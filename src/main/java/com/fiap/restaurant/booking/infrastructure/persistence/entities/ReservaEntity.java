@@ -1,0 +1,41 @@
+package com.fiap.restaurant.booking.infrastructure.persistence.entities;
+
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.enums.StatusReservaEnum;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@Table(name = "reserva")
+public class ReservaEntity {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
+    private String cpf;
+
+    @NotNull
+    private LocalDateTime dataHoraReserva;
+
+    @Enumerated(EnumType.STRING)
+    private StatusReservaEnum status;
+
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private LocalDateTime dataHoraCriacao;
+
+    // TODO: Id da mesa (nao implementado)
+
+}
