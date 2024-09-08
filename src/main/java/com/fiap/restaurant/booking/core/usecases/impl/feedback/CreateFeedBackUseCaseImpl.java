@@ -9,7 +9,6 @@ import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackR
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-@Component
 
 public class CreateFeedBackUseCaseImpl implements CreateFeedBackUseCase {
 

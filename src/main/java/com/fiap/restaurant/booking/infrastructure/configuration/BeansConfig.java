@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.configuration;
 
+import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
@@ -19,6 +20,13 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindRequestedReser
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByCpfUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.CreateReservaUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.ListAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.impl.CreateReservaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.impl.feedback.CreateFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.impl.feedback.ListAllFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -68,5 +76,15 @@ public class BeansConfig {
     @Bean
     public ConfirmReservaUseCase confirmReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
         return new ConfirmReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
+    }
+
+    @Bean
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
+        return new CreateFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    }
+
+    @Bean
+    public ListAllFeedBackUseCase ListaAllFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
+        return new ListAllFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
     }
 }
