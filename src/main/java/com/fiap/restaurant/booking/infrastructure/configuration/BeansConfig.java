@@ -124,4 +124,14 @@ public class BeansConfig {
     public ConfirmReservaUseCase confirmReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
         return new ConfirmReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
     }
+
+    @Bean
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
+        return new CreateFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    }
+
+    @Bean
+    public ListAllFeedBackUseCase ListaAllFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
+        return new ListAllFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    }
 }
