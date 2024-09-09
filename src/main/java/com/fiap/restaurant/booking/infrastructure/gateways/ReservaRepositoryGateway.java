@@ -25,7 +25,7 @@ public class ReservaRepositoryGateway implements ReservaGateway {
     @Override
     public Reserva create(final Reserva reserva) {
         final var entity = reservaEntityMapper.toEntity(reserva);
-        final var entitySaved =  reservaRepository.save(entity);
+        final var entitySaved = reservaRepository.save(entity);
         return reservaEntityMapper.toDomain(entitySaved);
     }
 
@@ -36,8 +36,26 @@ public class ReservaRepositoryGateway implements ReservaGateway {
     }
 
     @Override
-    public Optional<Reserva> findByCpf(final String cpf) {
-        return reservaRepository.findByCpfCliente(cpf)
+    public Optional<Reserva> findByid(final Long id) {
+        return reservaRepository.findById(id)
                 .map(reservaEntityMapper::toDomain);
+    }
+
+    @Override
+    public List<Reserva> findByCpf(final String cpf) {
+        final var entities = reservaRepository.findByCpfCliente(cpf);
+        return reservaEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Reserva> findByStatus(final String status) {
+        final var entities = reservaRepository.findByStatus(status);
+        return reservaEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public void update(final Reserva reserva) {
+        final var entity = reservaEntityMapper.toEntity(reserva);
+        reservaRepository.save(entity);
     }
 }

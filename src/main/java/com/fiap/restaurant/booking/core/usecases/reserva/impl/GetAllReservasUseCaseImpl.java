@@ -1,8 +1,8 @@
-package com.fiap.restaurant.booking.core.usecases.impl;
+package com.fiap.restaurant.booking.core.usecases.reserva.impl;
 
 import com.fiap.restaurant.booking.core.domains.Reserva;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
-import com.fiap.restaurant.booking.core.usecases.GetAllReservasUseCase;
+import com.fiap.restaurant.booking.core.usecases.reserva.GetAllReservasUseCase;
 
 import java.util.List;
 

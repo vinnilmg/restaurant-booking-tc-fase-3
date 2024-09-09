@@ -1,5 +1,7 @@
 package com.fiap.restaurant.booking.core.domains;
 
+import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
+
 import java.time.LocalDateTime;
 
 public interface Reserva {
@@ -12,4 +14,12 @@ public interface Reserva {
     LocalDateTime getDataHoraReserva();
 
     LocalDateTime getDataHoraCriacao();
+
+    void updateStatus(StatusReservaEnum status);
+
+    boolean isRequested();
+
+    boolean isCanceled();
+
+    boolean isConfirmed();
 }

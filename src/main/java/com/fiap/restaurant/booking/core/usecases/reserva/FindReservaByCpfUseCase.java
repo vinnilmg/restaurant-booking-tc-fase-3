@@ -1,8 +1,10 @@
-package com.fiap.restaurant.booking.core.usecases;
+package com.fiap.restaurant.booking.core.usecases.reserva;
 
 import com.fiap.restaurant.booking.core.domains.Reserva;
 
+import java.util.List;
+
 @FunctionalInterface
 public interface FindReservaByCpfUseCase {
-    Reserva execute(String cpf);
+    List<Reserva> execute(String cpf);
 }

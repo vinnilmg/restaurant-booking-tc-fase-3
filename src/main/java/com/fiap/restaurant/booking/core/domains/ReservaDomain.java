@@ -10,11 +10,11 @@ import static io.micrometer.common.util.StringUtils.isEmpty;
 import static java.util.Objects.isNull;
 
 public class ReservaDomain implements Reserva {
+    private final String cpf;
+    private final LocalDateTime dataHoraReserva;
     private Long id;
     private LocalDateTime dataHoraCriacao;
-    private final String cpf;
-    private final StatusReservaEnum status;
-    private LocalDateTime dataHoraReserva;
+    private StatusReservaEnum status;
 
     public ReservaDomain(
             final Long id,
@@ -63,6 +63,26 @@ public class ReservaDomain implements Reserva {
     @Override
     public LocalDateTime getDataHoraCriacao() {
         return dataHoraCriacao;
+    }
+
+    @Override
+    public void updateStatus(final StatusReservaEnum status) {
+        this.status = status;
+    }
+
+    @Override
+    public boolean isRequested() {
+        return status.equals(StatusReservaEnum.SOLICITADA);
+    }
+
+    @Override
+    public boolean isCanceled() {
+        return status.equals(StatusReservaEnum.CANCELADA);
+    }
+
+    @Override
+    public boolean isConfirmed() {
+        return status.equals(StatusReservaEnum.CONFIRMADA);
     }
 
     private static Long idValidation(final Long id) {

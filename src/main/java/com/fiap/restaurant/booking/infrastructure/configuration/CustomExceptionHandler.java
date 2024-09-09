@@ -16,7 +16,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationError(ValidationException e, WebRequest request) {
-        log.error("Erro de validação: {}", e.getMessage(), e);
+        //log.error("Erro de validação: {}", e.getMessage(), e);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ApiErrorResponse(e.getMessage()));

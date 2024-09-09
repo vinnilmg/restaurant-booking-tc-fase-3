@@ -10,5 +10,11 @@ public interface ReservaGateway {
 
     List<Reserva> getAll();
 
-    Optional<Reserva> findByCpf(String cpf);
+    Optional<Reserva> findByid(Long id);
+
+    List<Reserva> findByCpf(String cpf);
+
+    List<Reserva> findByStatus(String status);
+
+    void update(Reserva reserva);
 }
