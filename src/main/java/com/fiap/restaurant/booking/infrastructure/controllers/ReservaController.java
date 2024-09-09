@@ -12,7 +12,6 @@ import com.fiap.restaurant.booking.core.usecases.reserva.GetAllReservasUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.ReservaMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.ReservaRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.ReservaResponse;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

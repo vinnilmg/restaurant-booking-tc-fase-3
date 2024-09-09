@@ -86,5 +86,12 @@ public class BeansConfig {
     @Bean
     public ListAllFeedBackUseCase ListaAllFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
         return new ListAllFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    public GetAllReservasUseCase getAllReservasUseCase(ReservaGateway reservaGateway) {
+        return new GetAllReservasUseCaseImpl(reservaGateway);
+    }
+
+    @Bean
+    public FindReservaByCpfUseCase findReservaByCpfUseCase(ReservaGateway reservaGateway) {
+        return new FindReservaByCpfUseCaseImpl(reservaGateway);
     }
 }
