@@ -94,4 +94,34 @@ public class BeansConfig {
     public FindReservaByCpfUseCase findReservaByCpfUseCase(ReservaGateway reservaGateway) {
         return new FindReservaByCpfUseCaseImpl(reservaGateway);
     }
+
+    @Bean
+    public FindCanceledReservasUseCase findCanceledReservasUseCase(ReservaGateway reservaGateway) {
+        return new FindCanceledReservasUseCaseImpl(reservaGateway);
+    }
+
+    @Bean
+    public FindRequestedReservasUseCase findRequestedReservasUseCase(ReservaGateway reservaGateway) {
+        return new FindRequestedReservasUseCaseImpl(reservaGateway);
+    }
+
+    @Bean
+    public FindConfirmedReservasUseCase findConfirmedReservasUseCase(ReservaGateway reservaGateway) {
+        return new FindConfirmedReservasUseCaseImpl(reservaGateway);
+    }
+
+    @Bean
+    public FindReservaByIdUseCase findReservaByIdUseCase(ReservaGateway reservaGateway) {
+        return new FindReservaByIdUseCaseImpl(reservaGateway);
+    }
+
+    @Bean
+    public CancelReservaUseCase cancelReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
+        return new CancelReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
+    }
+
+    @Bean
+    public ConfirmReservaUseCase confirmReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
+        return new ConfirmReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
+    }
 }
