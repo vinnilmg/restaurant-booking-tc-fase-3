@@ -13,6 +13,13 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
 
     @Override
     public Reserva execute(final Reserva reserva) {
+        /*
+         * TODO:
+         *  - Verificar se existe uma reserva em andamento para o cliente
+         *  - Verificar se o restaurante + a mesa existem
+         *  - Verifica se o restaurante está em aberto no período solicitado
+         */
+
         return reservaGateway.create(reserva);
     }
 }

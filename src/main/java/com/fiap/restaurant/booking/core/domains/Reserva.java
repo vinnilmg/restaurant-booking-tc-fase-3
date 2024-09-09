@@ -3,11 +3,13 @@ package com.fiap.restaurant.booking.core.domains;
 import java.time.LocalDateTime;
 
 public interface Reserva {
-    Long id();
+    Long getId();
 
-    String cpf();
+    String getCpf();
 
-    String status();
+    String getStatus();
 
-    LocalDateTime dataHoraReserva();
+    LocalDateTime getDataHoraReserva();
+
+    LocalDateTime getDataHoraCriacao();
 }

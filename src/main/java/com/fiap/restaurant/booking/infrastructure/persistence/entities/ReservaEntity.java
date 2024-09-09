@@ -1,6 +1,5 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 
-import com.fiap.restaurant.booking.infrastructure.persistence.entities.enums.StatusReservaEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -24,18 +23,16 @@ public class ReservaEntity {
     private Long id;
 
     @NotNull
-    private String cpf;
+    private String cpfCliente;
 
     @NotNull
     private LocalDateTime dataHoraReserva;
 
-    @Enumerated(EnumType.STRING)
-    private StatusReservaEnum status;
+    private String status;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
     private LocalDateTime dataHoraCriacao;
 
     // TODO: Id da mesa (nao implementado)
-
 }
