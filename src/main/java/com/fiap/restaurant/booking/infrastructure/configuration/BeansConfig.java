@@ -22,11 +22,13 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUse
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.CreateReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
-import com.fiap.restaurant.booking.core.usecases.feedback.ListAllFeedBackUseCase;
-import com.fiap.restaurant.booking.core.usecases.impl.CreateReservaUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.impl.feedback.CreateFeedBackUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.impl.feedback.ListAllFeedBackUseCaseImpl;
-import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
+import com.fiap.restaurant.booking.core.usecases.feedback.FindAllFeedBackByNomeClienteUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.FindAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.CreateFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindAllFeedBackByNomeClienteImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindAllFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.reserva.*;
+import com.fiap.restaurant.booking.core.usecases.reserva.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -126,12 +128,18 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
-        return new CreateFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new CreateFeedBackUseCaseImpl(feedBackGateway);
     }
 
     @Bean
-    public ListAllFeedBackUseCase ListaAllFeedBackUseCase(FeedBackGateway feedBackGateway, FeedBackMapper feedBackMapper) {
-        return new ListAllFeedBackUseCaseImpl(feedBackMapper,feedBackGateway);
+    public FindAllFeedBackUseCase ListaAllFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new FindAllFeedBackUseCaseImpl(feedBackGateway);
     }
+
+    @Bean
+    public FindAllFeedBackByNomeClienteUseCase findAllFeedBackByNomeClienteUseCase(FeedBackGateway feedBackGateway) {
+        return new FindAllFeedBackByNomeClienteImpl(feedBackGateway);
+    }
+
 }

@@ -1,15 +1,12 @@
 package com.fiap.restaurant.booking.infrastructure.gateways;
 
-import com.fiap.restaurant.booking.core.domains.FeedBack;
-import com.fiap.restaurant.booking.core.exception.ConvertModelToEntityException;
-import com.fiap.restaurant.booking.core.exception.NotCreatedEntityException;
+import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.FeedBackEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.FeedBackRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class FeedBackRepositoryGateway implements FeedBackGateway {
@@ -24,18 +21,25 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     }
 
     @Override
-    public FeedBack create(Optional<FeedBack> feedBack) {
-        return Optional.of(feedBackRepository.save(feedBack
-                        .map(feedBackEntityMapper::toEntity)
-                        .orElseThrow(()
-                                -> new ConvertModelToEntityException(FeedBack.class))))
+    public FeedBackDomain create(FeedBackDomain feedBack) {
+        return feedBackEntityMapper.toDomain(
+                feedBackRepository.save(
+                        feedBackEntityMapper.toEntity(
+                                feedBack)
+                )
+        );
+    }
+    @Override
+    public List<FeedBackDomain> findAll() {
+        return feedBackRepository.findAll()
+                .stream()
                 .map(feedBackEntityMapper::toDomain)
-                .orElseThrow(() -> new NotCreatedEntityException(FeedBack.class));
+                .toList();
     }
 
     @Override
-    public List<FeedBack> findAll() {
-        return feedBackRepository.findAll()
+    public List<FeedBackDomain> findAllByNomeCliente(String nomeCliente) {
+        return feedBackRepository.findAllByNomeCliente(nomeCliente)
                 .stream()
                 .map(feedBackEntityMapper::toDomain)
                 .toList();

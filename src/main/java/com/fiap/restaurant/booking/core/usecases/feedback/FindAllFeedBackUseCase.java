@@ -2,8 +2,9 @@ package com.fiap.restaurant.booking.core.usecases.feedback;
 
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 
-@FunctionalInterface
-public interface CreateFeedBackUseCase {
+import java.util.List;
 
-    FeedBackDomain execute(FeedBackDomain feedBack);
+@FunctionalInterface
+public interface FindAllFeedBackUseCase {
+    List<FeedBackDomain> execute();
 }

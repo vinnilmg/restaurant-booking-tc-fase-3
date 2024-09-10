@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.feedbackTest;
 
-import com.fiap.restaurant.booking.core.domains.FeedBack;
+import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ public class FeedbackDomainClassTest {
     @Test
     void criarFeedbackComAvaliacãoNulo() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new FeedBack(
+        Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 null,
                 Long.parseLong("1"),
                 "teste",
@@ -23,7 +24,7 @@ public class FeedbackDomainClassTest {
     @Test
     void criarFeedbackComRestauranteIdNulo() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new FeedBack(
+        Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
                 null,
                 "teste",
@@ -35,7 +36,7 @@ public class FeedbackDomainClassTest {
     @Test
     void criarFeedbackComNomeClienteNulo() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new FeedBack(
+        Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
                 Long.parseLong("1"),
                 null,
@@ -47,7 +48,7 @@ public class FeedbackDomainClassTest {
     @Test
     void criarFeedbackComAvaliacaoMenorQueUm() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new FeedBack(
+        Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
                 Long.parseLong("1"),
                 "teste",
@@ -59,7 +60,7 @@ public class FeedbackDomainClassTest {
     @Test
     void criarFeedbackComAvaliacaoMaiorQueCinco() {
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {new FeedBack(
+        Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
                 Long.parseLong("1"),
                 "teste",
@@ -75,8 +76,8 @@ public class FeedbackDomainClassTest {
         Integer avaliacao = 4;
         String comentario = "Ótimo atendimento!";
 
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            new FeedBack(id, restauranteID, nomeCliente, avaliacao, comentario);
+        Assertions.assertThrows(ValidationException.class, () -> {
+            new FeedBackDomain(id, restauranteID, nomeCliente, avaliacao, comentario);
         });
 
     }
@@ -90,7 +91,7 @@ public class FeedbackDomainClassTest {
         Integer avaliacao = 4;
         String comentario = "Ótimo atendimento!";
 
-        FeedBack feedback = new FeedBack(id, restauranteID, nomeCliente, avaliacao, comentario);
+        FeedBackDomain feedback = new FeedBackDomain(id, restauranteID, nomeCliente, avaliacao, comentario);
 
         assertNotNull(feedback);
         assertEquals(id, feedback.getId());
