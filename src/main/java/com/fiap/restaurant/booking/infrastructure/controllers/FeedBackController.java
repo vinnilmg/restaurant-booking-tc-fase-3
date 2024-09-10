@@ -43,22 +43,22 @@ public class FeedBackController {
 
     @GetMapping
     public ResponseEntity<List<FeedBackResponse>> getFeedbacksByNomeCliente(@RequestParam final String nomeCliente) {
-        final var reservas = findAllFeedBackByNomeClienteUseCase.execute(nomeCliente)
+        final var responses = findAllFeedBackByNomeClienteUseCase.execute(nomeCliente)
                 .stream()
                 .map(feedBackMapper::toFeedbackResponse)
                 .toList();
 
-        return ResponseEntity.status(OK).body(reservas);
+        return ResponseEntity.status(OK).body(responses);
     }
 
     @GetMapping
     public ResponseEntity<List<FeedBackResponse>> getAllFeedbacks() {
-        final var reservas = findAllFeedBackUseCase.execute()
+        final var responses = findAllFeedBackUseCase.execute()
                 .stream()
                 .map(feedBackMapper::toFeedbackResponse)
                 .toList();
 
-        return ResponseEntity.status(OK).body(reservas);
+        return ResponseEntity.status(OK).body(responses);
     }
 
 }
