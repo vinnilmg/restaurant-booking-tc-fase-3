@@ -2,11 +2,13 @@ package com.fiap.restaurant.booking.infrastructure.gateways;
 
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
+import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.FeedBackEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.FeedBackRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FeedBackRepositoryGateway implements FeedBackGateway {
@@ -29,6 +31,7 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
                 )
         );
     }
+
     @Override
     public List<FeedBackDomain> findAll() {
         return feedBackRepository.findAll()
@@ -43,5 +46,17 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
                 .stream()
                 .map(feedBackEntityMapper::toDomain)
                 .toList();
+    }
+
+    @Override
+    public Optional<FeedBackDomain> findById(Long id) {
+        return feedBackRepository.findById(id)
+                .map(feedBackEntityMapper::toDomain);
+    }
+
+    @Override
+    public String delete(Long id) {
+        feedBackRepository.deleteById(id);
+        return String.format("Feedback by id %s was deleted by success.", id);
     }
 }
