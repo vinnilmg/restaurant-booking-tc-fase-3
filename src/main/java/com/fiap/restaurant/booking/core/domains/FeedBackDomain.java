@@ -28,9 +28,7 @@ public class FeedBackDomain {
         this.nomeCliente = nomeCliente;
         this.avaliacao = avaliacao;
         this.comentario = comentario;
-
     }
-
 
     private void validationToCreateInstance(Long id, Long restauranteId, String nomeCliente, Integer avaliacao, String comentario) {
         if (Objects.isNull(avaliacao))

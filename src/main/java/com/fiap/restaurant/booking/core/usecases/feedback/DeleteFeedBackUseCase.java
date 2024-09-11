@@ -4,6 +4,5 @@ import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageRe
 
 @FunctionalInterface
 public interface DeleteFeedBackUseCase {
-
     MessageResponse execute(Long id);
 }

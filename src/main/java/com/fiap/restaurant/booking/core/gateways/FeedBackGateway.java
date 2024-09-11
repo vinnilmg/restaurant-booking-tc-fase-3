@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface FeedBackGateway {
 
-    FeedBackDomain create(FeedBackDomain feedBackModel);
+    FeedBackDomain create(FeedBackDomain feedback);
 
     List<FeedBackDomain> findAll();
 

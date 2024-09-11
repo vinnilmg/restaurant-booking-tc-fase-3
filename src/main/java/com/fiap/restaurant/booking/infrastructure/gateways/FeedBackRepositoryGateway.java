@@ -2,7 +2,6 @@ package com.fiap.restaurant.booking.infrastructure.gateways;
 
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
-import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.FeedBackEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.FeedBackRepository;
 import org.springframework.stereotype.Component;
@@ -26,8 +25,7 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     public FeedBackDomain create(FeedBackDomain feedBack) {
         return feedBackEntityMapper.toDomain(
                 feedBackRepository.save(
-                        feedBackEntityMapper.toEntity(
-                                feedBack)
+                        feedBackEntityMapper.toEntity(feedBack)
                 )
         );
     }

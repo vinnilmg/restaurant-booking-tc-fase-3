@@ -6,7 +6,6 @@ import com.fiap.restaurant.booking.core.usecases.feedback.FindByIdFeedBackUseCas
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
 
 public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
-
     private final FeedBackGateway feedBackGateway;
 
     private final FindByIdFeedBackUseCase findByIdFeedBackUseCase;
@@ -15,7 +14,6 @@ public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
         this.feedBackGateway = feedBackGateway;
         this.findByIdFeedBackUseCase = findByIdFeedBackUseCase;
     }
-
 
     @Override
     public MessageResponse execute(Long id) {

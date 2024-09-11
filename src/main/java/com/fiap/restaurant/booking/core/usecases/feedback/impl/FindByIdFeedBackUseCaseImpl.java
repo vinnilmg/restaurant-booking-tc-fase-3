@@ -7,7 +7,6 @@ import com.fiap.restaurant.booking.core.usecases.feedback.FindByIdFeedBackUseCas
 
 
 public class FindByIdFeedBackUseCaseImpl implements FindByIdFeedBackUseCase {
-
     private final FeedBackGateway feedBackGateway;
 
     public FindByIdFeedBackUseCaseImpl(FeedBackGateway feedBackGateway) {
