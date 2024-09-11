@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import java.util.List;
 
 @FunctionalInterface
-public interface FindAllFeedBackUseCase {
-    List<FeedBackDomain> execute();
+public interface GetAllFeedBackByNomeClienteUseCase {
+
+    List<FeedBackDomain> execute(String nomeCliente);
 }

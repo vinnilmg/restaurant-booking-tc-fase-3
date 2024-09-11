@@ -79,13 +79,13 @@ public class BeansConfig {
     }
 
    @Bean
-    public FindAllFeedBackUseCase findAllFeedBackUseCase(FeedBackGateway feedBackGateway) {
-        return new FindAllFeedBackUseCaseImpl(feedBackGateway);
+    public GetAllFeedBackUseCase findAllFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new GetAllFeedBackUseCaseImpl(feedBackGateway);
     }
 
     @Bean
-    public FindAllFeedBackByNomeClienteUseCase findAllFeedBackByNomeClienteUseCase(FeedBackGateway feedBackGateway) {
-        return new FindAllFeedBackByNomeClienteUseCaseImpl(feedBackGateway);
+    public GetAllFeedBackByNomeClienteUseCase findAllFeedBackByNomeClienteUseCase(FeedBackGateway feedBackGateway) {
+        return new GetAllFeedBackByNomeClienteUseCaseImpl(feedBackGateway);
     }
 
     @Bean

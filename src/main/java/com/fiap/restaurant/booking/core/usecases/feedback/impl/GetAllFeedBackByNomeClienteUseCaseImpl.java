@@ -3,16 +3,16 @@ package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
-import com.fiap.restaurant.booking.core.usecases.feedback.FindAllFeedBackByNomeClienteUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
 
 import java.util.List;
 
-public class FindAllFeedBackByNomeClienteUseCaseImpl implements FindAllFeedBackByNomeClienteUseCase {
+public class GetAllFeedBackByNomeClienteUseCaseImpl implements GetAllFeedBackByNomeClienteUseCase {
 
 
     private final FeedBackGateway feedBackGateway;
 
-    public FindAllFeedBackByNomeClienteUseCaseImpl(FeedBackGateway feedBackGateway) {
+    public GetAllFeedBackByNomeClienteUseCaseImpl(FeedBackGateway feedBackGateway) {
         this.feedBackGateway = feedBackGateway;
     }
 

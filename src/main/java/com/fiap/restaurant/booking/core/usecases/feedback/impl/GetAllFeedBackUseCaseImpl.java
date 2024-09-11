@@ -2,17 +2,15 @@ package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
-import com.fiap.restaurant.booking.core.usecases.feedback.FindAllFeedBackUseCase;
-import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
-import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackResponse;
+import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
 
 import java.util.List;
 
 
-public class FindAllFeedBackUseCaseImpl implements FindAllFeedBackUseCase {
+public class GetAllFeedBackUseCaseImpl implements GetAllFeedBackUseCase {
 
     private final FeedBackGateway feedBackGateway;
-    public FindAllFeedBackUseCaseImpl( FeedBackGateway feedBackGateway) {
+    public GetAllFeedBackUseCaseImpl(FeedBackGateway feedBackGateway) {
         this.feedBackGateway = feedBackGateway;
     }
 
