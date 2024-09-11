@@ -17,9 +17,9 @@ public class FindByIdFeedBackUseCaseImpl implements FindByIdFeedBackUseCase {
     @Override
     public FeedBackDomain execute(Long id) {
         return feedBackGateway.findById(id)
-                .orElseThrow(() ->  ValidationException.of(
-                        "FeedBack",
-                        String.format("with id %s not found",id)
+                .orElseThrow(() -> ValidationException.of(
+                                "FeedBack",
+                                String.format("with id %s not found", id)
                         )
                 );
     }

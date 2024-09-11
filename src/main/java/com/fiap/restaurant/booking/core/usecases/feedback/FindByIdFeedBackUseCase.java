@@ -6,5 +6,6 @@ import java.util.List;
 
 @FunctionalInterface
 public interface FindByIdFeedBackUseCase {
+
     FeedBackDomain execute(Long id);
 }

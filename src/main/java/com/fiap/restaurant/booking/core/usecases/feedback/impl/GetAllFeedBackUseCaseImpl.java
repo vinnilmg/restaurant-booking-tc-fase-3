@@ -10,6 +10,7 @@ import java.util.List;
 public class GetAllFeedBackUseCaseImpl implements GetAllFeedBackUseCase {
 
     private final FeedBackGateway feedBackGateway;
+
     public GetAllFeedBackUseCaseImpl(FeedBackGateway feedBackGateway) {
         this.feedBackGateway = feedBackGateway;
     }

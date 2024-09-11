@@ -7,8 +7,8 @@ import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageRe
 
 public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
 
-
     private final FeedBackGateway feedBackGateway;
+
     private final FindByIdFeedBackUseCase findByIdFeedBackUseCase;
 
     public DeleteFeedBackUseCaseImpl(FeedBackGateway feedBackGateway, FindByIdFeedBackUseCase findByIdFeedBackUseCase) {
@@ -20,8 +20,9 @@ public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
     @Override
     public MessageResponse execute(Long id) {
         findByIdFeedBackUseCase.execute(id);
-       return MessageResponse.builder()
-               .message(feedBackGateway.delete(id))
-               .build();
+
+        return MessageResponse.builder()
+                .message(feedBackGateway.delete(id))
+                .build();
     }
 }

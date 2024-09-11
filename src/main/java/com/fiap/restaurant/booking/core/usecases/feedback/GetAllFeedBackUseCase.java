@@ -6,5 +6,6 @@ import java.util.List;
 
 @FunctionalInterface
 public interface GetAllFeedBackUseCase {
+
     List<FeedBackDomain> execute();
 }

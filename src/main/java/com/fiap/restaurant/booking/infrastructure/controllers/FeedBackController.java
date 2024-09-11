@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/feedbacks")
 public class FeedBackController {
-    
+
     private final FindByIdFeedBackUseCase findByIdFeedBackUseCase;
 
     private final CreateFeedBackUseCase createFeedBackUseCase;
@@ -41,7 +41,7 @@ public class FeedBackController {
 
     @PostMapping
     public ResponseEntity<FeedBackResponse> createFeedback(@RequestBody final FeedBackRequest feedBackRequest) {
-        var response = feedBackMapper.toFeedbackResponse(
+       final var response = feedBackMapper.toFeedbackResponse(
                 createFeedBackUseCase.execute(feedBackMapper.toFeedBackDomain(feedBackRequest)));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -70,13 +70,13 @@ public class FeedBackController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteFeedBackById(@PathVariable Long id) {
-      return  ResponseEntity.status(OK).body(deleteFeedBackUseCase.execute(id));
+        return ResponseEntity.status(OK).body(deleteFeedBackUseCase.execute(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<FeedBackResponse> getFeedBackById(@PathVariable Long id) {
         final var response = feedBackMapper.toFeedbackResponse(findByIdFeedBackUseCase.execute(id));
-        return  ResponseEntity.status(OK).body(response);
+        return ResponseEntity.status(OK).body(response);
     }
 
 }
