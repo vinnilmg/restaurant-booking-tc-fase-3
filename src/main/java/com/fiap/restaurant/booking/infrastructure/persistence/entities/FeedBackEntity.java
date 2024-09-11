@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,10 +22,13 @@ public class FeedBackEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @NotNull
     private Long restauranteId;
 
+    @NotNull
     private String nomeCliente;
 
+    @NotNull
     private Integer avaliacao;
 
     @CreationTimestamp

@@ -1,9 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
-import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
-import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
-import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
-import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.*;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackResponse;
@@ -19,6 +16,8 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/feedbacks")
 public class FeedBackController {
+    
+    private final FindByIdFeedBackUseCase findByIdFeedBackUseCase;
 
     private final CreateFeedBackUseCase createFeedBackUseCase;
 
@@ -30,12 +29,14 @@ public class FeedBackController {
 
     private final FeedBackMapper feedBackMapper;
 
-    public FeedBackController(CreateFeedBackUseCase createFeedBackUseCase, GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase, GetAllFeedBackUseCase getAllFeedBackUseCase, DeleteFeedBackUseCase deleteFeedBackUseCase, FeedBackMapper feedBackMapper) {
+
+    public FeedBackController(CreateFeedBackUseCase createFeedBackUseCase, GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase, GetAllFeedBackUseCase getAllFeedBackUseCase, DeleteFeedBackUseCase deleteFeedBackUseCase, FeedBackMapper feedBackMapper, FindByIdFeedBackUseCase findByIdFeedBackUseCase) {
         this.createFeedBackUseCase = createFeedBackUseCase;
         this.getAllFeedBackByNomeClienteUseCase = getAllFeedBackByNomeClienteUseCase;
         this.getAllFeedBackUseCase = getAllFeedBackUseCase;
         this.deleteFeedBackUseCase = deleteFeedBackUseCase;
         this.feedBackMapper = feedBackMapper;
+        this.findByIdFeedBackUseCase = findByIdFeedBackUseCase;
     }
 
     @PostMapping
@@ -70,6 +71,12 @@ public class FeedBackController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteFeedBackById(@PathVariable Long id) {
       return  ResponseEntity.status(OK).body(deleteFeedBackUseCase.execute(id));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FeedBackResponse> getFeedBackById(@PathVariable Long id) {
+        final var response = feedBackMapper.toFeedbackResponse(findByIdFeedBackUseCase.execute(id));
+        return  ResponseEntity.status(OK).body(response);
     }
 
 }
