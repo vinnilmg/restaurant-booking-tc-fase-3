@@ -53,8 +53,7 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     }
 
     @Override
-    public String delete(Long id) {
+    public void delete(Long id) {
         feedBackRepository.deleteById(id);
-        return String.format("Feedback by id %s was deleted by success.", id);
     }
 }

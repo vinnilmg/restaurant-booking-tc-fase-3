@@ -18,9 +18,9 @@ public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
     @Override
     public MessageResponse execute(Long id) {
         findByIdFeedBackUseCase.execute(id);
-
+        feedBackGateway.delete(id);
         return MessageResponse.builder()
-                .message(feedBackGateway.delete(id))
+                .message(String.format("Feedback by id %s was deleted by success.",id))
                 .build();
     }
 }

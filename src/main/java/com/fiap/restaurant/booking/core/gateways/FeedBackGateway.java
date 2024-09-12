@@ -15,5 +15,5 @@ public interface FeedBackGateway {
 
     Optional<FeedBackDomain> findById(Long id);
 
-    String delete(Long id);
+    void delete(Long id);
 }

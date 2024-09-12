@@ -22,6 +22,7 @@ public class FeedBackEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    // TODO: Criar relacionamento com o restaurante
     @NotNull
     private Long restauranteId;
 
