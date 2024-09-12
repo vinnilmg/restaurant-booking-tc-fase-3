@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalDateTime;
-import static com.fiap.restaurant.booking.utils.fixture.DefaultParamsConstants.DEFAULT_CPF;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CPF;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
