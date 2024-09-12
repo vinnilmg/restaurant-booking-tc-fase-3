@@ -19,13 +19,13 @@ public class GetAllFeedBackByNomeClienteUseCaseImpl implements GetAllFeedBackByN
 
     @Override
     public List<FeedBackDomain> execute(String nomeCliente) {
-        if(nomeCliente.isEmpty())
+        if (nomeCliente.isEmpty())
             throw ValidationException.of("nomeCliente", "cannot be empty");
 
         var feedBackDomainList = feedBackGateway.findAllByNomeCliente(nomeCliente);
 
         if (feedBackDomainList.isEmpty())
-            throw NotFoundException.of(String.format("Not found feedbacks by nome cliente %s", nomeCliente));
+            throw NotFoundException.of(String.format("feedbacks by nome cliente %s", nomeCliente));
 
         return feedBackDomainList;
     }
