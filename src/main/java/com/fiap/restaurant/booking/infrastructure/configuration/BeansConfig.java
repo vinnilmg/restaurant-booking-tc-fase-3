@@ -1,6 +1,17 @@
 package com.fiap.restaurant.booking.infrastructure.configuration;
 
+import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
+import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.FindByIdFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.CreateFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.DeleteFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindByIdFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -68,5 +79,30 @@ public class BeansConfig {
     @Bean
     public ConfirmReservaUseCase confirmReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
         return new ConfirmReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
+    }
+
+    @Bean
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new CreateFeedBackUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public GetAllFeedBackUseCase findAllFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new GetAllFeedBackUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public GetAllFeedBackByNomeClienteUseCase findAllFeedBackByNomeClienteUseCase(FeedBackGateway feedBackGateway) {
+        return new GetAllFeedBackByNomeClienteUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public FindByIdFeedBackUseCase findByIdFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new FindByIdFeedBackUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public DeleteFeedBackUseCase deleteFeedBackUseCase(FindByIdFeedBackUseCase findByIdFeedBackUseCase, FeedBackGateway feedBackGateway) {
+        return new DeleteFeedBackUseCaseImpl(feedBackGateway, findByIdFeedBackUseCase);
     }
 }
