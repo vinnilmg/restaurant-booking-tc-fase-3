@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.infrastructure.configuration;
 
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
+import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
@@ -12,6 +13,8 @@ import com.fiap.restaurant.booking.core.usecases.feedback.impl.DeleteFeedBackUse
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindByIdFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.CreateMesaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -104,5 +107,9 @@ public class BeansConfig {
     @Bean
     public DeleteFeedBackUseCase deleteFeedBackUseCase(FindByIdFeedBackUseCase findByIdFeedBackUseCase, FeedBackGateway feedBackGateway) {
         return new DeleteFeedBackUseCaseImpl(feedBackGateway, findByIdFeedBackUseCase);
+    }
+
+    public CreateMesaUseCase createMesaUseCase(MesaGateway mesaGateway) {
+        return new CreateMesaUseCaseImpl(mesaGateway);
     }
 }
