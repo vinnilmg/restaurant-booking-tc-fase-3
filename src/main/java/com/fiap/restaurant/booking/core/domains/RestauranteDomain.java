@@ -137,6 +137,7 @@ public class RestauranteDomain implements Restaurante {
     private static Double mediaFeedbackValidation(final Double mediaFeedback) {
         if (isNull(mediaFeedback)) throw ValidationException.of("Média Feedback", "cannot be null");
         if (mediaFeedback < 0) throw ValidationException.of("Média Feedback", "cannot be negative");
+        if (mediaFeedback > 5) throw ValidationException.of("Média Feedback", "must be from 1 to 5");
         return mediaFeedback;
     }
 }

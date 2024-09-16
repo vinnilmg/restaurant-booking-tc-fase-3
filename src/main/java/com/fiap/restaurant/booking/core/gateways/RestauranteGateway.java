@@ -19,5 +19,7 @@ public interface RestauranteGateway {
 
     List<Restaurante> findByMediaFeedback(Double mediaFeedback);
 
+    Optional<Restaurante> findByCnpj(String cnpj);
+
     void update(Restaurante restaurante);
 }

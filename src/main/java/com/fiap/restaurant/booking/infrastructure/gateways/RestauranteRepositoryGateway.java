@@ -57,6 +57,12 @@ public class RestauranteRepositoryGateway implements RestauranteGateway {
     }
 
     @Override
+    public Optional<Restaurante> findByCnpj(final String cnpj) {
+        return restauranteRepository.findByCnpj(cnpj)
+                .map(restauranteEntityMapper::toDomain);
+    }
+
+    @Override
     public void update(Restaurante restaurante) {
         final var entity = restauranteEntityMapper.toEntity(restaurante);
         restauranteRepository.save(entity);
