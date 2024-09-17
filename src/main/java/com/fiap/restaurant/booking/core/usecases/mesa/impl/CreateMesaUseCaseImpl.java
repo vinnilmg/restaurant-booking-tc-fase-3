@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.mesa.impl;
 
-import com.fiap.restaurant.booking.core.domains.Mesa;
+import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
 
@@ -13,7 +13,10 @@ public class CreateMesaUseCaseImpl implements CreateMesaUseCase {
     }
 
     @Override
-    public Mesa execute(Mesa mesa) {
-        return mesaGateway.create(mesa);
+    public MesaDomain execute(final MesaDomain mesaDomain) {
+        if (mesaDomain.getStatus() == null) {
+            throw new IllegalArgumentException("O status da mesa não pode ser nulo");
+        }
+        return mesaGateway.create(mesaDomain);
     }
 }

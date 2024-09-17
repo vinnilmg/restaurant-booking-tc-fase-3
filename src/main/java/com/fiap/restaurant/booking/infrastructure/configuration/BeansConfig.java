@@ -109,6 +109,7 @@ public class BeansConfig {
         return new DeleteFeedBackUseCaseImpl(feedBackGateway, findByIdFeedBackUseCase);
     }
 
+    @Bean
     public CreateMesaUseCase createMesaUseCase(MesaGateway mesaGateway) {
         return new CreateMesaUseCaseImpl(mesaGateway);
     }

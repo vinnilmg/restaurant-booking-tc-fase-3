@@ -1,19 +1,19 @@
 package com.fiap.restaurant.booking.core.gateways;
 
-import com.fiap.restaurant.booking.core.domains.Mesa;
+import com.fiap.restaurant.booking.core.domains.MesaDomain;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface MesaGateway {
 
-    Mesa create(Mesa mesa);
+    MesaDomain create(MesaDomain mesa);
 
-    Optional<Mesa> findById(Long id);
+    Optional<MesaDomain> findById(Long id) throws Exception;
 
-    List<Mesa> findByStatus(String status);
+    List<MesaDomain> findByStatus(String status);
 
-    List<Mesa> findByRestauranteId(Long restauranteId);
+    List<MesaDomain> findByRestauranteId(Long restauranteId);
 
     void delete(Long id);
 
