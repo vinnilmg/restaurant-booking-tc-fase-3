@@ -15,5 +15,7 @@ public interface FeedBackGateway {
 
     Optional<FeedBackDomain> findById(Long id);
 
+    Optional<FeedBackDomain> findByIdRestaurante(Long id);
+
     void delete(Long id);
 }

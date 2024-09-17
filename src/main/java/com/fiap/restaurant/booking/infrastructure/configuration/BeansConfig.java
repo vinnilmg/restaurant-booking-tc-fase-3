@@ -4,12 +4,14 @@ import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
-import com.fiap.restaurant.booking.core.usecases.feedback.FindByIdFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.CreateFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.DeleteFeedBackUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindByIdFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
@@ -97,12 +99,17 @@ public class BeansConfig {
     }
 
     @Bean
-    public FindByIdFeedBackUseCase findByIdFeedBackUseCase(FeedBackGateway feedBackGateway) {
-        return new FindByIdFeedBackUseCaseImpl(feedBackGateway);
+    public FindFeedBackByIdUseCase findFeedBackByIdUseCase(FeedBackGateway feedBackGateway) {
+        return new FindFeedBackByIdUseCaseImpl(feedBackGateway);
     }
 
     @Bean
-    public DeleteFeedBackUseCase deleteFeedBackUseCase(FindByIdFeedBackUseCase findByIdFeedBackUseCase, FeedBackGateway feedBackGateway) {
-        return new DeleteFeedBackUseCaseImpl(feedBackGateway, findByIdFeedBackUseCase);
+    public FindFeedBackByIdRestauranteUseCase findByIdRestauranteFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new FindFeedBackByIdRestauranteUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public DeleteFeedBackUseCase deleteFeedBackUseCase(FindFeedBackByIdUseCase findFeedBackByIdUseCase, FeedBackGateway feedBackGateway) {
+        return new DeleteFeedBackUseCaseImpl(feedBackGateway, findFeedBackByIdUseCase);
     }
 }

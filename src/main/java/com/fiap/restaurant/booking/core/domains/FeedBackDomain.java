@@ -1,12 +1,16 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
+@Builder
+@AllArgsConstructor
 public class FeedBackDomain {
 
     private Long id;

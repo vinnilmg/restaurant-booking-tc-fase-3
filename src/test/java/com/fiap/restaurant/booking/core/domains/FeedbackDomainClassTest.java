@@ -1,6 +1,5 @@
-package com.fiap.restaurant.booking.feedbackTest;
+package com.fiap.restaurant.booking.core.domains;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
