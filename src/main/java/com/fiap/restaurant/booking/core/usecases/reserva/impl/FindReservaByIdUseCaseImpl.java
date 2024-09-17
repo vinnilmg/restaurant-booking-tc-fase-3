@@ -18,7 +18,7 @@ public class FindReservaByIdUseCaseImpl implements FindReservaByIdUseCase {
     @Override
     public Reserva execute(final Long id) {
         if (isNull(id) || id < 0) throw ValidationException.of("Reserva Id", "cannot be null or negative");
-        return reservaGateway.findByid(id)
+        return reservaGateway.findById(id)
                 .orElseThrow(() -> NotFoundException.of("Reserva"));
     }
 }
