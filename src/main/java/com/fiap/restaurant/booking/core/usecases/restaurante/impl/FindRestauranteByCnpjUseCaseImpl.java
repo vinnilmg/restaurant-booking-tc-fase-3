@@ -6,6 +6,8 @@ import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByCnpjUseCase;
 
+import java.util.Optional;
+
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class FindRestauranteByCnpjUseCaseImpl implements FindRestauranteByCnpjUseCase {
@@ -17,10 +19,9 @@ public class FindRestauranteByCnpjUseCaseImpl implements FindRestauranteByCnpjUs
     }
 
     @Override
-    public Restaurante execute(final String cnpj) {
+    public Optional<Restaurante> execute(final String cnpj) {
         if (isEmpty(cnpj) || cnpj.length() < 14) throw ValidationException.of("Restaurante CNPJ","invalid");
-        return restauranteGateway.findByCnpj(cnpj)
-                .orElseThrow(() -> NotFoundException.of("Restaurante"));
+        return restauranteGateway.findByCnpj(cnpj);
 
     }
 }

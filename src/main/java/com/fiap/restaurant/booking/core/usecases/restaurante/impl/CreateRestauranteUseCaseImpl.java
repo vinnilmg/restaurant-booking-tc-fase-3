@@ -23,10 +23,10 @@ public class CreateRestauranteUseCaseImpl implements CreateRestauranteUseCase {
     public Restaurante execute(final Restaurante restaurante) {
         final var cnpj = findRestauranteByCnpjUseCase.execute(restaurante.getCnpj());
 
-        if (isNull(cnpj)) {
-            return restauranteGateway.create(restaurante);
+        if (cnpj.isPresent()) {
+            throw ValidationException.of("CNPJ","already exists");
         }
 
-        throw ValidationException.of("CNPJ","already exists");
+        return restauranteGateway.create(restaurante);
     }
 }

@@ -1,16 +1,17 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
+import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.usecases.restaurante.*;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.RestauranteMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.RestauranteRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.RestauranteResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RequestMapping("/api/restaurants")
 @RestController
@@ -42,7 +43,8 @@ public class RestauranteController {
     @PostMapping
     public ResponseEntity<RestauranteResponse> createRestaurant(@RequestBody final RestauranteRequest request) {
         final var restaurante = createRestauranteUseCase.execute(restauranteMapper.toRestaurante(request));
-        return ResponseEntity.status(CREATED)
+        return ResponseEntity
+                .status(CREATED)
                 .body(restauranteMapper.toRestauranteResponse(restaurante));
     }
 
@@ -75,7 +77,7 @@ public class RestauranteController {
     }
 
     @GetMapping("feedback/{feedback}")
-    public ResponseEntity<List<RestauranteResponse>> getRestaurantsByCuisine(@PathVariable final Double feedback) {
+    public ResponseEntity<List<RestauranteResponse>> getRestaurantsByFeedback(@PathVariable final Double feedback) {
         final var restaurantes = findRestauranteByMediaFeedbackUseCase.execute(feedback);
         return ResponseEntity.status(OK)
                 .body(restauranteMapper.toRestauranteResponse(restaurantes));
