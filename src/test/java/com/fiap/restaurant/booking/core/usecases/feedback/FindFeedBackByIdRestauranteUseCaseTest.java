@@ -1,14 +1,13 @@
 package com.fiap.restaurant.booking.core.usecases.feedback;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,32 +27,32 @@ class FindFeedBackByIdRestauranteUseCaseTest {
 
     @Test
     void shouldThrowNotFoundExceptionWhenFeedBackIsNotFound() {
-        assertThatThrownBy(() -> findFeedBackByIdRestauranteUseCase.execute(1L))
+        assertThatThrownBy(() ->
+                findFeedBackByIdRestauranteUseCase.execute(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessage("Feedback with id restaurante %s not found", 1L);
+                .hasMessage(InformationsFeedbackConstants.getMessageIdRestauranteNotFound(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID)
+                        , InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID);
     }
+
     @Test
     void shouldThrowValidationExceptionWhenIdIsNull() {
-       assertThatThrownBy(() -> findFeedBackByIdRestauranteUseCase.execute(null))
+        assertThatThrownBy(() -> findFeedBackByIdRestauranteUseCase.execute(null))
                 .isInstanceOf(ValidationException.class)
-                .hasMessage("id restaurante cannot be null");
+                .hasMessage(InformationsFeedbackConstants.MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL);
 
     }
+
     @Test
     void shouldReturnFeedbackByIdRestaurante() {
-        var feedbackDomain = Optional.of(FeedBackDomain
-                .builder()
-                .id(1L)
-                .avaliacao(Integer.valueOf(1))
-                .comentario("Boulos Comunista")
-                .dataHoraCriacao(LocalDateTime.now())
-                .restauranteId(2L)
-                .nomeCliente("Lula 13")
-                .build());
+        Long idRestaurante = 2L;
 
-        when(feedBackGateway.findByIdRestaurante(2L)).thenReturn(feedbackDomain);
+        var feedbackDomain = Optional.of(InformationsFeedbackConstants
+                .buildFeedBackTest(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID, idRestaurante, Integer.valueOf(1))
+        );
 
-        final var result = findFeedBackByIdRestauranteUseCase.execute(2L);
+        when(feedBackGateway.findByIdRestaurante(idRestaurante)).thenReturn(feedbackDomain);
+
+        final var result = findFeedBackByIdRestauranteUseCase.execute(idRestaurante);
 
         assertThat(result)
                 .isNotNull()
