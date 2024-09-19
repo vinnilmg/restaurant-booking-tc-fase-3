@@ -54,7 +54,7 @@ public class FeedBackController {
     }
 
     @GetMapping("/nome-cliente/{nomeCliente}")
-    public ResponseEntity<List<FeedBackResponse>> getFeedbacksByNomeCliente(@PathVariable final String nomeCliente) {
+    public ResponseEntity<List<FeedBackResponse>> getFeedbacksByIdRestaurante(@PathVariable final String nomeCliente) {
         final var responses = getAllFeedBackByNomeClienteUseCase.execute(nomeCliente)
                 .stream()
                 .map(feedBackMapper::toFeedbackResponse)
@@ -64,7 +64,7 @@ public class FeedBackController {
     }
 
     @GetMapping("/restaurante/{idRestaurante}")
-    public ResponseEntity<FeedBackResponse> getFeedbacksByNomeCliente(@PathVariable final Long idRestaurante) {
+    public ResponseEntity<FeedBackResponse> getFeedbacksByIdRestaurante(@PathVariable final Long idRestaurante) {
         final var response = feedBackMapper.toFeedbackResponse(findFeedBackByIdRestauranteUseCase.execute(idRestaurante));
         return ResponseEntity.status(OK).body(response);
     }

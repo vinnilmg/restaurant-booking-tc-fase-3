@@ -36,7 +36,7 @@ public class InformationsFeedbackConstants {
         return String.format(MESSAGE_ID_FEEDBACK_NOT_FOUND,idFeedback);
     }
 
-    public static String getMessageWhenDeleteAFeedbackLong (Long idFeedback) {
+    public static String getMessageWhenDeleteAFeedback(Long idFeedback) {
         return String.format(MESSAGE_WHEN_DELETE_A_FEEDBACK,idFeedback);
     }
 

@@ -11,7 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.getMessageWhenDeleteAFeedbackLong;
+import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.getMessageWhenDeleteAFeedback;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -48,7 +48,7 @@ class DeleteFeedBackUseCaseTest {
         when(feedBackGateway.findById(any())).thenReturn(feedbackDomain);
 
         assertThat(deleteFeedBackUseCase.execute(feedbackDomain.get().getId()).getMessage())
-                .isEqualTo(getMessageWhenDeleteAFeedbackLong(feedbackDomain.get().getId()));
+                .isEqualTo(getMessageWhenDeleteAFeedback(feedbackDomain.get().getId()));
 
         verify(feedBackGateway, times(1)).delete(any());
     }

@@ -16,12 +16,10 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 class CreateFeedBackUseCaseTest {
-
     private CreateFeedBackUseCase createFeedBackUseCase;
 
     @Mock
     private FeedBackGateway feedBackGateway;
-
 
     private AutoCloseable mock;
 
@@ -49,7 +47,6 @@ class CreateFeedBackUseCaseTest {
 
         assertThat(feedBackDomainFromDatabase.getNomeCliente()).isEqualTo(feedBackToReturned.getNomeCliente());
         assertThat(feedBackDomainFromDatabase.getAvaliacao()).isEqualTo(feedBackToReturned.getAvaliacao());
-
     }
 
     @Test
@@ -60,8 +57,5 @@ class CreateFeedBackUseCaseTest {
         assertThatThrownBy(() -> createFeedBackUseCase.execute(feedbackToCreate))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage(InformationsFeedbackConstants.MESSAGE_ID_FEEDBACK_NOT_NULL_WHEN_CREATE);
-
     }
-
-
 }

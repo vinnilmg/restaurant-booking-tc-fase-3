@@ -5,8 +5,11 @@ import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Collections;
 import java.util.List;
@@ -19,12 +22,21 @@ import static org.mockito.Mockito.*;
 class GetAllFeedBackByNomeClienteUseCaseTest {
 
     private GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase;
+
+    @Mock
     private FeedBackGateway feedBackGateway;
+
+    private AutoCloseable mock;
 
     @BeforeEach
     void init() {
-        feedBackGateway = mock(FeedBackGateway.class);
+        mock = MockitoAnnotations.openMocks(this);
         getAllFeedBackByNomeClienteUseCase = new GetAllFeedBackByNomeClienteUseCaseImpl(feedBackGateway);
+    }
+
+    @AfterEach
+    void tearsDown() throws Exception {
+        mock.close();
     }
 
     @Test
