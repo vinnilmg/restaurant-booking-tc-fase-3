@@ -52,13 +52,13 @@ class FindReservaByIdUseCaseTest {
     void shouldThrowNotFoundExceptionWhenReservaIsNotFound() {
         final var id = DEFAULT_RESERVA_ID;
 
-        when(reservaGateway.findByid(id)).thenReturn(Optional.empty());
+        when(reservaGateway.findById(id)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> findReservaByIdUseCase.execute(id))
                 .isInstanceOf(NotFoundException.class)
                 .hasMessage("Reserva not found");
 
-        verify(reservaGateway).findByid(id);
+        verify(reservaGateway).findById(id);
     }
 
     @Test
@@ -66,7 +66,7 @@ class FindReservaByIdUseCaseTest {
         final var id = DEFAULT_RESERVA_ID;
         final var expected = ReservaDomainFixture.SOLICITADA();
 
-        when(reservaGateway.findByid(id)).thenReturn(Optional.of(expected));
+        when(reservaGateway.findById(id)).thenReturn(Optional.of(expected));
 
         final var result = findReservaByIdUseCase.execute(id);
 
@@ -74,6 +74,6 @@ class FindReservaByIdUseCaseTest {
                 .isNotNull()
                 .isEqualTo(expected);
 
-        verify(reservaGateway).findByid(id);
+        verify(reservaGateway).findById(id);
     }
 }
