@@ -44,6 +44,25 @@ import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestaurant
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByTipoCulinariaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.GetAllRestaurantesUseCaseImpl;
+import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
+import com.fiap.restaurant.booking.core.usecases.endereco.AtualizaEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.CreateEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.DeleteEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCepUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCidadeUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByRuaUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.GetAllEnderecosUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.AtualizaEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.CreateEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.DeleteEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByBairroUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCepUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByIdUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByRuaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.GetAllEnderecosUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -93,6 +112,51 @@ public class BeansConfig {
     @Bean
     public ConfirmReservaUseCase confirmReservaUseCase(FindReservaByIdUseCase findReservaByIdUseCase, ReservaGateway reservaGateway) {
         return new ConfirmReservaUseCaseImpl(findReservaByIdUseCase, reservaGateway);
+    }
+
+    @Bean
+    public AtualizaEnderecoUseCase atualizaEnderecoUseCase(FindEnderecoByIdUseCase findEnderecoByIdUseCase, EnderecoGateway enderecoGateway) {
+        return new AtualizaEnderecoUseCaseImpl(findEnderecoByIdUseCase, enderecoGateway);
+    }
+
+    @Bean
+    public CreateEnderecoUseCase createEnderecoUseCase(EnderecoGateway enderecoGateway) {
+        return new CreateEnderecoUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public DeleteEnderecoUseCase deleteEnderecoUseCase(FindEnderecoByIdUseCase findEnderecoByIdUseCase, EnderecoGateway enderecoGateway) {
+        return new DeleteEnderecoUseCaseImpl(findEnderecoByIdUseCase, enderecoGateway);
+    }
+
+    @Bean
+    public FindEnderecoByBairroUseCase findEnderecoByBairroUseCase(EnderecoGateway enderecoGateway) {
+        return new FindEnderecoByBairroUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public FindEnderecoByCepUseCase findEnderecoByCepUseCase(EnderecoGateway enderecoGateway) {
+        return new FindEnderecoByCepUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public FindEnderecoByCidadeUseCase findEnderecoByCidadeUseCase(EnderecoGateway enderecoGateway) {
+        return new FindEnderecoByCidadeUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public FindEnderecoByIdUseCase findEnderecoByIdUseCase(EnderecoGateway enderecoGateway) {
+        return new FindEnderecoByIdUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public FindEnderecoByRuaUseCase findEnderecoByRuaUseCase(EnderecoGateway enderecoGateway) {
+        return new FindEnderecoByRuaUseCaseImpl(enderecoGateway);
+    }
+
+    @Bean
+    public GetAllEnderecosUseCase getAllEnderecosUseCase(EnderecoGateway enderecoGateway) {
+        return new GetAllEnderecosUseCaseImpl(enderecoGateway);
     }
 
     @Bean
