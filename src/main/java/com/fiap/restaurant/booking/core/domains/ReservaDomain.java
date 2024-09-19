@@ -6,6 +6,7 @@ import com.fiap.restaurant.booking.utils.DateTimeUtils;
 
 import java.time.LocalDateTime;
 
+import static com.fiap.restaurant.booking.utils.DateTimeUtils.toDefaultFormat;
 import static io.micrometer.common.util.StringUtils.isEmpty;
 import static java.util.Objects.isNull;
 
@@ -61,8 +62,18 @@ public class ReservaDomain implements Reserva {
     }
 
     @Override
+    public String getDataHoraReservaFormatted() {
+        return toDefaultFormat(this.dataHoraReserva);
+    }
+
+    @Override
     public LocalDateTime getDataHoraCriacao() {
         return dataHoraCriacao;
+    }
+
+    @Override
+    public String getDataHoraCriacaoFormatted() {
+        return toDefaultFormat(this.dataHoraCriacao);
     }
 
     @Override

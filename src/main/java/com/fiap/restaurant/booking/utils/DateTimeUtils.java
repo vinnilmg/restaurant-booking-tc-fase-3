@@ -13,6 +13,10 @@ public class DateTimeUtils {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(DEFAULT_PATTERN));
     }
 
+    public static String toDefaultFormat(final LocalDateTime dateTime) {
+        return dateTime.format(DateTimeFormatter.ofPattern(DEFAULT_PATTERN));
+    }
+
     public static boolean isFutureDate(final LocalDateTime dateTime) {
         return dateTime.isAfter(LocalDateTime.now());
     }

@@ -13,7 +13,11 @@ public interface Reserva {
 
     LocalDateTime getDataHoraReserva();
 
+    String getDataHoraReservaFormatted();
+
     LocalDateTime getDataHoraCriacao();
+
+    String getDataHoraCriacaoFormatted();
 
     void updateStatus(StatusReservaEnum status);
 
