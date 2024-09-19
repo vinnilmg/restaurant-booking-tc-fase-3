@@ -16,7 +16,4 @@ public interface MesaGateway {
     List<MesaDomain> findByRestauranteId(Long restauranteId);
 
     void delete(Long id);
-
-
-
 }

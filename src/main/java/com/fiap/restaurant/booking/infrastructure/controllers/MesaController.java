@@ -5,8 +5,15 @@ import com.fiap.restaurant.booking.infrastructure.controllers.mappers.MesaMapper
 import com.fiap.restaurant.booking.infrastructure.controllers.request.MesaRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MesaResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -25,12 +32,9 @@ public class MesaController {
 
     @PostMapping
     public ResponseEntity<MesaResponse> createMesa(@RequestBody final MesaRequest request) {
-        log.info("Request received: {}", request);
-       final var response = mesaMapper.toMesaResponse(createMesaUseCase.execute(mesaMapper.toMesaDomain(request)));
-        log.info("MesaDomain created: {}", mesaMapper.toMesaDomain(request));
-//feedBackMapper.toFeedbackResponse(
-//                createFeedBackUseCase.execute(feedBackMapper.toFeedBackDomain(feedBackRequest)));
-       return ResponseEntity.status(201).body(response);
+        final var mesa = createMesaUseCase.execute(mesaMapper.toMesaDomain(request));
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(mesaMapper.toMesaResponse(mesa));
     }
 
     @GetMapping
@@ -41,6 +45,5 @@ public class MesaController {
     @DeleteMapping("/{id}")
     public ResponseEntity<MesaResponse> deleteMesa(@PathVariable Long id) {
         return null;
-
     }
 }

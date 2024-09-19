@@ -7,6 +7,13 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface MesaEntityMapper {
 
-    MesaEntity toEntity(MesaDomain mesaDomain);
-    MesaDomain toDomain(MesaEntity mesaEntity);
+    MesaEntity toEntity(MesaDomain mesa);
+
+    default MesaDomain toDomain(MesaEntity mesa) {
+        return new MesaDomain(
+                mesa.getId(),
+                mesa.getNumeroDaMesa(),
+                mesa.getStatus()
+        );
+    }
 }

@@ -7,9 +7,9 @@ public enum StatusMesaEnum {
     DISPONIVEL,
     RESERVADA;
 
-//    public static Optional<StatusMesaEnum> toEnum(final String value) {
-//        return Stream.of(values())
-//                .filter(status -> status.name().equalsIgnoreCase(value))
-//                .findFirst();
-//    }
+    public static Optional<StatusMesaEnum> toEnum(final String value) {
+        return Stream.of(values())
+                .filter(status -> status.name().equalsIgnoreCase(value))
+                .findFirst();
+    }
 }

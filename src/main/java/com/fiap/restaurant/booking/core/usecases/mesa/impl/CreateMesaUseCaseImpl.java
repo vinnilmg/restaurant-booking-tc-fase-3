@@ -15,7 +15,7 @@ public class CreateMesaUseCaseImpl implements CreateMesaUseCase {
     @Override
     public MesaDomain execute(final MesaDomain mesaDomain) {
         if (mesaDomain.getStatus() == null) {
-            throw new IllegalArgumentException("O status da mesa não pode ser nulo");
+            throw new IllegalArgumentException("O status da mesa não pode ser nulo"); // Retornar um validation exception
         }
         return mesaGateway.create(mesaDomain);
     }
