@@ -43,12 +43,12 @@ public class EnderecoDomain implements Endereco {
             final String estado,
             final String cep
     ) {
-        this.rua = rua;
-        this.numero = numero;
+        this.rua = ruaValidation(rua);
+        this.numero = numeroValidation(numero);
         this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.bairro = bairroValidation(bairro);
+        this.cidade = cidadeValidation(cidade);
+        this.estado = estadoValidation(estado);
         this.cep = cepValidation(cep);
     }
 
@@ -91,6 +91,31 @@ public class EnderecoDomain implements Endereco {
         if (isNull(id)) throw ValidationException.of("Endereco Id", "cannot be null");
         if (id < 0) throw ValidationException.of("Endereco Id", "cannot be negative");
         return id;
+    }
+
+    private static String ruaValidation(final String rua) {
+        if (isNull(rua)) throw ValidationException.of("Endereço Rua", "cannot be null");
+        return rua;
+    }
+
+    private static String numeroValidation(final String numero) {
+        if (isNull(numero)) throw ValidationException.of("Endereço numero", "cannot be null");
+        return numero;
+    }
+
+    private static String bairroValidation(final String bairro) {
+        if (isNull(bairro)) throw ValidationException.of("Endereço Bairro", "cannot be null");
+        return bairro;
+    }
+
+    private static String cidadeValidation(final String cidade) {
+        if (isNull(cidade)) throw ValidationException.of("Endereço Cidade", "cannot be null");
+        return cidade;
+    }
+
+    private static String estadoValidation(final String estado) {
+        if (isNull(estado)) throw ValidationException.of("Endereço Estado", "cannot be null");
+        return estado;
     }
 
     private static String cepValidation(final String cep) {

@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.core.usecases.endereco.impl;
 
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
+import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
 import com.fiap.restaurant.booking.core.usecases.endereco.DeleteEnderecoUseCase;
 import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByIdUseCase;
@@ -18,6 +19,7 @@ public class DeleteEnderecoUseCaseImpl implements DeleteEnderecoUseCase {
 
     @Override
     public void execute(final Long id) {
+        if (isNull(id) || id < 0) throw ValidationException.of("Endereco Id", "cannot be null or negative");
         final var endereco = findEnderecoByIdUseCase.execute(id);
 
         if (isNull(endereco)) {
