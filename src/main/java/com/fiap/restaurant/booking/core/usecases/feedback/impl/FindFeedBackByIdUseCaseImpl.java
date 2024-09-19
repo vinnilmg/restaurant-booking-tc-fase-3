@@ -11,18 +11,17 @@ import java.util.Objects;
 
 @AllArgsConstructor
 public class FindFeedBackByIdUseCaseImpl implements FindFeedBackByIdUseCase {
+
     private final FeedBackGateway feedBackGateway;
-
-
 
     @Override
     public FeedBackDomain execute(Long id) {
-        if(Objects.isNull(id))
-             throw ValidationException.of("id", "cannot be null");
+        if (Objects.isNull(id))
+            throw ValidationException.of("id", "cannot be null");
         return feedBackGateway.findById(id)
                 .orElseThrow(() ->
-                               new NotFoundException(String.format("Feedback with id %s", id)
-                    )
+                        new NotFoundException(String.format("Feedback with id %s", id)
+                        )
                 );
     }
 }

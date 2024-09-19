@@ -5,24 +5,36 @@ import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdRestauranteUseCaseImpl;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class FindFeedBackByIdRestauranteUseCaseTest {
+
     private FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase;
+
+    @Mock
     private FeedBackGateway feedBackGateway;
+
+    private AutoCloseable mock;
 
     @BeforeEach
     void init() {
-        feedBackGateway = mock(FeedBackGateway.class);
+        mock = MockitoAnnotations.openMocks(this);
         findFeedBackByIdRestauranteUseCase = new FindFeedBackByIdRestauranteUseCaseImpl(feedBackGateway);
+    }
+
+    @AfterEach
+    void tearsDown() throws Exception {
+        mock.close();
     }
 
     @Test
@@ -32,6 +44,8 @@ class FindFeedBackByIdRestauranteUseCaseTest {
                 .isInstanceOf(NotFoundException.class)
                 .hasMessage(InformationsFeedbackConstants.getMessageIdRestauranteNotFound(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID)
                         , InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID);
+
+        verify(feedBackGateway, times(1)).findByIdRestaurante(any());
     }
 
     @Test
@@ -40,6 +54,7 @@ class FindFeedBackByIdRestauranteUseCaseTest {
                 .isInstanceOf(ValidationException.class)
                 .hasMessage(InformationsFeedbackConstants.MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL);
 
+        verify(feedBackGateway, never()).findByIdRestaurante(any());
     }
 
     @Test
@@ -57,6 +72,8 @@ class FindFeedBackByIdRestauranteUseCaseTest {
         assertThat(result)
                 .isNotNull()
                 .isEqualTo(feedbackDomain.get());
+
+        verify(feedBackGateway, times(1)).findByIdRestaurante(any());
     }
 
 }

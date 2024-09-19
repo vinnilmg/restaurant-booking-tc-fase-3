@@ -16,7 +16,7 @@ public class FindFeedBackByIdRestauranteUseCaseImpl implements FindFeedBackByIdR
 
     @Override
     public FeedBackDomain execute(Long idRestaurante) {
-        if(Objects.isNull(idRestaurante))
+        if (Objects.isNull(idRestaurante))
             throw ValidationException.of("id restaurante", "cannot be null");
         return feedBackGateway.findByIdRestaurante(idRestaurante)
                 .orElseThrow(() ->

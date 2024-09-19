@@ -26,7 +26,7 @@ public class FeedBackDomain {
     private LocalDateTime dataHoraCriacao;
 
     public FeedBackDomain(Long id, Long restauranteId, String nomeCliente, Integer avaliacao, String comentario) {
-        validationToCreateInstance(id, restauranteId, nomeCliente, avaliacao, comentario);
+        validationToCreateInstance(restauranteId, nomeCliente, avaliacao);
         this.id = id;
         this.restauranteId = restauranteId;
         this.nomeCliente = nomeCliente;
@@ -34,7 +34,7 @@ public class FeedBackDomain {
         this.comentario = comentario;
     }
 
-    private void validationToCreateInstance(Long id, Long restauranteId, String nomeCliente, Integer avaliacao, String comentario) {
+    private void validationToCreateInstance( Long restauranteId, String nomeCliente, Integer avaliacao) {
         if (Objects.isNull(avaliacao))
             throw ValidationException.of("Nota de avaliação invalida", "Nota de avaliação tem que ser entre 1 ou 5");
         if (avaliacao <= 0 || avaliacao > 5)

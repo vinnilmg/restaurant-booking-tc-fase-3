@@ -10,6 +10,8 @@ public class InformationsFeedbackConstants {
 
     private static final String MESSAGE_ID_FEEDBACK_NOT_FOUND = "Feedback with id %s not found";
 
+    public static final String MESSAGE_ID_FEEDBACK_NOT_NULL_WHEN_CREATE = "id has to be null to create a new feedback";
+
     public static final String MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL ="id restaurante cannot be null";
 
     public static final String MESSAGE_WHEN_ID_FEEDBACK_IS_NULL ="id cannot be null";
@@ -18,9 +20,13 @@ public class InformationsFeedbackConstants {
 
     public static final String MESSAGE_WHEN_NOME_CLIENTE_FEEDBACK_NOT_FOUND ="feedbacks by nome cliente %s not found";
 
+    public static final String MESSAGE_WHEN_DELETE_A_FEEDBACK = "Feedback by id %s was deleted by success.";
+
     public static final String NOME_CLIENTE_EXAMPLE_TESTE ="teste";
 
     public static final Long DEFAULT_FEEDBACK_ID = 1L;
+
+    public static final Long DEFAULT_RESTAURANTE_ID = 1L;
 
     public static String getMessageIdRestauranteNotFound(Long idRestaurante) {
         return String.format(MESSAGE_ID_RESTAURANTE_NOT_FOUND,idRestaurante);
@@ -28,6 +34,10 @@ public class InformationsFeedbackConstants {
 
     public static String getMessageIdFeedbackNotFound(Long idFeedback) {
         return String.format(MESSAGE_ID_FEEDBACK_NOT_FOUND,idFeedback);
+    }
+
+    public static String getMessageWhenDeleteAFeedbackLong (Long idFeedback) {
+        return String.format(MESSAGE_WHEN_DELETE_A_FEEDBACK,idFeedback);
     }
 
     public static String getMessageWhenNomeClienteFeedbackNotFound(String nomeCliente) {
