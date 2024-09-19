@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import com.fiap.restaurant.booking.utils.fixture.ReservaDomainFixture;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -85,6 +86,30 @@ class ReservaDomainTest {
     }
 
     @Test
+    void shouldThrowValidationExceptionWhenIdIsNull() {
+        assertThatThrownBy(() -> new ReservaDomain(
+                null,
+                null,
+                null,
+                null,
+                null))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Reserva Id cannot be null");
+    }
+
+    @Test
+    void shouldThrowValidationExceptionWhenIdIsNegative() {
+        assertThatThrownBy(() -> new ReservaDomain(
+                -1L,
+                null,
+                null,
+                null,
+                null))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Reserva Id cannot be negative");
+    }
+
+    @Test
     void shouldConstructReservaDomain() {
         final var cpf = DEFAULT_CPF;
         final var status = StatusReservaEnum.SOLICITADA.name();
@@ -107,5 +132,78 @@ class ReservaDomainTest {
         assertThat(result)
                 .extracting(Reserva::getId, Reserva::getDataHoraCriacao)
                 .containsOnlyNulls();
+    }
+
+    @Test
+    void shouldConstructReservaDomainWithId() {
+        final var id = 1L;
+        final var cpf = DEFAULT_CPF;
+        final var status = StatusReservaEnum.SOLICITADA.name();
+        final var dataHoraReserva = LocalDateTime.now().plusDays(5);
+        final var dataHoraCriacao = LocalDateTime.now();
+
+        final var result = new ReservaDomain(
+                1L,
+                cpf,
+                status,
+                dataHoraReserva,
+                dataHoraCriacao
+        );
+
+        assertThat(result)
+                .isNotNull()
+                .isInstanceOf(Reserva.class)
+                .extracting(
+                        Reserva::getId,
+                        Reserva::getCpf,
+                        Reserva::getStatus,
+                        Reserva::getDataHoraReserva,
+                        Reserva::getDataHoraCriacao
+                ).containsExactly(
+                        id,
+                        cpf,
+                        status,
+                        dataHoraReserva,
+                        dataHoraCriacao
+                );
+    }
+
+    @Test
+    void shouldReturnTrueWhenReservaIsRequested() {
+        final var reserva = ReservaDomainFixture.SOLICITADA();
+        assertThat(reserva)
+                .extracting(Reserva::isRequested, Reserva::isConfirmed, Reserva::isCanceled)
+                .containsExactly(true, false, false);
+    }
+
+    @Test
+    void shouldReturnTrueWhenReservaIsCanceled() {
+        final var reserva = ReservaDomainFixture.CANCELADA();
+        assertThat(reserva)
+                .extracting(Reserva::isRequested, Reserva::isConfirmed, Reserva::isCanceled)
+                .containsExactly(false, false, true);
+    }
+
+    @Test
+    void shouldReturnTrueWhenReservaIsConfirmed() {
+        final var reserva = ReservaDomainFixture.CONFIRMADA();
+        assertThat(reserva)
+                .extracting(Reserva::isRequested, Reserva::isConfirmed, Reserva::isCanceled)
+                .containsExactly(false, true, false);
+    }
+
+    @Test
+    void shouldUpdateStatus() {
+        final var reserva = ReservaDomainFixture.SOLICITADA();
+        assertThat(reserva.isRequested())
+                .isTrue();
+
+        reserva.updateStatus(StatusReservaEnum.CANCELADA);
+
+        assertThat(reserva.isRequested())
+                .isFalse();
+
+        assertThat(reserva.isCanceled())
+                .isTrue();
     }
 }

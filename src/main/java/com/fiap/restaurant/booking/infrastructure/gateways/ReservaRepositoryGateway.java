@@ -36,7 +36,7 @@ public class ReservaRepositoryGateway implements ReservaGateway {
     }
 
     @Override
-    public Optional<Reserva> findByid(final Long id) {
+    public Optional<Reserva> findById(final Long id) {
         return reservaRepository.findById(id)
                 .map(reservaEntityMapper::toDomain);
     }

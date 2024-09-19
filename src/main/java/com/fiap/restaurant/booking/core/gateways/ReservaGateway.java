@@ -10,7 +10,7 @@ public interface ReservaGateway {
 
     List<Reserva> getAll();
 
-    Optional<Reserva> findByid(Long id);
+    Optional<Reserva> findById(Long id);
 
     List<Reserva> findByCpf(String cpf);
 
