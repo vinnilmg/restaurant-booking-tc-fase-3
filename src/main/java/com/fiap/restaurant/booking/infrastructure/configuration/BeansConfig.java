@@ -31,8 +31,19 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindRequestedReser
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByCpfUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.*;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.*;
+import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByCnpjUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMediaFeedbackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByMediaFeedbackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByTipoCulinariaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.GetAllRestaurantesUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -90,8 +101,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway) {
-        return new CreateRestauranteUseCaseImpl(restauranteGateway);
+    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway, FindRestauranteByCnpjUseCase findReservaByCpfUseCase) {
+        return new CreateRestauranteUseCaseImpl(restauranteGateway, findReservaByCpfUseCase);
     }
 
     @Bean
@@ -118,7 +129,6 @@ public class BeansConfig {
     public FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase(RestauranteGateway restauranteGateway) {
         return new FindRestauranteByMediaFeedbackUseCaseImpl(restauranteGateway);
     }
-}
 
     @Bean
     public GetAllFeedBackUseCase findAllFeedBackUseCase(FeedBackGateway feedBackGateway) {
