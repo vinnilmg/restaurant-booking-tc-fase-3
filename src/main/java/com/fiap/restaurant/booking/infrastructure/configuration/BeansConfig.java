@@ -1,8 +1,27 @@
 package com.fiap.restaurant.booking.infrastructure.configuration;
 
+import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
+import com.fiap.restaurant.booking.core.usecases.endereco.AtualizaEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.CreateEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.DeleteEnderecoUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCepUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCidadeUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByRuaUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.GetAllEnderecosUseCase;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.AtualizaEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.CreateEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.DeleteEnderecoUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByBairroUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCepUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByIdUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByRuaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.endereco.impl.GetAllEnderecosUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.FindByIdFeedBackUseCase;
@@ -39,30 +58,12 @@ import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNo
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByMediaFeedbackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByTipoCulinariaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.GetAllRestaurantesUseCaseImpl;
-import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
-import com.fiap.restaurant.booking.core.usecases.endereco.AtualizaEnderecoUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.CreateEnderecoUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.DeleteEnderecoUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCepUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCidadeUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByIdUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByRuaUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.GetAllEnderecosUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.AtualizaEnderecoUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.CreateEnderecoUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.DeleteEnderecoUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByBairroUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCepUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByCidadeUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByIdUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.FindEnderecoByRuaUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.endereco.impl.GetAllEnderecosUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -162,6 +163,11 @@ public class BeansConfig {
     @Bean
     public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
         return new CreateFeedBackUseCaseImpl(feedBackGateway);
+    }
+
+    @Bean
+    public FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByCnpjUseCaseImpl(restauranteGateway);
     }
 
     @Bean

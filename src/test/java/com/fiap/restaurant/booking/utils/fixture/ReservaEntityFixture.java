@@ -29,4 +29,13 @@ public class ReservaEntityFixture {
         result.setDataHoraCriacao(LocalDateTime.now());
         return result;
     }
+
+    public static ReservaEntity WITHOUT_ID() {
+        final var result = new ReservaEntity();
+        result.setStatus(StatusReservaEnum.SOLICITADA.name());
+        result.setCpfCliente(DEFAULT_CPF);
+        result.setDataHoraReserva(LocalDateTime.now().plusDays(3));
+        result.setDataHoraCriacao(LocalDateTime.now());
+        return result;
+    }
 }
