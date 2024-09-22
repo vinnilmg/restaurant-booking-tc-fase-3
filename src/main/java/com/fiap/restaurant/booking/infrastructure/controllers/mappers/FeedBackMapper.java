@@ -11,6 +11,8 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 
 public interface FeedBackMapper {
+
+    @Mapping(target = "restauranteId", expression = "java(feedBack.setRestaurante().getId())")
     default FeedBackDomain toFeedBackDomain(FeedBackRequest request) {
         return FeedBackBuilder.build(request);
     }

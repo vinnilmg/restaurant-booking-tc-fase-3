@@ -87,8 +87,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
-        return new CreateFeedBackUseCaseImpl(feedBackGateway);
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new CreateFeedBackUseCaseImpl(feedBackGateway, findRestauranteByIdUseCase);
     }
 
     @Bean
@@ -98,7 +98,7 @@ public class BeansConfig {
 
     @Bean
     public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway, FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase) {
-        return new CreateRestauranteUseCaseImpl(restauranteGateway,findRestauranteByCnpjUseCase);
+        return new CreateRestauranteUseCaseImpl(restauranteGateway, findRestauranteByCnpjUseCase);
     }
 
     @Bean

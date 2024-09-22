@@ -31,7 +31,7 @@ class CreateFeedBackUseCaseTest {
     @BeforeEach
     void init() {
         mock = MockitoAnnotations.openMocks(this);
-        createFeedBackUseCase = new CreateFeedBackUseCaseImpl(feedBackGateway);
+        createFeedBackUseCase = new CreateFeedBackUseCaseImpl(feedBackGateway,findRestauranteByIdUseCase);
     }
 
     @AfterEach
@@ -46,7 +46,7 @@ class CreateFeedBackUseCaseTest {
 
         when(feedBackGateway.create(any())).thenReturn(feedBackToReturned);
 
-        var feedBackDomainFromDatabase = createFeedBackUseCase.execute(feedbackToCreate);
+        var feedBackDomainFromDatabase = createFeedBackUseCase.execute(feedbackToCreate,feedBackToReturned.getId());
 
         assertThat(feedBackDomainFromDatabase.getNomeCliente()).isEqualTo(feedBackToReturned.getNomeCliente());
         assertThat(feedBackDomainFromDatabase.getAvaliacao()).isEqualTo(feedBackToReturned.getAvaliacao());
@@ -57,7 +57,7 @@ class CreateFeedBackUseCaseTest {
 
         var feedbackToCreate = InformationsFeedbackConstants.buildFeedBackTest(1L, 1L, 1);
 
-        assertThatThrownBy(() -> createFeedBackUseCase.execute(feedbackToCreate))
+        assertThatThrownBy(() -> createFeedBackUseCase.execute(feedbackToCreate,feedbackToCreate.getRestaurante().getId()))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage(InformationsFeedbackConstants.MESSAGE_ID_FEEDBACK_NOT_NULL_WHEN_CREATE);
     }

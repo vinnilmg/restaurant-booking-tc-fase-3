@@ -25,7 +25,7 @@ public class FeedbackDomainClassTest {
 
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
-                InformationsRestauranteConstants.buildRestauranteTest(2L),
+                InformationsRestauranteConstants.buildRestauranteTest(null),
                 "teste",
                 1,
                 "teste");
@@ -94,7 +94,7 @@ public class FeedbackDomainClassTest {
 
         assertNotNull(feedback);
         assertEquals(id, feedback.getId());
-        assertEquals(restauranteID, feedback.getRestaurante());
+        assertEquals(restauranteID, feedback.getRestaurante().getId());
         assertEquals(nomeCliente, feedback.getNomeCliente());
         assertEquals(avaliacao, feedback.getAvaliacao());
         assertEquals(comentario, feedback.getComentario());

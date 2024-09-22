@@ -5,5 +5,5 @@ import com.fiap.restaurant.booking.core.domains.FeedBack;
 @FunctionalInterface
 public interface CreateFeedBackUseCase {
 
-    FeedBack execute(FeedBack feedBack);
+    FeedBack execute(FeedBack feedBack,Long idRestaurante);
 }
