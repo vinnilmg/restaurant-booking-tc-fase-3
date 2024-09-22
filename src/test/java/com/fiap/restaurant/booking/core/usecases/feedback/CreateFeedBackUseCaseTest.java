@@ -3,6 +3,7 @@ package com.fiap.restaurant.booking.core.usecases.feedback;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.CreateFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +17,11 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 class CreateFeedBackUseCaseTest {
+
     private CreateFeedBackUseCase createFeedBackUseCase;
+
+    @Mock
+    private FindRestauranteByIdUseCase findRestauranteByIdUseCase;
 
     @Mock
     private FeedBackGateway feedBackGateway;
@@ -37,8 +42,6 @@ class CreateFeedBackUseCaseTest {
     @Test
     void shouldBeCreateFeedBack() {
         var feedBackToReturned = InformationsFeedbackConstants.buildFeedBackTest(1L, 1L, 1);
-        feedBackToReturned.setDataHoraCriacao(null);
-
         var feedbackToCreate = InformationsFeedbackConstants.buildFeedBackTest(null, 1L, 1);
 
         when(feedBackGateway.create(any())).thenReturn(feedBackToReturned);

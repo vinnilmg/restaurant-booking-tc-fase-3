@@ -6,6 +6,7 @@ import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdRestau
 import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackResponse;
@@ -42,13 +43,17 @@ public class FeedBackController {
 
     private final FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase;
 
+    private final FindRestauranteByIdUseCase findRestauranteByIdUseCase;
+
     private final FeedBackMapper feedBackMapper;
 
 
     @PostMapping
     public ResponseEntity<FeedBackResponse> createFeedback(@RequestBody final FeedBackRequest feedBackRequest) {
-        final var response = feedBackMapper.toFeedbackResponse(
-                createFeedBackUseCase.execute(feedBackMapper.toFeedBackDomain(feedBackRequest)));
+        var restauranteDomain = findRestauranteByIdUseCase.execute(feedBackRequest.restauranteId());
+        var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest);
+        feedbackDomain.setRestaurante(restauranteDomain);
+        final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

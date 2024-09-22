@@ -92,8 +92,13 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway) {
-        return new CreateRestauranteUseCaseImpl(restauranteGateway);
+    public FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByCnpjUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway, FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase) {
+        return new CreateRestauranteUseCaseImpl(restauranteGateway,findRestauranteByCnpjUseCase);
     }
 
     @Bean
@@ -120,7 +125,6 @@ public class BeansConfig {
     public FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase(RestauranteGateway restauranteGateway) {
         return new FindRestauranteByMediaFeedbackUseCaseImpl(restauranteGateway);
     }
-}
 
     @Bean
     public GetAllFeedBackUseCase findAllFeedBackUseCase(FeedBackGateway feedBackGateway) {

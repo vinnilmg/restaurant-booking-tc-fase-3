@@ -51,7 +51,7 @@ public class InformationsFeedbackConstants {
                 .avaliacao(avaliacao)
                 .comentario("Comentário aleatório")
                 .dataHoraCriacao(LocalDateTime.now())
-                .restauranteId(idRestaurante)
+                .restauranteId(InformationsRestauranteConstants.buildRestauranteTest(idRestaurante))
                 .nomeCliente("Cliente Teste")
                 .build();
     }

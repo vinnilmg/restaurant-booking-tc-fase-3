@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
@@ -15,7 +16,7 @@ public class FindFeedBackByIdRestauranteUseCaseImpl implements FindFeedBackByIdR
     private final FeedBackGateway feedBackGateway;
 
     @Override
-    public FeedBackDomain execute(Long idRestaurante) {
+    public FeedBack execute(Long idRestaurante) {
         if (Objects.isNull(idRestaurante))
             throw ValidationException.of("id restaurante", "cannot be null");
         return feedBackGateway.findByIdRestaurante(idRestaurante)

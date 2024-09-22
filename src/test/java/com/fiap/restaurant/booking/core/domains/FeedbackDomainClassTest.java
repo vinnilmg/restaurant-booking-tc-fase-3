@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import com.fiap.restaurant.booking.utils.InformationsRestauranteConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,10 +12,9 @@ public class FeedbackDomainClassTest {
 
     @Test
     void criarFeedbackComAvaliacãoNulo() {
-
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 null,
-                Long.parseLong("1"),
+                InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 null,
                 "teste");
@@ -25,7 +25,7 @@ public class FeedbackDomainClassTest {
 
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
-                null,
+                InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 1,
                 "teste");
@@ -37,7 +37,7 @@ public class FeedbackDomainClassTest {
 
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
-                Long.parseLong("1"),
+                InformationsRestauranteConstants.buildRestauranteTest(2L),
                 null,
                 1,
                 "teste");
@@ -49,7 +49,7 @@ public class FeedbackDomainClassTest {
 
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
-                Long.parseLong("1"),
+                InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 0,
                 "teste");
@@ -61,7 +61,7 @@ public class FeedbackDomainClassTest {
 
         Assertions.assertThrows(ValidationException.class, () -> {new FeedBackDomain(
                 Long.parseLong("1"),
-                Long.parseLong("1"),
+                InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 6,
                 "teste");
@@ -76,7 +76,7 @@ public class FeedbackDomainClassTest {
         String comentario = "Ótimo atendimento!";
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            new FeedBackDomain(id, restauranteID, nomeCliente, avaliacao, comentario);
+            new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario);
         });
 
     }
@@ -90,11 +90,11 @@ public class FeedbackDomainClassTest {
         Integer avaliacao = 4;
         String comentario = "Ótimo atendimento!";
 
-        FeedBackDomain feedback = new FeedBackDomain(id, restauranteID, nomeCliente, avaliacao, comentario);
+        FeedBackDomain feedback = new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario);
 
         assertNotNull(feedback);
         assertEquals(id, feedback.getId());
-        assertEquals(restauranteID, feedback.getRestauranteId());
+        assertEquals(restauranteID, feedback.getRestaurante());
         assertEquals(nomeCliente, feedback.getNomeCliente());
         assertEquals(avaliacao, feedback.getAvaliacao());
         assertEquals(comentario, feedback.getComentario());

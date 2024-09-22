@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback;
 
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
@@ -63,7 +64,7 @@ class FindFeedBackByIdUseCaseTest {
     @Test
     void shouldReturnFeedback() {
         Long idRestaurante = 2L;
-        var feedbackDomain = Optional.of(InformationsFeedbackConstants
+        Optional<FeedBack> feedbackDomain = Optional.of(InformationsFeedbackConstants
                 .buildFeedBackTest(DEFAULT_FEEDBACK_ID,
                         idRestaurante,
                         Integer.valueOf(2)));
@@ -78,8 +79,8 @@ class FindFeedBackByIdUseCaseTest {
         assertThat(result.getId())
                 .isEqualTo(feedbackDomain.get().getId());
 
-        assertThat(result.getRestauranteId())
-                .isEqualTo(feedbackDomain.get().getRestauranteId());
+        assertThat(result.getRestaurante().getId())
+                .isEqualTo(feedbackDomain.get().getRestaurante().getId());
 
         assertThat(result.getComentario())
                 .isEqualTo(feedbackDomain.get().getComentario());

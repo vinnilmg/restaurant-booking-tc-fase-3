@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback;
 
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.DeleteFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
@@ -41,7 +42,7 @@ class DeleteFeedBackUseCaseTest {
 
     @Test
     void shouldBeDeleteFeedBack() {
-        var feedbackDomain = Optional.of(InformationsFeedbackConstants
+        Optional<FeedBack> feedbackDomain = Optional.of(InformationsFeedbackConstants
                 .buildFeedBackTest(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID, 2L, Integer.valueOf(1))
         );
 

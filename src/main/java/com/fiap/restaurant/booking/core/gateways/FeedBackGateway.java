@@ -1,21 +1,21 @@
 package com.fiap.restaurant.booking.core.gateways;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface FeedBackGateway {
 
-    FeedBackDomain create(FeedBackDomain feedback);
+    FeedBack create(FeedBack feedback);
 
-    List<FeedBackDomain> findAll();
+    List<FeedBack> findAll();
 
-    List<FeedBackDomain> findAllByNomeCliente(String nomeCliente);
+    List<FeedBack> findAllByNomeCliente(String nomeCliente);
 
-    Optional<FeedBackDomain> findById(Long id);
+    Optional<FeedBack> findById(Long id);
 
-    Optional<FeedBackDomain> findByIdRestaurante(Long id);
+    Optional<FeedBack> findByIdRestaurante(Long id);
 
     void delete(Long id);
 }

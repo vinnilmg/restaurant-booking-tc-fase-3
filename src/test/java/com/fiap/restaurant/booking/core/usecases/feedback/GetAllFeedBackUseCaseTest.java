@@ -1,8 +1,10 @@
 package com.fiap.restaurant.booking.core.usecases.feedback;
 
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.utils.InformationsRestauranteConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,14 +39,14 @@ class GetAllFeedBackUseCaseTest {
 
     @Test
     void shouldGetAllFeedbacks() {
-        final List<FeedBackDomain> feedBackDomainsList = List.of(
+        final List<FeedBack> feedBackDomainsList = List.of(
                FeedBackDomain
                        .builder()
                        .id(1L)
                        .avaliacao(Integer.valueOf(1))
                        .comentario("cadeirada do datena")
                        .dataHoraCriacao(LocalDateTime.now())
-                       .restauranteId(2L)
+                       .restauranteId(InformationsRestauranteConstants.buildRestauranteTest(1L))
                         .nomeCliente("Pablo Marçal")
                        .build(),
                 FeedBackDomain
@@ -53,7 +55,7 @@ class GetAllFeedBackUseCaseTest {
                         .avaliacao(Integer.valueOf(1))
                         .comentario("Boulos Comunista")
                         .dataHoraCriacao(LocalDateTime.now())
-                        .restauranteId(2L)
+                        .restauranteId(InformationsRestauranteConstants.buildRestauranteTest(2L))
                         .nomeCliente("Lula 13")
                         .build()
         );

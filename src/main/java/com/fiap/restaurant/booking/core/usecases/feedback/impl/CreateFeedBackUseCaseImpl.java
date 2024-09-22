@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
@@ -16,9 +16,9 @@ public class CreateFeedBackUseCaseImpl implements CreateFeedBackUseCase {
     }
 
     @Override
-    public FeedBackDomain execute(final FeedBackDomain feedBackDomain) {
-        if(Objects.isNull(feedBackDomain.getId())) {
-            return feedBackGateway.create(feedBackDomain);
+    public FeedBack execute(final FeedBack feedBack) {
+        if(Objects.isNull(feedBack.getId())) {
+            return feedBackGateway.create(feedBack);
         }
         throw new ValidationException("id","has to be null to create a new feedback");
     }
