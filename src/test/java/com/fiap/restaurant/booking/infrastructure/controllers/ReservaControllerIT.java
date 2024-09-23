@@ -12,9 +12,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.hasKey;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -22,6 +22,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @AutoConfigureTestDatabase
 class ReservaControllerIT {
     private static final String ENDPOINT = "/api/bookings";
+    private static final String RESERVA_SCHEMA = "schema/reserva.schema.json";
+    private static final String RESERVA_LIST_SCHEMA = "schema/reserva.list.schema.json";
 
     @LocalServerPort
     private int port;
@@ -45,8 +47,7 @@ class ReservaControllerIT {
                     .post(ENDPOINT)
                     .then()
                     .statusCode(HttpStatus.CREATED.value())
-                    .body("$", hasKey("id"))
-                    .body("$", hasKey("dataHoraCriacao"))
+                    .body(matchesJsonSchemaInClasspath(RESERVA_SCHEMA))
                     .body("cpfCliente", equalTo(reservaRequest.cpfCliente()))
                     .body("dataHoraReserva", equalTo(reservaRequest.dataHoraReserva()))
                     .body("status", equalTo(StatusReservaEnum.SOLICITADA.toString()));
@@ -62,7 +63,8 @@ class ReservaControllerIT {
                     .get(ENDPOINT)
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("$", hasSize(greaterThan(0)));
+                    .body("$", hasSize(greaterThan(0)))
+                    .body(matchesJsonSchemaInClasspath(RESERVA_LIST_SCHEMA));
         }
 
         @Test
@@ -74,11 +76,9 @@ class ReservaControllerIT {
                     .get(ENDPOINT.concat("/customers/{cpf}"), cpf)
                     .then()
                     .statusCode(HttpStatus.OK.value())
+                    .body("$", hasSize(greaterThan(0)))
                     .body("[0].cpfCliente", equalTo(cpf))
-                    .body("[0]", hasKey("id"))
-                    .body("[0]", hasKey("dataHoraReserva"))
-                    .body("[0]", hasKey("status"))
-                    .body("[0]", hasKey("dataHoraCriacao"));
+                    .body(matchesJsonSchemaInClasspath(RESERVA_LIST_SCHEMA));
         }
 
         @Test
@@ -91,10 +91,19 @@ class ReservaControllerIT {
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("id", equalTo(id))
-                    .body("$", hasKey("cpfCliente"))
-                    .body("$", hasKey("dataHoraReserva"))
-                    .body("$", hasKey("status"))
-                    .body("$", hasKey("dataHoraCriacao"));
+                    .body(matchesJsonSchemaInClasspath(RESERVA_SCHEMA));
+        }
+
+        @Test
+        void shouldThrowNotFoundWhenBookingIdIsNotExists() {
+            final var id = 10000;
+
+            given()
+                    .when()
+                    .get(ENDPOINT.concat("/{id}"), id)
+                    .then()
+                    .statusCode(HttpStatus.NOT_FOUND.value())
+                    .body("message", equalTo("Reserva not found"));
         }
 
         @Test
@@ -104,7 +113,8 @@ class ReservaControllerIT {
                     .get("api/bookings/canceled")
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("$", hasSize(greaterThan(0)));
+                    .body("$", hasSize(greaterThan(0)))
+                    .body(matchesJsonSchemaInClasspath(RESERVA_LIST_SCHEMA));
         }
 
         @Test
@@ -114,7 +124,8 @@ class ReservaControllerIT {
                     .get("api/bookings/requested")
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("$", hasSize(greaterThan(0)));
+                    .body("$", hasSize(greaterThan(0)))
+                    .body(matchesJsonSchemaInClasspath(RESERVA_LIST_SCHEMA));
         }
 
         @Test
@@ -124,7 +135,8 @@ class ReservaControllerIT {
                     .get("api/bookings/confirmed")
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("$", hasSize(greaterThan(0)));
+                    .body("$", hasSize(greaterThan(0)))
+                    .body(matchesJsonSchemaInClasspath(RESERVA_LIST_SCHEMA));
         }
     }
 
