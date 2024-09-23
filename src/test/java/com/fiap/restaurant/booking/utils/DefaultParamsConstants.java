@@ -6,6 +6,9 @@ public class DefaultParamsConstants {
 
     public static final String DEFAULT_CPF = "83533067009";
     public static final Long DEFAULT_RESERVA_ID = 1L;
+    public static final String DEFAULT_NOME = "Name";
+    public static final String DEFAULT_CNPJ = "41.521.747/0001-72";
+    public static final String DEFAULT_TIPO_CULINARIA = "BRASILEIRA";
 
     public static final String JSON_PATH_ID = "$.id";
     public static final String JSON_PATH_CPF = "$.cpfCliente";

@@ -28,7 +28,7 @@ public class RestauranteDomain implements Restaurante {
                              final Double mediaFeedback) {
         this.id = idValidation(id);
         this.nome = nomeValidation(nome);
-        this.cnpj = cnpfValidation(cnpj);
+        this.cnpj = cnpjValidation(cnpj);
         this.tipoCulinaria = tipoCulinariaValidation(tipoCulinaria);
         this.inicioFuncionamento = inicioFuncionamento;
         this.fimFuncionamento = fimFuncionamento;
@@ -44,10 +44,10 @@ public class RestauranteDomain implements Restaurante {
                              Integer capacidade,
                              Double mediaFeedback) {
         this.nome = nomeValidation(nome);
-        this.cnpj = cnpfValidation(cnpj);
+        this.cnpj = cnpjValidation(cnpj);
         this.tipoCulinaria = tipoCulinariaValidation(tipoCulinaria);
-        this.inicioFuncionamento = horarioValidation(inicioFuncionamento);
-        this.fimFuncionamento = horarioValidation(fimFuncionamento);
+        this.inicioFuncionamento = inicioHorarioValidation(inicioFuncionamento);
+        this.fimFuncionamento = fimHorarioValidation(fimFuncionamento);
         this.capacidade = capacidadeValidation(capacidade);
         this.mediaFeedback = mediaFeedbackValidation(mediaFeedback);
     }
@@ -108,7 +108,7 @@ public class RestauranteDomain implements Restaurante {
         return nome;
     }
 
-    private static String cnpfValidation(final String cnpj) {
+    private static String cnpjValidation(final String cnpj) {
         if (isNull(cnpj)) throw ValidationException.of("Restaurante CNPJ", "cannot be null");
         if (cnpj.length() < 14) throw ValidationException.of("Restaurante CNPJ", "must be 14 positions");
         return cnpj;
@@ -121,11 +121,18 @@ public class RestauranteDomain implements Restaurante {
         return tipoCulinariaEnum.get();
     }
 
-    private static LocalDateTime horarioValidation(final String horarioValidation) {
-        if (isNull(horarioValidation))
+    private static LocalDateTime inicioHorarioValidation(final String inicioFuncionamento) {
+        if (isNull(inicioFuncionamento))
             throw ValidationException.of("Inicio Funcionamento do Restaurante",
                 "cannot be null");
-        return DateTimeUtils.toLocalDateTime(horarioValidation);
+        return DateTimeUtils.toLocalDateTime(inicioFuncionamento);
+    }
+
+    private static LocalDateTime fimHorarioValidation(final String fimFuncionamento) {
+        if (isNull(fimFuncionamento))
+            throw ValidationException.of("Fim Funcionamento do Restaurante",
+                    "cannot be null");
+        return DateTimeUtils.toLocalDateTime(fimFuncionamento);
     }
 
     private static Integer capacidadeValidation(final Integer capacidade) {
