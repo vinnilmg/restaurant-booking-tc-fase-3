@@ -5,6 +5,8 @@ import com.fiap.restaurant.booking.utils.InformationsRestauranteConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,7 +19,8 @@ public class FeedbackDomainClassTest {
                 InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 null,
-                "teste");
+                "teste",
+                LocalDateTime.now());
         });
     }
     @Test
@@ -28,7 +31,8 @@ public class FeedbackDomainClassTest {
                 InformationsRestauranteConstants.buildRestauranteTest(null),
                 "teste",
                 1,
-                "teste");
+                "teste",
+                LocalDateTime.now());
         });
     }
 
@@ -40,7 +44,8 @@ public class FeedbackDomainClassTest {
                 InformationsRestauranteConstants.buildRestauranteTest(2L),
                 null,
                 1,
-                "teste");
+                "teste",
+                LocalDateTime.now());
         });
     }
 
@@ -52,7 +57,8 @@ public class FeedbackDomainClassTest {
                 InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 0,
-                "teste");
+                "teste",
+                LocalDateTime.now());
         });
     }
 
@@ -64,7 +70,8 @@ public class FeedbackDomainClassTest {
                 InformationsRestauranteConstants.buildRestauranteTest(2L),
                 "teste",
                 6,
-                "teste");
+                "teste",
+                LocalDateTime.now());
         });
     }
     @Test
@@ -76,7 +83,7 @@ public class FeedbackDomainClassTest {
         String comentario = "Ótimo atendimento!";
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario);
+            new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario,LocalDateTime.now());
         });
 
     }
@@ -90,7 +97,7 @@ public class FeedbackDomainClassTest {
         Integer avaliacao = 4;
         String comentario = "Ótimo atendimento!";
 
-        FeedBackDomain feedback = new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario);
+        FeedBackDomain feedback = new FeedBackDomain(id, InformationsRestauranteConstants.buildRestauranteTest(2L), nomeCliente, avaliacao, comentario,LocalDateTime.now());
 
         assertNotNull(feedback);
         assertEquals(id, feedback.getId());

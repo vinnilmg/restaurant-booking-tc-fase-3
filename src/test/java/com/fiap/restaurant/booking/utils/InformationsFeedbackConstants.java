@@ -56,15 +56,13 @@ public class InformationsFeedbackConstants {
     }
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Long idRestaurante, Integer avaliacao) {
-        return FeedBackDomain
-                .builder()
-                .id(idFeedback)
-                .avaliacao(avaliacao)
-                .comentario("Comentário aleatório")
-                .dataHoraCriacao(LocalDateTime.now())
-                .restauranteId(InformationsRestauranteConstants.buildRestauranteTest(idRestaurante))
-                .nomeCliente("Cliente Teste")
-                .build();
+        return new FeedBackDomain(idFeedback,
+                InformationsRestauranteConstants.buildRestauranteTest(idRestaurante),
+                "Cliente Teste",
+                avaliacao,
+                "Comentário aleatório",
+                LocalDateTime.now()
+        );
     }
 }
 

@@ -5,14 +5,16 @@ import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
-import lombok.AllArgsConstructor;
 
 import java.util.Objects;
 
-@AllArgsConstructor
 public class FindFeedBackByIdUseCaseImpl implements FindFeedBackByIdUseCase {
 
     private final FeedBackGateway feedBackGateway;
+
+    public FindFeedBackByIdUseCaseImpl(FeedBackGateway feedBackGateway) {
+        this.feedBackGateway = feedBackGateway;
+    }
 
     @Override
     public FeedBack execute(Long id) {

@@ -10,7 +10,6 @@ import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMa
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackResponse;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +26,6 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/feedbacks")
-@AllArgsConstructor
 public class FeedBackController {
 
     private final FindFeedBackByIdUseCase findByIdFeedBackUseCase;
@@ -43,6 +41,16 @@ public class FeedBackController {
     private final FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase;
 
     private final FeedBackMapper feedBackMapper;
+
+    public FeedBackController(FindFeedBackByIdUseCase findByIdFeedBackUseCase, CreateFeedBackUseCase createFeedBackUseCase, GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase, GetAllFeedBackUseCase getAllFeedBackUseCase, DeleteFeedBackUseCase deleteFeedBackUseCase, FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase, FeedBackMapper feedBackMapper) {
+        this.findByIdFeedBackUseCase = findByIdFeedBackUseCase;
+        this.createFeedBackUseCase = createFeedBackUseCase;
+        this.getAllFeedBackByNomeClienteUseCase = getAllFeedBackByNomeClienteUseCase;
+        this.getAllFeedBackUseCase = getAllFeedBackUseCase;
+        this.deleteFeedBackUseCase = deleteFeedBackUseCase;
+        this.findFeedBackByIdRestauranteUseCase = findFeedBackByIdRestauranteUseCase;
+        this.feedBackMapper = feedBackMapper;
+    }
 
 
     @PostMapping

@@ -4,13 +4,16 @@ import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.DeleteFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
 
     private final FeedBackGateway feedBackGateway;
     private final FindFeedBackByIdUseCase findByIdFeedBackUseCase;
+
+    public DeleteFeedBackUseCaseImpl(FeedBackGateway feedBackGateway, FindFeedBackByIdUseCase findByIdFeedBackUseCase) {
+        this.feedBackGateway = feedBackGateway;
+        this.findByIdFeedBackUseCase = findByIdFeedBackUseCase;
+    }
 
 
     @Override

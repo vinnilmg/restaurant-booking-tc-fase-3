@@ -9,24 +9,20 @@ import lombok.experimental.UtilityClass;
 public class FeedBackBuilder {
 
     public static FeedBackDomain build(FeedBackRequest request) {
-        return FeedBackDomain.builder()
-                .nomeCliente(request.nomeCliente())
-                .comentario(request.comentario())
-                .avaliacao(request.avaliacao())
-                .build();
-
+        return FeedBackDomain.createInstanceRequestValidation(request.restauranteId(),
+                request.nomeCliente(),
+                request.avaliacao(),
+                request.comentario());
     }
 
     public static FeedBackDomain build(FeedBackEntity feedBackEntity) {
-        return FeedBackDomain.builder()
-                .nomeCliente(feedBackEntity.getNomeCliente())
-                .comentario(feedBackEntity.getComentario())
-                .avaliacao(feedBackEntity.getAvaliacao())
-                .id(feedBackEntity.getId())
-                .restauranteId(RestauranteBuilder.build(feedBackEntity.getRestaurante()))
-                .dataHoraCriacao(feedBackEntity.getDataHoraCriacao())
-                .build();
+        return new FeedBackDomain(feedBackEntity.getId(),
+                RestauranteBuilder.build(feedBackEntity.getRestaurante()),
+                feedBackEntity.getNomeCliente(),
+                feedBackEntity.getAvaliacao(),
+                feedBackEntity.getComentario(),
+                feedBackEntity.getDataHoraCriacao()
 
+        );
     }
-
 }
