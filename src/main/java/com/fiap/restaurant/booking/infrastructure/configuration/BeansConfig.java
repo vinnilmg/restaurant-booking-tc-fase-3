@@ -50,20 +50,8 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindRequestedReser
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByCpfUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByCnpjUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMediaFeedbackUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByMediaFeedbackUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByTipoCulinariaUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.GetAllRestaurantesUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.*;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -188,6 +176,21 @@ public class BeansConfig {
     @Bean
     public FindRestauranteByNomeUseCase findRestauranteByNomeUseCase(RestauranteGateway restauranteGateway) {
         return new FindRestauranteByNomeUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoRuaUseCase findRestauranteByEnderecoRuaUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoRuaUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoBairroUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoCidadeUseCaseImpl(restauranteGateway);
     }
 
     @Bean

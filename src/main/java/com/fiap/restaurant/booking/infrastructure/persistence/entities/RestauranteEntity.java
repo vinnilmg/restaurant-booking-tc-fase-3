@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,10 +33,10 @@ public class RestauranteEntity {
     private String tipoCulinaria;
 
     @NotNull
-    private LocalDateTime inicioFuncionamento;
+    private LocalTime inicioFuncionamento;
 
     @NotNull
-    private LocalDateTime fimFuncionamento;
+    private LocalTime fimFuncionamento;
 
     @NotNull
     private Integer capacidade;

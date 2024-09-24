@@ -45,6 +45,24 @@ public class RestauranteRepositoryGateway implements RestauranteGateway {
     }
 
     @Override
+    public List<Restaurante> findByEnderecoRua(String rua) {
+        final var entities = restauranteRepository.findByEnderecoRua(rua);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Restaurante> findByEnderecoBairro(String bairro) {
+        final var entities = restauranteRepository.findByEnderecoBairro(bairro);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Restaurante> findByEnderecoCidade(String cidade) {
+        final var entities = restauranteRepository.findByEnderecoCidade(cidade);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
     public List<Restaurante> findByTipoCulinaria(final String tipoCulinaria) {
         final var entities = restauranteRepository.findByTipoCulinaria(tipoCulinaria);
         return restauranteEntityMapper.toDomains(entities);

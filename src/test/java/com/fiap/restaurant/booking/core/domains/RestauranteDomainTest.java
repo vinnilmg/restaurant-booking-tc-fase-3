@@ -3,12 +3,9 @@ package com.fiap.restaurant.booking.core.domains;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
-import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalDateTime;
+import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalTime;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,6 +15,7 @@ public class RestauranteDomainTest {
     @Test
     void shouldThrowValidationExceptionWhenNomeIsNull() {
         assertThatThrownBy(() -> new RestauranteDomain(
+                null,
                 null,
                 null,
                 null,
@@ -38,6 +36,7 @@ public class RestauranteDomainTest {
                 null,
                 null,
                 null,
+                null,
                 null))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("Restaurante CNPJ cannot be null");
@@ -52,9 +51,25 @@ public class RestauranteDomainTest {
                 null,
                 null,
                 null,
+                null,
                 null))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("Restaurante CNPJ must be 14 positions");
+    }
+
+    @Test
+    void shouldThrowValidationExceptionWhenEnderecoIsNull() {
+            assertThatThrownBy(() -> new RestauranteDomain(
+                    DEFAULT_NOME,
+                    DEFAULT_CNPJ,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null))
+                    .isInstanceOf(ValidationException.class)
+                    .hasMessage("Restaurante Endereco cannot be null");
     }
 
     @Test
@@ -62,6 +77,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
+                DEFAULT_ENDERECO_DOMAIN,
                 null,
                 null,
                 null,
@@ -76,6 +92,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
+                DEFAULT_ENDERECO_DOMAIN,
                 "whatever",
                 null,
                 null,
@@ -90,6 +107,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
+                DEFAULT_ENDERECO_DOMAIN,
                 DEFAULT_TIPO_CULINARIA,
                 null,
                 null,
@@ -104,8 +122,9 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
+                DEFAULT_ENDERECO_DOMAIN,
                 DEFAULT_TIPO_CULINARIA,
-                null,
+                DEFAULT_TIME,
                 null,
                 null,
                 null))
@@ -116,6 +135,7 @@ public class RestauranteDomainTest {
     @Test
     void shouldThrowValidationExceptionWhenIdIsNull() {
         assertThatThrownBy(() -> new RestauranteDomain(
+                null,
                 null,
                 null,
                 null,
@@ -138,6 +158,7 @@ public class RestauranteDomainTest {
                 null,
                 null,
                 null,
+                null,
                 null))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("Restaurante Id cannot be negative");
@@ -147,17 +168,17 @@ public class RestauranteDomainTest {
     void shouldConstructRestauranteDomain() {
         final var nome = DEFAULT_NOME;
         final var cnpj = DEFAULT_CNPJ;
+        final var endereco = DEFAULT_ENDERECO_DOMAIN;
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = LocalDateTime.of(LocalDate.now(), LocalTime.of(11,0))
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        final var fimFuncionamento = LocalDateTime.of(LocalDate.now(), LocalTime.of(20,0))
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        final var inicioFuncionameto = DEFAULT_TIME;
+        final var fimFuncionamento = DEFAULT_TIME;
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 
         final var result = new RestauranteDomain(
                 nome,
                 cnpj,
+                endereco,
                 tipoCulinaria,
                 inicioFuncionameto,
                 fimFuncionamento,
@@ -171,6 +192,7 @@ public class RestauranteDomainTest {
                 .extracting(
                         RestauranteDomain::getNome,
                         RestauranteDomain::getCnpj,
+                        RestauranteDomain::getEndereco,
                         RestauranteDomain::getTipoCulinaria,
                         RestauranteDomain::getInicioFuncionamento,
                         RestauranteDomain::getFimFuncionamento,
@@ -179,9 +201,10 @@ public class RestauranteDomainTest {
                 .containsExactly(
                         nome,
                         cnpj,
+                        endereco,
                         tipoCulinaria,
-                        toLocalDateTime(inicioFuncionameto),
-                        toLocalDateTime(fimFuncionamento),
+                        toLocalTime(inicioFuncionameto),
+                        toLocalTime(fimFuncionamento),
                         capacidade,
                         mediaFeedback);
 
@@ -196,9 +219,10 @@ public class RestauranteDomainTest {
         final var id = 1L;
         final var nome = DEFAULT_NOME;
         final var cnpj = DEFAULT_CNPJ;
+        final var endereco = DEFAULT_ENDERECO_DOMAIN;
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = LocalDateTime.of(LocalDate.now(), LocalTime.of(11,0));
-        final var fimFuncionamento = LocalDateTime.of(LocalDate.now(), LocalTime.of(20,0));
+        final var inicioFuncionameto = LocalTime.of(11,0);
+        final var fimFuncionamento = LocalTime.of(20,0);
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 
@@ -206,6 +230,7 @@ public class RestauranteDomainTest {
                 1L,
                 nome,
                 cnpj,
+                endereco,
                 tipoCulinaria,
                 inicioFuncionameto,
                 fimFuncionamento,
@@ -220,6 +245,7 @@ public class RestauranteDomainTest {
                         RestauranteDomain::getId,
                         RestauranteDomain::getNome,
                         RestauranteDomain::getCnpj,
+                        RestauranteDomain::getEndereco,
                         RestauranteDomain::getTipoCulinaria,
                         RestauranteDomain::getInicioFuncionamento,
                         RestauranteDomain::getFimFuncionamento,
@@ -229,6 +255,7 @@ public class RestauranteDomainTest {
                         id,
                         nome,
                         cnpj,
+                        endereco,
                         tipoCulinaria,
                         inicioFuncionameto,
                         fimFuncionamento,

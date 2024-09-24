@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.mappers;
 
+import com.fiap.restaurant.booking.core.domains.Endereco;
 import com.fiap.restaurant.booking.core.domains.Restaurante;
 import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
@@ -14,6 +15,7 @@ public interface RestauranteEntityMapper {
 
     @Mapping(target = "nome", source = "nome")
     @Mapping(target = "cnpj", source = "cnpj")
+    @Mapping(target = "endereco", source = "endereco")
     @Mapping(target = "tipoCulinaria", source = "tipoCulinaria")
     @Mapping(target = "inicioFuncionamento", source = "inicioFuncionamento")
     @Mapping(target = "fimFuncionamento", source = "fimFuncionamento")
@@ -26,6 +28,7 @@ public interface RestauranteEntityMapper {
                 restaurante.getId(),
                 restaurante.getNome(),
                 restaurante.getCnpj(),
+                (Endereco) restaurante.getEndereco(),
                 restaurante.getTipoCulinaria(),
                 restaurante.getInicioFuncionamento(),
                 restaurante.getFimFuncionamento(),
