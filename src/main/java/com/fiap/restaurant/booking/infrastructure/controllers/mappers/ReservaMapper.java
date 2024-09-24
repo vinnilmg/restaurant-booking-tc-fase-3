@@ -30,7 +30,7 @@ public interface ReservaMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "cpfCliente", source = "cpf")
     @Mapping(target = "status", source = "status")
-    @Mapping(target = "dataHoraReserva", source = "dataHoraReserva")
-    @Mapping(target = "dataHoraCriacao", source = "dataHoraCriacao")
+    @Mapping(target = "dataHoraReserva", source = "dataHoraReservaFormatted")
+    @Mapping(target = "dataHoraCriacao", source = "dataHoraCriacaoFormatted")
     ReservaResponse toReservaResponse(Reserva reserva);
 }

@@ -3,7 +3,6 @@ package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
@@ -20,25 +19,31 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "reserva")
-public class ReservaEntity {
+@Table(name = "endereco")
+public class EnderecoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @NotNull
-    private String cpfCliente;
+    private String rua;
 
     @NotNull
-    private LocalDateTime dataHoraReserva;
+    private String numero;
+
+    private String complemento;
 
     @NotNull
-    private String status;
+    private String bairro;
 
-    @Column(nullable = false, updatable = false)
-    @CreationTimestamp
-    private LocalDateTime dataHoraCriacao;
+    @NotNull
+    private String cidade;
 
-    // TODO: Id da mesa (nao implementado)
+    @NotNull
+    private String estado;
+
+    @NotNull
+    private String cep;
+
 }
