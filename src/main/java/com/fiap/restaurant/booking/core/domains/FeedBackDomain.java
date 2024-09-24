@@ -28,10 +28,10 @@ public class FeedBackDomain implements FeedBack {
         this.avaliacao = avaliacao;
         this.comentario = comentario;
     }
-    public FeedBackDomain(Long id, Restaurante restauranteId, String nomeCliente, Integer avaliacao, String comentario,LocalDateTime dataHoraCriacao) {
-        validationToCreateInstance(restauranteId, nomeCliente, avaliacao);
+    public FeedBackDomain(Long id, Restaurante restaurante, String nomeCliente, Integer avaliacao, String comentario, LocalDateTime dataHoraCriacao) {
+        validationToCreateInstance(restaurante, nomeCliente, avaliacao);
         this.id = id;
-        this.restauranteId = restauranteId;
+        this.restauranteId = restaurante;
         this.nomeCliente = nomeCliente;
         this.avaliacao = avaliacao;
         this.comentario = comentario;

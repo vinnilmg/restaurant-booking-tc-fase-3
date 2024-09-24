@@ -11,7 +11,6 @@ import org.mapstruct.Mapping;
 
 public interface FeedBackMapper {
 
-    @Mapping(target = "restauranteId", expression = "java(feedBack.setRestaurante().getId())")
     default FeedBackDomain toFeedBackDomain(FeedBackRequest request) {
         return FeedBackDomain.createInstanceRequestValidation(request.restauranteId(),
                 request.nomeCliente(),
