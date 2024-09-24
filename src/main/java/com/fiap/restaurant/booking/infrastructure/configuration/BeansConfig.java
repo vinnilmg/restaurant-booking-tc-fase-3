@@ -166,11 +166,6 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
-        return new CreateFeedBackUseCaseImpl(feedBackGateway);
-    }
-
-    @Bean
     public FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase(RestauranteGateway restauranteGateway) {
         return new FindRestauranteByCnpjUseCaseImpl(restauranteGateway);
     }
