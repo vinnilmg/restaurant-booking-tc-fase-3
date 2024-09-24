@@ -21,7 +21,7 @@ public class DeleteFeedBackUseCaseImpl implements DeleteFeedBackUseCase {
         findByIdFeedBackUseCase.execute(id);
         feedBackGateway.delete(id);
         return MessageResponse.builder()
-                .message(String.format("Feedback by id %s was deleted by success.",id))
+                .message(String.format("Feedback by id %s was deleted by success.", id))
                 .build();
     }
 }

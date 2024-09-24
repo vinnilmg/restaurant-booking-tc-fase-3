@@ -57,7 +57,7 @@ public class FeedBackController {
     public ResponseEntity<FeedBackResponse> createFeedback(@RequestBody final FeedBackRequest feedBackRequest) {
         var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest);
 
-        final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain,feedBackRequest.restauranteId()));
+        final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain, feedBackRequest.restauranteId()));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

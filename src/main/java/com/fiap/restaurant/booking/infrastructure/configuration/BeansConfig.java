@@ -52,8 +52,26 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindRequestedReser
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByCpfUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.restaurante.*;
-import com.fiap.restaurant.booking.core.usecases.restaurante.impl.*;
+import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByCnpjUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoBairroUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoCidadeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoRuaUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMediaFeedbackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoBairroUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoRuaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByMediaFeedbackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByTipoCulinariaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.GetAllRestaurantesUseCaseImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -109,6 +127,7 @@ public class BeansConfig {
     public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
         return new CreateFeedBackUseCaseImpl(feedBackGateway, findRestauranteByIdUseCase);
     }
+
     @Bean
     public AtualizaEnderecoUseCase atualizaEnderecoUseCase(FindEnderecoByIdUseCase findEnderecoByIdUseCase, EnderecoGateway enderecoGateway) {
         return new AtualizaEnderecoUseCaseImpl(findEnderecoByIdUseCase, enderecoGateway);

@@ -4,9 +4,10 @@ import com.fiap.restaurant.booking.core.domains.Restaurante;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoRuaUseCase;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 import java.util.List;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class FindRestauranteByEnderecoRuaUseCaseImpl implements FindRestauranteByEnderecoRuaUseCase {
     private final RestauranteGateway restauranteGateway;

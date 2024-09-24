@@ -1,11 +1,24 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
-import com.fiap.restaurant.booking.core.usecases.restaurante.*;
+import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoBairroUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoCidadeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoRuaUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMediaFeedbackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.RestauranteMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.RestauranteRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.RestauranteResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

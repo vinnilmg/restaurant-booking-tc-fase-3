@@ -11,7 +11,7 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE,uses = {RestauranteMapper.class})
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {RestauranteMapper.class})
 public interface RestauranteEntityMapper {
 
     @Mapping(target = "nome", source = "nome")

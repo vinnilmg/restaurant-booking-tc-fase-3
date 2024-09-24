@@ -135,7 +135,7 @@ public class RestauranteDomain implements Restaurante {
     private static LocalTime inicioHorarioValidation(final String inicioFuncionamento) {
         if (isNull(inicioFuncionamento))
             throw ValidationException.of("Inicio Funcionamento do Restaurante",
-                "cannot be null");
+                    "cannot be null");
         return DateTimeUtils.toLocalTime(inicioFuncionamento);
     }
 

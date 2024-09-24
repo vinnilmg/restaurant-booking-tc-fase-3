@@ -10,6 +10,7 @@ public class CreateEnderecoUseCaseImpl implements CreateEnderecoUseCase {
     public CreateEnderecoUseCaseImpl(EnderecoGateway enderecoGateway) {
         this.enderecoGateway = enderecoGateway;
     }
+
     @Override
     public Endereco execute(final Endereco endereco) {
         return enderecoGateway.create(endereco);

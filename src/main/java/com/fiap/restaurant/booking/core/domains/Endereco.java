@@ -1,7 +1,5 @@
 package com.fiap.restaurant.booking.core.domains;
 
-import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
-
 public interface Endereco {
     Long getId();
 

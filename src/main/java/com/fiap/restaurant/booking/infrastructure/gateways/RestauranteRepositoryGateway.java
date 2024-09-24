@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.RestauranteEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.RestauranteRepository;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Optional;
 
