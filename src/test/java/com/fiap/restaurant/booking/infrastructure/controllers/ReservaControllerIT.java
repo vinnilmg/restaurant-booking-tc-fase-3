@@ -10,8 +10,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESERVA_LIST_SCHEMA;
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESERVA_SCHEMA;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
@@ -19,11 +23,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureTestDatabase
 class ReservaControllerIT {
     private static final String ENDPOINT = "/api/bookings";
-    private static final String RESERVA_SCHEMA = "schema/reserva.schema.json";
-    private static final String RESERVA_LIST_SCHEMA = "schema/reserva.list.schema.json";
 
     @LocalServerPort
     private int port;
@@ -58,8 +61,7 @@ class ReservaControllerIT {
     class Get {
         @Test
         void shouldGetAllBookings() {
-            given()
-                    .when()
+            when()
                     .get(ENDPOINT)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -71,8 +73,7 @@ class ReservaControllerIT {
         void shouldGetBookingsByCpf() {
             final var cpf = "26407243041";
 
-            given()
-                    .when()
+            when()
                     .get(ENDPOINT.concat("/customers/{cpf}"), cpf)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -85,8 +86,7 @@ class ReservaControllerIT {
         void shouldGetBookingById() {
             final var id = 1;
 
-            given()
-                    .when()
+            when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -98,8 +98,7 @@ class ReservaControllerIT {
         void shouldThrowNotFoundWhenBookingIdIsNotExists() {
             final var id = 10000;
 
-            given()
-                    .when()
+            when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value())
@@ -108,8 +107,7 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetCanceledBookings() {
-            given()
-                    .when()
+            when()
                     .get("api/bookings/canceled")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -119,8 +117,7 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetRequestedBookings() {
-            given()
-                    .when()
+            when()
                     .get("api/bookings/requested")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -130,8 +127,7 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetConfirmedBookings() {
-            given()
-                    .when()
+            when()
                     .get("api/bookings/confirmed")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -146,8 +142,7 @@ class ReservaControllerIT {
         void shouldCancelBooking() {
             final var id = 1L;
 
-            given()
-                    .when()
+            when()
                     .put(ENDPOINT.concat("/cancel/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NO_CONTENT.value());
@@ -157,8 +152,7 @@ class ReservaControllerIT {
         void shouldConfirmBooking() {
             final var id = 1L;
 
-            given()
-                    .when()
+            when()
                     .put(ENDPOINT.concat("/confirm/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NO_CONTENT.value());
