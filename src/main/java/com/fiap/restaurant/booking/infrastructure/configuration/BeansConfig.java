@@ -121,6 +121,7 @@ public class BeansConfig {
     public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
         return new CreateFeedBackUseCaseImpl(feedBackGateway, findRestauranteByIdUseCase);
     }
+    @Bean
     public AtualizaEnderecoUseCase atualizaEnderecoUseCase(FindEnderecoByIdUseCase findEnderecoByIdUseCase, EnderecoGateway enderecoGateway) {
         return new AtualizaEnderecoUseCaseImpl(findEnderecoByIdUseCase, enderecoGateway);
     }
