@@ -4,7 +4,7 @@ import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.utils.DateTimeUtils;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import static java.util.Objects.isNull;
 
@@ -12,23 +12,26 @@ public class RestauranteDomain implements Restaurante {
     private final String cnpj;
     private Long id;
     private String nome;
+    private Endereco endereco;
     private TipoCulinariaEnum tipoCulinaria;
-    private LocalDateTime inicioFuncionamento;
-    private LocalDateTime fimFuncionamento;
+    private LocalTime inicioFuncionamento;
+    private LocalTime fimFuncionamento;
     private Integer capacidade;
     private Double mediaFeedback;
 
     public RestauranteDomain(final Long id,
                              final String nome,
                              final String cnpj,
+                             final Endereco endereco,
                              final String tipoCulinaria,
-                             final LocalDateTime inicioFuncionamento,
-                             final LocalDateTime fimFuncionamento,
+                             final LocalTime inicioFuncionamento,
+                             final LocalTime fimFuncionamento,
                              final Integer capacidade,
                              final Double mediaFeedback) {
         this.id = idValidation(id);
         this.nome = nomeValidation(nome);
-        this.cnpj = cnpfValidation(cnpj);
+        this.cnpj = cnpjValidation(cnpj);
+        this.endereco = enderecoValidation(endereco);
         this.tipoCulinaria = tipoCulinariaValidation(tipoCulinaria);
         this.inicioFuncionamento = inicioFuncionamento;
         this.fimFuncionamento = fimFuncionamento;
@@ -38,16 +41,18 @@ public class RestauranteDomain implements Restaurante {
 
     public RestauranteDomain(String nome,
                              String cnpj,
+                             Endereco endereco,
                              String tipoCulinaria,
                              String inicioFuncionamento,
                              String fimFuncionamento,
                              Integer capacidade,
                              Double mediaFeedback) {
         this.nome = nomeValidation(nome);
-        this.cnpj = cnpfValidation(cnpj);
+        this.cnpj = cnpjValidation(cnpj);
+        this.endereco = enderecoValidation(endereco);
         this.tipoCulinaria = tipoCulinariaValidation(tipoCulinaria);
-        this.inicioFuncionamento = horarioValidation(inicioFuncionamento);
-        this.fimFuncionamento = horarioValidation(fimFuncionamento);
+        this.inicioFuncionamento = inicioHorarioValidation(inicioFuncionamento);
+        this.fimFuncionamento = fimHorarioValidation(fimFuncionamento);
         this.capacidade = capacidadeValidation(capacidade);
         this.mediaFeedback = mediaFeedbackValidation(mediaFeedback);
     }
@@ -58,13 +63,18 @@ public class RestauranteDomain implements Restaurante {
     }
 
     @Override
+    public String getNome() {
+        return nome;
+    }
+
+    @Override
     public String getCnpj() {
         return cnpj;
     }
 
     @Override
-    public String getNome() {
-        return nome;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
     @Override
@@ -73,12 +83,12 @@ public class RestauranteDomain implements Restaurante {
     }
 
     @Override
-    public LocalDateTime getInicioFuncionamento() {
+    public LocalTime getInicioFuncionamento() {
         return inicioFuncionamento;
     }
 
     @Override
-    public LocalDateTime getFimFuncionamento() {
+    public LocalTime getFimFuncionamento() {
         return fimFuncionamento;
     }
 
@@ -92,10 +102,6 @@ public class RestauranteDomain implements Restaurante {
         return mediaFeedback;
     }
 
-    @Override
-    public void updateMedia(final Double mediaFeedback) {
-        this.mediaFeedback = mediaFeedback;
-    }
 
     private static Long idValidation(final Long id) {
         if (isNull(id)) throw ValidationException.of("Restaurante Id", "cannot be null");
@@ -108,10 +114,15 @@ public class RestauranteDomain implements Restaurante {
         return nome;
     }
 
-    private static String cnpfValidation(final String cnpj) {
+    private static String cnpjValidation(final String cnpj) {
         if (isNull(cnpj)) throw ValidationException.of("Restaurante CNPJ", "cannot be null");
         if (cnpj.length() < 14) throw ValidationException.of("Restaurante CNPJ", "must be 14 positions");
         return cnpj;
+    }
+
+    private static Endereco enderecoValidation(final Endereco endereco) {
+        if (isNull(endereco)) throw ValidationException.of("Restaurante Endereco", "cannot be null");
+        return endereco;
     }
 
     private static TipoCulinariaEnum tipoCulinariaValidation(final String tipoCulinaria) {
@@ -121,11 +132,18 @@ public class RestauranteDomain implements Restaurante {
         return tipoCulinariaEnum.get();
     }
 
-    private static LocalDateTime horarioValidation(final String horarioValidation) {
-        if (isNull(horarioValidation))
+    private static LocalTime inicioHorarioValidation(final String inicioFuncionamento) {
+        if (isNull(inicioFuncionamento))
             throw ValidationException.of("Inicio Funcionamento do Restaurante",
                 "cannot be null");
-        return DateTimeUtils.toLocalDateTime(horarioValidation);
+        return DateTimeUtils.toLocalTime(inicioFuncionamento);
+    }
+
+    private static LocalTime fimHorarioValidation(final String fimFuncionamento) {
+        if (isNull(fimFuncionamento))
+            throw ValidationException.of("Fim Funcionamento do Restaurante",
+                    "cannot be null");
+        return DateTimeUtils.toLocalTime(fimFuncionamento);
     }
 
     private static Integer capacidadeValidation(final Integer capacidade) {

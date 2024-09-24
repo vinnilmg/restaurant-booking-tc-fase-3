@@ -1,8 +1,6 @@
 package com.fiap.restaurant.booking.core.domains;
 
-import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
-
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public interface Restaurante {
     Long getId();
@@ -11,15 +9,16 @@ public interface Restaurante {
 
     String getCnpj();
 
+    Endereco getEndereco();
+
     String getTipoCulinaria();
 
-    LocalDateTime getInicioFuncionamento();
+    LocalTime getInicioFuncionamento();
 
-    LocalDateTime getFimFuncionamento();
+    LocalTime getFimFuncionamento();
 
     Integer getCapacidade();
 
     Double getMediaFeedback();
 
-    void updateMedia(Double mediaFeedback);
 }

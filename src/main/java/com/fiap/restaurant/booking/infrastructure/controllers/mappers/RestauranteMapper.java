@@ -17,6 +17,7 @@ public interface RestauranteMapper {
         return new RestauranteDomain(
                 request.nome(),
                 request.cnpj(),
+                request.endereco(),
                 request.tipoCulinaria(),
                 request.inicioFuncionamento(),
                 request.fimFuncionamento(),
@@ -29,6 +30,7 @@ public interface RestauranteMapper {
 
     @Mapping(target = "nome", source = "nome")
     @Mapping(target = "cnpj", source = "cnpj")
+    @Mapping(target = "endereco", source = "endereco")
     @Mapping(target = "tipoCulinaria", source = "tipoCulinaria")
     @Mapping(target = "inicioFuncionamento", source = "inicioFuncionamento")
     @Mapping(target = "fimFuncionamento", source = "fimFuncionamento")

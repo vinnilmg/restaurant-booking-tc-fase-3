@@ -1,13 +1,10 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,20 +25,23 @@ public class RestauranteEntity {
     private String cnpj;
 
     @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private EnderecoEntity endereco;
+
+    @NotNull
     private String tipoCulinaria;
 
     @NotNull
-    private LocalDateTime inicioFuncionamento;
+    private LocalTime inicioFuncionamento;
 
     @NotNull
-    private LocalDateTime fimFuncionamento;
+    private LocalTime fimFuncionamento;
 
     @NotNull
     private Integer capacidade;
 
     @NotNull
     private Double mediaFeedback;
-
-    //TODO: endereço (nao implementado)
 
 }

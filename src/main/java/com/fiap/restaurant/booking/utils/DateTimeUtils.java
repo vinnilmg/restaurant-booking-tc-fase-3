@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.utils;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateTimeUtils {
@@ -11,6 +12,10 @@ public class DateTimeUtils {
 
     public static LocalDateTime toLocalDateTime(final String dateTime) {
         return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern(DEFAULT_PATTERN));
+    }
+
+    public static LocalTime toLocalTime(final String dateTime) {
+        return LocalTime.parse(dateTime, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public static String toDefaultFormat(final LocalDateTime dateTime) {
