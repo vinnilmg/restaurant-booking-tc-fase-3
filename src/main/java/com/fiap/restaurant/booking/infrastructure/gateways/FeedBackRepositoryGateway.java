@@ -55,7 +55,6 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
                 .map(feedBackEntityMapper::toDomain);
     }
 
-
     @Override
     public void delete(Long id) {
         feedBackRepository.deleteById(id);
