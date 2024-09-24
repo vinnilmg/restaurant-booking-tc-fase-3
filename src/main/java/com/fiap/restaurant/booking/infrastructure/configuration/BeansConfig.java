@@ -172,8 +172,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway, FindRestauranteByCnpjUseCase findRestauranteByCnpjUseCase) {
-        return new CreateRestauranteUseCaseImpl(restauranteGateway, findRestauranteByCnpjUseCase);
+    public CreateRestauranteUseCase createRestauranteUseCase(RestauranteGateway restauranteGateway, FindRestauranteByCnpjUseCase findReservaByCpfUseCase) {
+        return new CreateRestauranteUseCaseImpl(restauranteGateway, findReservaByCpfUseCase);
     }
 
     @Bean
