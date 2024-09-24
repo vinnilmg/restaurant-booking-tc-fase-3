@@ -1,6 +1,5 @@
 package com.fiap.restaurant.booking.infrastructure.controllers.mappers;
 
-import com.fiap.restaurant.booking.core.builders.FeedBackBuilder;
 import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
@@ -14,7 +13,10 @@ public interface FeedBackMapper {
 
     @Mapping(target = "restauranteId", expression = "java(feedBack.setRestaurante().getId())")
     default FeedBackDomain toFeedBackDomain(FeedBackRequest request) {
-        return FeedBackBuilder.build(request);
+        return FeedBackDomain.createInstanceRequestValidation(request.restauranteId(),
+                request.nomeCliente(),
+                request.avaliacao(),
+                request.comentario());
     }
 
     @Mapping(target = "restauranteId", expression = "java(feedBack.getRestaurante().getId())")
