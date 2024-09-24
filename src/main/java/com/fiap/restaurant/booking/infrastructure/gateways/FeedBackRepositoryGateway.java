@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.gateways;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.FeedBackEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.FeedBackRepository;
@@ -21,8 +21,9 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
         this.feedBackEntityMapper = feedBackEntityMapper;
     }
 
+
     @Override
-    public FeedBackDomain create(FeedBackDomain feedBack) {
+    public FeedBack create(FeedBack feedBack) {
         return feedBackEntityMapper.toDomain(
                 feedBackRepository.save(
                         feedBackEntityMapper.toEntity(feedBack)
@@ -31,24 +32,26 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     }
 
     @Override
-    public List<FeedBackDomain> findAll() {
-        return feedBackRepository.findAll()
-                .stream()
-                .map(feedBackEntityMapper::toDomain)
-                .toList();
+    public List<FeedBack> findAll() {
+        return feedBackEntityMapper.toDomains(feedBackRepository.findAll());
+
     }
 
     @Override
-    public List<FeedBackDomain> findAllByNomeCliente(String nomeCliente) {
-        return feedBackRepository.findAllByNomeCliente(nomeCliente)
-                .stream()
-                .map(feedBackEntityMapper::toDomain)
-                .toList();
+    public List<FeedBack> findAllByNomeCliente(String nomeCliente) {
+        return feedBackEntityMapper.toDomains(feedBackRepository.findAllByNomeCliente(nomeCliente));
+
     }
 
     @Override
-    public Optional<FeedBackDomain> findById(Long id) {
+    public Optional<FeedBack> findById(Long id) {
         return feedBackRepository.findById(id)
+                .map(feedBackEntityMapper::toDomain);
+    }
+
+    @Override
+    public Optional<FeedBack> findByIdRestaurante(Long id) {
+        return feedBackRepository.findByRestauranteId(id)
                 .map(feedBackEntityMapper::toDomain);
     }
 

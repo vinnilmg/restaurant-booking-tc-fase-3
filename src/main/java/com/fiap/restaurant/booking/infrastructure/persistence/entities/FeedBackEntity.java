@@ -1,6 +1,11 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,14 +27,17 @@ public class FeedBackEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    // TODO: Criar relacionamento com o restaurante
-    @NotNull
-    private Long restauranteId;
+    @NotNull(message = "restaurante can't be null")
+    @ManyToOne
+    private RestauranteEntity restaurante;
 
-    @NotNull
+    @NotNull(message = "nome cliente can't be null")
     private String nomeCliente;
 
-    @NotNull
+    @NotNull(message = "comentário can't be null")
+    private String comentario;
+
+    @NotNull(message = "avaliação can't be null")
     private Integer avaliacao;
 
     @CreationTimestamp
