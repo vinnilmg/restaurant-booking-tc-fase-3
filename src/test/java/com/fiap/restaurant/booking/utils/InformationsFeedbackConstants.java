@@ -1,6 +1,11 @@
 package com.fiap.restaurant.booking.utils;
 
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.Restaurante;
+import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackEntity;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
 
 import java.time.LocalDateTime;
 
@@ -64,6 +69,57 @@ public class InformationsFeedbackConstants {
                 LocalDateTime.now()
         );
     }
+
+
+    public static FeedBackEntity FEEDBACK_BY_DOMAIN_WITH_ID(final FeedBack feedBack) {
+        final var result = new FeedBackEntity();
+        result.setId(1L);
+        result.setRestaurante(RESTAURANTE_BY_DOMAIN_WITH_ID(feedBack.getRestaurante()));
+        result.setNomeCliente(feedBack.getNomeCliente());
+        result.setAvaliacao(feedBack.getAvaliacao());
+        result.setComentario(feedBack.getComentario());
+        result.setDataHoraCriacao(feedBack.getDataHoraCriacao());
+        return result;
+    }
+
+    public static RestauranteEntity RESTAURANTE_BY_DOMAIN_WITH_ID(final Restaurante restaurante) {
+        final var result = new RestauranteEntity();
+        result.setId(1L);
+        result.setNome(restaurante.getNome());
+        result.setCnpj(restaurante.getCnpj());
+        result.setTipoCulinaria(restaurante.getTipoCulinaria());
+        result.setInicioFuncionamento(restaurante.getInicioFuncionamento());
+        result.setFimFuncionamento(restaurante.getFimFuncionamento());
+        result.setCapacidade(restaurante.getCapacidade());
+        result.setMediaFeedback(restaurante.getMediaFeedback());
+        return result;
+    }
+
+
+    public static RestauranteEntity RESTAURANTE_FULL() {
+        final var result = new RestauranteEntity();
+        result.setId(1L);
+        result.setNome("Restaurante Fictício");
+        result.setCnpj("12345678901234");
+        result.setTipoCulinaria(TipoCulinariaEnum.VEGETARIANA.name());
+        result.setInicioFuncionamento(LocalDateTime.of(2024, 9, 23, 11, 0));
+        result.setFimFuncionamento(LocalDateTime.of(2024, 9, 23, 23, 0));
+        result.setCapacidade(100);
+        result.setMediaFeedback(4.5);
+        return result;
+    }
+
+    public static FeedBackEntity FEEDBACK_FULL() {
+        final var result = new FeedBackEntity();
+        result.setId(1L);
+        result.setRestaurante(RESTAURANTE_FULL());
+        result.setNomeCliente("John Doe");
+        result.setAvaliacao(5);
+        result.setComentario("Excelente serviço!");
+        result.setDataHoraCriacao(LocalDateTime.now());
+        return result;
+    }
+
 }
 
 

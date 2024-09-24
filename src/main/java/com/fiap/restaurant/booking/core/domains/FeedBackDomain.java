@@ -63,10 +63,6 @@ public class FeedBackDomain implements FeedBack {
             throw ValidationException.of("Id do restaurante inválido", "id restaurante deve ser maior que zero");
     }
 
-
-
-
-
     @Override
     public Long getId() {
         return this.id;

@@ -33,18 +33,14 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
 
     @Override
     public List<FeedBack> findAll() {
-        return feedBackRepository.findAll()
-                .stream()
-                .map(feedBackEntityMapper::toDomain)
-                .toList();
+        return feedBackEntityMapper.toDomains(feedBackRepository.findAll());
+
     }
 
     @Override
     public List<FeedBack> findAllByNomeCliente(String nomeCliente) {
-        return feedBackRepository.findAllByNomeCliente(nomeCliente)
-                .stream()
-                .map(feedBackEntityMapper::toDomain)
-                .toList();
+        return feedBackEntityMapper.toDomains(feedBackRepository.findAllByNomeCliente(nomeCliente));
+
     }
 
     @Override
@@ -58,7 +54,6 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
         return feedBackRepository.findByRestauranteId(id)
                 .map(feedBackEntityMapper::toDomain);
     }
-
 
 
     @Override
