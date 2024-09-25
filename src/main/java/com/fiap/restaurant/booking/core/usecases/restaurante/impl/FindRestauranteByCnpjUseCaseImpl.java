@@ -18,7 +18,7 @@ public class FindRestauranteByCnpjUseCaseImpl implements FindRestauranteByCnpjUs
 
     @Override
     public Optional<Restaurante> execute(final String cnpj) {
-        if (isEmpty(cnpj) || cnpj.length() < 14) throw ValidationException.of("Restaurante CNPJ", "invalid");
+        if (isEmpty(cnpj) || cnpj.length() != 14) throw ValidationException.of("Restaurante CNPJ", "invalid");
         return restauranteGateway.findByCnpj(cnpj);
 
     }
