@@ -2,12 +2,14 @@
 
 Funcionalidade: Reserva
 
+  @smoke @high
   Cenario: Reservar uma Mesa
     Dado Que desejo reservar uma mesa em um restaurante
     Quando a mesa estiver disponível
     Entao deve realizar uma reserva na mesa do restaurante escolhido
     E apresentar o resultado
 
+  @smoke @high
   Cenario: Buscar Todas as Reservas
     Dado que existam reservas
     Quando efetuar a busca de todas as reservas
