@@ -10,7 +10,7 @@ public class DefaultParamsConstants {
     public static final String DEFAULT_CPF = "83533067009";
     public static final Long DEFAULT_RESERVA_ID = 1L;
     public static final String DEFAULT_NOME = "Name";
-    public static final String DEFAULT_CNPJ = "41.521.747/0001-72";
+    public static final String DEFAULT_CNPJ = "41521747000172";
     public static final String DEFAULT_TIPO_CULINARIA = "BRASILEIRA";
     public static final EnderecoDomain DEFAULT_ENDERECO_DOMAIN =
             new EnderecoDomain(
