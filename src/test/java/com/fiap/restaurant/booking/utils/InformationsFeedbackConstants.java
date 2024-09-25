@@ -63,7 +63,7 @@ public class InformationsFeedbackConstants {
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Long idRestaurante, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
-                InformationsRestauranteConstants.buildRestauranteTest(idRestaurante),
+                InformationsRestauranteConstants.buildRestauranteTest(),
                 "Cliente Teste",
                 avaliacao,
                 "Comentário aleatório",

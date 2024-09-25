@@ -9,7 +9,7 @@ import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_E
 
 public class InformationsRestauranteConstants {
 
-    public static RestauranteDomain buildRestauranteTest(Long idRestaurante) {
+    public static RestauranteDomain buildRestauranteTest() {
         return new RestauranteDomain(
                 1L,
                 "testeRestaurante",
