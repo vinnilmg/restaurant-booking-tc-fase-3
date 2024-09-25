@@ -8,21 +8,6 @@ Funcionalidade: Reserva
     Entao deve realizar uma reserva na mesa do restaurante escolhido
     E apresentar o resultado
 
-  Cenario: Cancelar uma Reserva
-    Dado que desejo cancelar uma reserva
-    Quando a reserva existir
-    Entao deve cancelar a reserva com sucesso
-
-  Cenario: Confirmar uma Reserva
-    Dado que desejo confirmar uma reserva
-    Quando a reserva existir
-    Entao deve confirmar a reserva com sucesso
-
-  Cenario: Buscar Reservas de um Cliente
-    Dado que um cliente já tenha feito alguma reserva
-    Quando efetuar a busca das reservas pelo CPF do cliente
-    Entao deve apresentar as reservas do cliente
-
   Cenario: Buscar Todas as Reservas
     Dado que existam reservas
     Quando efetuar a busca de todas as reservas
@@ -33,17 +18,27 @@ Funcionalidade: Reserva
     Quando efetuar a busca de uma reserva específica
     Entao deve apresentar o resultado
 
-    Cenario: Buscar Reservas Canceladas
-      Dado que alguma reserva tenha sido cancelada
-      Quando efetuar a busca das reservas canceladas
-      Entao deve apresentar todas as reservas que foram canceladas
+  Cenario: Buscar Reservas Solicitadas
+    Dado que alguma reserva tenha sido solicitada
+    Quando efetuar a busca das reservas solicitadas
+    Entao deve apresentar todas as reservas que foram solicitadas
+
+  Cenario: Cancelar uma Reserva
+    Dado que desejo cancelar uma reserva
+    Quando a reserva existir
+    Entao deve cancelar a reserva com sucesso
+
+  Cenario: Buscar Reservas Canceladas
+    Dado que alguma reserva tenha sido cancelada
+    Quando efetuar a busca das reservas canceladas
+    Entao deve apresentar todas as reservas que foram canceladas
+
+  Cenario: Confirmar uma Reserva
+    Dado que desejo confirmar uma reserva
+    Quando a reserva existir
+    Entao deve confirmar a reserva com sucesso
 
   Cenario: Buscar Reservas Confirmadas
     Dado que alguma reserva tenha sido confirmada
     Quando efetuar a busca das reservas confirmadas
     Entao deve apresentar todas as reservas que foram confirmadas
-
-  Cenario: Buscar Reservas Solicitadas
-    Dado que alguma reserva tenha sido solicitada
-    Quando efetuar a busca das reservas solicitada
-    Entao deve apresentar todas as reservas que foram solicitadas
