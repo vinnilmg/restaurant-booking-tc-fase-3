@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
@@ -18,15 +18,15 @@ public class GetAllFeedBackByNomeClienteUseCaseImpl implements GetAllFeedBackByN
     }
 
     @Override
-    public List<FeedBackDomain> execute(String nomeCliente) {
+    public List<FeedBack> execute(String nomeCliente) {
         if (nomeCliente.isEmpty())
             throw ValidationException.of("nomeCliente", "cannot be empty");
 
-        var feedBackDomainList = feedBackGateway.findAllByNomeCliente(nomeCliente);
+        var feedbackList = feedBackGateway.findAllByNomeCliente(nomeCliente);
 
-        if (feedBackDomainList.isEmpty())
+        if (feedbackList.isEmpty())
             throw NotFoundException.of(String.format("feedbacks by nome cliente %s", nomeCliente));
 
-        return feedBackDomainList;
+        return feedbackList;
     }
 }

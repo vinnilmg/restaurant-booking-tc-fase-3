@@ -19,7 +19,6 @@ class FindCanceledReservasUseCaseTest {
     private FindCanceledReservasUseCaseImpl findCanceledReservasUseCase;
     private ReservaGateway reservaGateway;
 
-
     @BeforeEach
     void init() {
         reservaGateway = mock(ReservaGateway.class);
@@ -30,7 +29,7 @@ class FindCanceledReservasUseCaseTest {
 
     @Test
     void shouldFindCanceledReservas() {
-        final List<Reserva> expected = List.of(ReservaDomainFixture.SOLICITADA());
+        final List<Reserva> expected = List.of(ReservaDomainFixture.CANCELADA());
 
         when(reservaGateway.findByStatus(StatusReservaEnum.CANCELADA.name()))
                 .thenReturn(expected);
@@ -48,7 +47,7 @@ class FindCanceledReservasUseCaseTest {
 
     @Test
     void shouldNotFindCanceledReservas() {
-        when(reservaGateway.findByStatus(StatusReservaEnum.CANCELADA.name()))
+        when(reservaGateway.findByStatus(StatusReservaEnum.SOLICITADA.name()))
                 .thenReturn(List.of());
 
         final var result = findCanceledReservasUseCase.execute();

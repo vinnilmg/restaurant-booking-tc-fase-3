@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.utils.fixture;
 
 import com.fiap.restaurant.booking.core.domains.ReservaDomain;
 import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.ReservaEntity;
 
 import java.time.LocalDateTime;
 
@@ -37,6 +38,16 @@ public class ReservaDomainFixture {
                 StatusReservaEnum.CONFIRMADA.name(),
                 LocalDateTime.now().plusDays(5),
                 LocalDateTime.now()
+        );
+    }
+
+    public static ReservaDomain BY_ENTITY(final ReservaEntity entity) {
+        return new ReservaDomain(
+                entity.getId(),
+                entity.getCpfCliente(),
+                entity.getStatus(),
+                entity.getDataHoraReserva(),
+                entity.getDataHoraCriacao()
         );
     }
 }

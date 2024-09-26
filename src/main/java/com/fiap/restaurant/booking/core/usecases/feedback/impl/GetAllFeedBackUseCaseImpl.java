@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.feedback.impl;
 
-import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
+import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
 
@@ -16,7 +16,7 @@ public class GetAllFeedBackUseCaseImpl implements GetAllFeedBackUseCase {
     }
 
     @Override
-    public List<FeedBackDomain> execute() {
+    public List<FeedBack> execute() {
         return feedBackGateway.findAll();
     }
 }
