@@ -16,5 +16,10 @@ mvn test -Pintegration-test
 mvn test -Psystem-test
 ```
 
-O relatório do Cucumber está sendo gerado no caminho abaixo: </br>
-target/cucumber-reports/cucumber.html
+<p>O relatório do Cucumber está sendo gerado no caminho abaixo: <br/>
+target/cucumber-reports/cucumber.html</p>
+
+Para gerar o relatório do allure (precisa do allure): <br/> 
+```sh
+allure serve ${PATH}
+```

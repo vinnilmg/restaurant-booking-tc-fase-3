@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.infrastructure.controllers;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.utils.fixture.ReservaRequestFixture;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -44,6 +45,7 @@ class ReservaControllerIT {
             final var reservaRequest = ReservaRequestFixture.FULL();
 
             given()
+                    .filter(new AllureRestAssured())
                     .contentType(APPLICATION_JSON_VALUE)
                     .body(reservaRequest)
                     .when()
@@ -61,7 +63,9 @@ class ReservaControllerIT {
     class Get {
         @Test
         void shouldGetAllBookings() {
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get(ENDPOINT)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -73,7 +77,9 @@ class ReservaControllerIT {
         void shouldGetBookingsByCpf() {
             final var cpf = "26407243041";
 
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get(ENDPOINT.concat("/customers/{cpf}"), cpf)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -86,7 +92,9 @@ class ReservaControllerIT {
         void shouldGetBookingById() {
             final var id = 1;
 
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -107,7 +115,9 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetCanceledBookings() {
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get("api/bookings/canceled")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -117,7 +127,9 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetRequestedBookings() {
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get("api/bookings/requested")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -127,7 +139,9 @@ class ReservaControllerIT {
 
         @Test
         void shouldGetConfirmedBookings() {
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .get("api/bookings/confirmed")
                     .then()
                     .statusCode(HttpStatus.OK.value())
@@ -142,7 +156,9 @@ class ReservaControllerIT {
         void shouldCancelBooking() {
             final var id = 1L;
 
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .put(ENDPOINT.concat("/cancel/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NO_CONTENT.value());
@@ -152,7 +168,9 @@ class ReservaControllerIT {
         void shouldConfirmBooking() {
             final var id = 1L;
 
-            when()
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
                     .put(ENDPOINT.concat("/confirm/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NO_CONTENT.value());
