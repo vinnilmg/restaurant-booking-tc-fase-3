@@ -7,19 +7,22 @@ import java.util.Objects;
 
 public class MesaDomain {
     private Long id;
-    private int numeroDaMesa;
+    private final int numeroDaMesa;
+    private final int idDoRestaurante;
     private StatusMesaEnum status;
     //TOD: Esperar o id do restaurante da classe RestauranteDomain
 
-    public MesaDomain(final Long id, final int numeroDaMesa, StatusMesaEnum status) {
+    public MesaDomain(final Long id, final int idDoRestaurante, final int numeroDaMesa, StatusMesaEnum status) {
         validationToCreateInstance(id, numeroDaMesa, status);
         this.id = id;
         this.numeroDaMesa = numeroDaMesa;
+        this.idDoRestaurante = idDoRestaurante;
         this.status = status;
     }
 
-    public MesaDomain(final int numeroDaMesa, StatusMesaEnum status) {
+    public MesaDomain(final int numeroDaMesa, final int idDoRestaurante, StatusMesaEnum status) {
         this.numeroDaMesa = numeroDaMesa;
+        this.idDoRestaurante = idDoRestaurante;
         this.status = status;
     }
 
@@ -29,6 +32,10 @@ public class MesaDomain {
 
     public int getNumeroDaMesa() {
         return numeroDaMesa;
+    }
+
+    public int getIdDoRestaurante() {
+        return idDoRestaurante;
     }
 
     public StatusMesaEnum getStatus() {

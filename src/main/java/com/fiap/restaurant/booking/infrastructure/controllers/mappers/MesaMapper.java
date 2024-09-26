@@ -13,6 +13,7 @@ public interface MesaMapper {
     default MesaDomain toMesaDomain(final MesaRequest mesaRequest) {
         return new MesaDomain(
                 mesaRequest.numeroDaMesa(),
+                mesaRequest.idDoRestaurante(),
                 StatusMesaEnum.DISPONIVEL
         );
     }

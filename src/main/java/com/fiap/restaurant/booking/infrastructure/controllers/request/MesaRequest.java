@@ -1,7 +1,7 @@
 package com.fiap.restaurant.booking.infrastructure.controllers.request;
 
 public record MesaRequest(
-        Integer numeroDaMesa
+        Integer numeroDaMesa,
+        int idDoRestaurante
 ) {
 }
-//TODO: Implementar Long idDoRestaurante
