@@ -31,10 +31,16 @@ public class MesaController {
     }
 
     @PostMapping
-    public ResponseEntity<MesaResponse> createMesa(@RequestBody final MesaRequest request) {
-        final var mesa = createMesaUseCase.execute(mesaMapper.toMesaDomain(request));
+    public ResponseEntity<MesaResponse> createMesa(@RequestBody final MesaRequest mesaRequest) {
+        var mesaDomain = mesaMapper.toMesaDomain(mesaRequest);
+
+        final var response =  mesaMapper
+                .toMesaResponse(createMesaUseCase
+                        .execute(mesaDomain,
+                                mesaRequest.restauranteId()));
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(mesaMapper.toMesaResponse(mesa));
+                .body(response);
     }
 
     @GetMapping

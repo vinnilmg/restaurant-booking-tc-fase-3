@@ -26,7 +26,7 @@ public class MesaRepositoryGateway implements MesaGateway {
     }
 
     @Override
-    public Optional<MesaDomain> findById(Long id) throws Exception {
+    public Optional<MesaDomain> findById(Long id) {
         return mesaRepository.findById(id)
                 .map(mesaEntityMapper::toDomain);
     }

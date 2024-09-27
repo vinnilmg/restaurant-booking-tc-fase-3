@@ -4,6 +4,6 @@ public record MesaResponse(
         Long id,
         Integer mesa,
         String status,
-        Long restaurante
+        Long restauranteId
 ) {
 }

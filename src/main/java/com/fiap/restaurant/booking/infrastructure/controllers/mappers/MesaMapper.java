@@ -11,15 +11,16 @@ import org.mapstruct.Mapping;
 public interface MesaMapper {
 
     default MesaDomain toMesaDomain(final MesaRequest mesaRequest) {
-        return new MesaDomain(
+        return MesaDomain.createInstanceRequestValidation(
+                mesaRequest.restauranteId(),
                 mesaRequest.numeroDaMesa(),
-                mesaRequest.idDoRestaurante(),
                 StatusMesaEnum.DISPONIVEL
-        );
+                );
     }
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "mesa", source = "numeroDaMesa")
+//    @Mapping(target = "restauranteId", expression = "java(mesa.getRestaurante().getId())")
     MesaResponse toMesaResponse(MesaDomain mesaDomain);
 }

@@ -247,8 +247,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateMesaUseCase createMesaUseCase(MesaGateway mesaGateway) {
-        return new CreateMesaUseCaseImpl(mesaGateway);
+    public CreateMesaUseCase createMesaUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new CreateMesaUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
     }
 
     @Bean

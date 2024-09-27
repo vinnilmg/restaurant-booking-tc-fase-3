@@ -9,7 +9,7 @@ public interface MesaGateway {
 
     MesaDomain create(MesaDomain mesa);
 
-    Optional<MesaDomain> findById(Long id) throws Exception;
+    Optional<MesaDomain> findById(Long id);
 
     List<MesaDomain> findByStatus(String status);
 

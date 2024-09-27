@@ -25,5 +25,6 @@ public class MesaEntity {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo")
     private StatusMesaEnum status;
-//    private Long idDoRestaurante;
+    @ManyToOne
+    private RestauranteEntity restaurante;
 }
