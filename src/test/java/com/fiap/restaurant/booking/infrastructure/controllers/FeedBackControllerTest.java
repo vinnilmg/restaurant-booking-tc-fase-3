@@ -7,6 +7,7 @@ import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdRestau
 import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapperImpl;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
@@ -53,6 +54,9 @@ public class FeedBackControllerTest {
     @Mock
     private GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase;
 
+    @Mock
+    private FindRestauranteByIdUseCase findRestauranteByIdUseCase;
+
     private FeedBackMapper feedBackMapper;
 
     @BeforeEach
@@ -65,6 +69,7 @@ public class FeedBackControllerTest {
                 , getAllFeedBackUseCase
                 , deleteFeedBackUseCase
                 , findFeedBackByIdRestauranteUseCase
+                , findRestauranteByIdUseCase
                 , feedBackMapper);
         mockMvc = MockMvcBuilders.standaloneSetup(feedBackController).build();
     }
@@ -80,15 +85,15 @@ public class FeedBackControllerTest {
         var feedback = InformationsFeedbackConstants.buildFeedBackTest(1L,
                 1L, 1);
 
-        when(createFeedBackUseCase.execute(any(FeedBack.class), anyLong())).thenReturn(feedback);
-
+        when(createFeedBackUseCase.execute(any(FeedBack.class))).thenReturn(feedback);
+        when(findRestauranteByIdUseCase.execute(any(Long.class))).thenReturn(feedback.getRestaurante());
         mockMvc.perform(
                 post(InformationsFeedbackConstants.ROUTE_CONTROLLER_DEFAULT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(ConverterUtils.toJsonString(feedBackMapper.toFeedbackResponse(feedback)))
         ).andExpect(status().isCreated());
 
-        verify(createFeedBackUseCase, times(1)).execute(any(FeedBack.class), anyLong());
+        verify(createFeedBackUseCase, times(1)).execute(any(FeedBack.class));
     }
 
 

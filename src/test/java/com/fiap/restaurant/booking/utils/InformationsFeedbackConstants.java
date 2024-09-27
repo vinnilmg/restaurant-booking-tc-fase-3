@@ -15,8 +15,6 @@ public class InformationsFeedbackConstants {
 
     private static final String MESSAGE_ID_FEEDBACK_NOT_FOUND = "Feedback with id %s not found";
 
-    public static final String MESSAGE_ID_FEEDBACK_NOT_NULL_WHEN_CREATE = "id has to be null to create a new feedback";
-
     public static final String MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL = "id restaurante cannot be null";
 
     public static final String MESSAGE_WHEN_ID_FEEDBACK_IS_NULL = "id cannot be null";

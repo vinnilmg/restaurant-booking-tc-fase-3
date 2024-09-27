@@ -6,6 +6,7 @@ import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdRestau
 import com.fiap.restaurant.booking.core.usecases.feedback.FindFeedBackByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackByNomeClienteUseCase;
 import com.fiap.restaurant.booking.core.usecases.feedback.GetAllFeedBackUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.FeedBackResponse;
@@ -40,24 +41,28 @@ public class FeedBackController {
 
     private final FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase;
 
+    private final FindRestauranteByIdUseCase findRestauranteByIdUseCase;
+
     private final FeedBackMapper feedBackMapper;
 
-    public FeedBackController(FindFeedBackByIdUseCase findByIdFeedBackUseCase, CreateFeedBackUseCase createFeedBackUseCase, GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase, GetAllFeedBackUseCase getAllFeedBackUseCase, DeleteFeedBackUseCase deleteFeedBackUseCase, FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase, FeedBackMapper feedBackMapper) {
+    public FeedBackController(FindFeedBackByIdUseCase findByIdFeedBackUseCase, CreateFeedBackUseCase createFeedBackUseCase, GetAllFeedBackByNomeClienteUseCase getAllFeedBackByNomeClienteUseCase, GetAllFeedBackUseCase getAllFeedBackUseCase, DeleteFeedBackUseCase deleteFeedBackUseCase, FindFeedBackByIdRestauranteUseCase findFeedBackByIdRestauranteUseCase, FindRestauranteByIdUseCase findRestauranteByIdUseCase, FeedBackMapper feedBackMapper) {
         this.findByIdFeedBackUseCase = findByIdFeedBackUseCase;
         this.createFeedBackUseCase = createFeedBackUseCase;
         this.getAllFeedBackByNomeClienteUseCase = getAllFeedBackByNomeClienteUseCase;
         this.getAllFeedBackUseCase = getAllFeedBackUseCase;
         this.deleteFeedBackUseCase = deleteFeedBackUseCase;
         this.findFeedBackByIdRestauranteUseCase = findFeedBackByIdRestauranteUseCase;
+        this.findRestauranteByIdUseCase = findRestauranteByIdUseCase;
         this.feedBackMapper = feedBackMapper;
     }
 
 
     @PostMapping
     public ResponseEntity<FeedBackResponse> createFeedback(@RequestBody final FeedBackRequest feedBackRequest) {
-        var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest);
 
-        final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain,feedBackRequest.restauranteId()));
+        var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest,findRestauranteByIdUseCase.execute(feedBackRequest.restauranteId()));
+
+        final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
