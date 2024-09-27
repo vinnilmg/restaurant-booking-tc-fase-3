@@ -15,6 +15,12 @@ public interface RestauranteGateway {
 
     List<Restaurante> findByNome(String nome);
 
+    List<Restaurante> findByEnderecoRua(String rua);
+
+    List<Restaurante> findByEnderecoBairro(String bairro);
+
+    List<Restaurante> findByEnderecoCidade(String cidade);
+
     List<Restaurante> findByTipoCulinaria(String tipoCulinaria);
 
     List<Restaurante> findByMediaFeedback(Double mediaFeedback);

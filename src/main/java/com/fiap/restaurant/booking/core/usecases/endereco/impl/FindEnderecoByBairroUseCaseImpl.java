@@ -1,9 +1,9 @@
 package com.fiap.restaurant.booking.core.usecases.endereco.impl;
 
 import com.fiap.restaurant.booking.core.domains.Endereco;
-import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
+import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
 
 import java.util.List;
 

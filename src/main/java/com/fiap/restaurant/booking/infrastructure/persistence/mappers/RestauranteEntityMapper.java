@@ -1,7 +1,9 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.mappers;
 
+import com.fiap.restaurant.booking.core.domains.Endereco;
 import com.fiap.restaurant.booking.core.domains.Restaurante;
 import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
+import com.fiap.restaurant.booking.infrastructure.controllers.mappers.RestauranteMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,11 +11,12 @@ import org.mapstruct.ReportingPolicy;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {RestauranteMapper.class})
 public interface RestauranteEntityMapper {
 
     @Mapping(target = "nome", source = "nome")
     @Mapping(target = "cnpj", source = "cnpj")
+    @Mapping(target = "endereco", source = "endereco")
     @Mapping(target = "tipoCulinaria", source = "tipoCulinaria")
     @Mapping(target = "inicioFuncionamento", source = "inicioFuncionamento")
     @Mapping(target = "fimFuncionamento", source = "fimFuncionamento")
@@ -26,6 +29,7 @@ public interface RestauranteEntityMapper {
                 restaurante.getId(),
                 restaurante.getNome(),
                 restaurante.getCnpj(),
+                (Endereco) restaurante.getEndereco(),
                 restaurante.getTipoCulinaria(),
                 restaurante.getInicioFuncionamento(),
                 restaurante.getFimFuncionamento(),

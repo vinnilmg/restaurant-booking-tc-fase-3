@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.util.Objects.isNull;
 
-public class FindRestauranteByMediaFeedbackUseCaseImpl implements FindRestauranteByMediaFeedbackUseCase{
+public class FindRestauranteByMediaFeedbackUseCaseImpl implements FindRestauranteByMediaFeedbackUseCase {
     private final RestauranteGateway restauranteGateway;
 
 

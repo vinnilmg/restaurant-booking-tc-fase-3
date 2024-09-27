@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.infrastructure.controllers;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.utils.fixture.ReservaRequestFixture;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -10,8 +11,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.context.ActiveProfiles;
 
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESERVA_LIST_SCHEMA;
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESERVA_SCHEMA;
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
@@ -19,11 +24,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @AutoConfigureTestDatabase
 class ReservaControllerIT {
     private static final String ENDPOINT = "/api/bookings";
-    private static final String RESERVA_SCHEMA = "schema/reserva.schema.json";
-    private static final String RESERVA_LIST_SCHEMA = "schema/reserva.list.schema.json";
 
     @LocalServerPort
     private int port;
@@ -41,6 +45,7 @@ class ReservaControllerIT {
             final var reservaRequest = ReservaRequestFixture.FULL();
 
             given()
+                    .filter(new AllureRestAssured())
                     .contentType(APPLICATION_JSON_VALUE)
                     .body(reservaRequest)
                     .when()
@@ -59,6 +64,7 @@ class ReservaControllerIT {
         @Test
         void shouldGetAllBookings() {
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get(ENDPOINT)
                     .then()
@@ -72,6 +78,7 @@ class ReservaControllerIT {
             final var cpf = "26407243041";
 
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get(ENDPOINT.concat("/customers/{cpf}"), cpf)
                     .then()
@@ -86,6 +93,7 @@ class ReservaControllerIT {
             final var id = 1;
 
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
@@ -98,8 +106,7 @@ class ReservaControllerIT {
         void shouldThrowNotFoundWhenBookingIdIsNotExists() {
             final var id = 10000;
 
-            given()
-                    .when()
+            when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value())
@@ -109,6 +116,7 @@ class ReservaControllerIT {
         @Test
         void shouldGetCanceledBookings() {
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get("api/bookings/canceled")
                     .then()
@@ -120,6 +128,7 @@ class ReservaControllerIT {
         @Test
         void shouldGetRequestedBookings() {
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get("api/bookings/requested")
                     .then()
@@ -131,6 +140,7 @@ class ReservaControllerIT {
         @Test
         void shouldGetConfirmedBookings() {
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .get("api/bookings/confirmed")
                     .then()
@@ -147,6 +157,7 @@ class ReservaControllerIT {
             final var id = 1L;
 
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .put(ENDPOINT.concat("/cancel/{id}"), id)
                     .then()
@@ -158,6 +169,7 @@ class ReservaControllerIT {
             final var id = 1L;
 
             given()
+                    .filter(new AllureRestAssured())
                     .when()
                     .put(ENDPOINT.concat("/confirm/{id}"), id)
                     .then()

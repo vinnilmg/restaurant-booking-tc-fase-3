@@ -53,28 +53,44 @@ public class EnderecoDomain implements Endereco {
     }
 
     @Override
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
     @Override
-    public String getRua() { return rua; }
+    public String getRua() {
+        return rua;
+    }
 
     @Override
-    public String getBairro() { return bairro; }
+    public String getBairro() {
+        return bairro;
+    }
 
     @Override
-    public String getNumero() { return numero; }
+    public String getNumero() {
+        return numero;
+    }
 
     @Override
-    public String getComplemento() { return complemento; }
+    public String getComplemento() {
+        return complemento;
+    }
 
     @Override
-    public String getCidade() { return cidade; }
+    public String getCidade() {
+        return cidade;
+    }
 
     @Override
-    public String getEstado() { return estado; }
+    public String getEstado() {
+        return estado;
+    }
 
     @Override
-    public String getCep() { return cep; }
+    public String getCep() {
+        return cep;
+    }
 
     @Override
     public void updateEndereco(Endereco endereco) {
