@@ -5,6 +5,6 @@ import com.fiap.restaurant.booking.core.domains.Restaurante;
 import java.util.List;
 
 @FunctionalInterface
-public interface FindRestauranteByNomeUseCase {
-    List<Restaurante> execute(String nome);
+public interface FindRestauranteByEnderecoCidadeUseCase {
+    List<Restaurante> execute(String cidade);
 }

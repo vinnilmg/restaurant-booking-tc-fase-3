@@ -9,6 +9,12 @@ import java.util.Optional;
 public interface RestauranteRepository extends JpaRepository<RestauranteEntity, Long> {
     List<RestauranteEntity> findByNome(String nome);
 
+    List<RestauranteEntity> findByEnderecoRua(String rua);
+
+    List<RestauranteEntity> findByEnderecoBairro(String bairro);
+
+    List<RestauranteEntity> findByEnderecoCidade(String cidade);
+
     List<RestauranteEntity> findByTipoCulinaria(String tipoCulinaria);
 
     List<RestauranteEntity> findByMediaFeedback(Double mediaFeedback);

@@ -38,7 +38,7 @@ public class FeedBackDomain implements FeedBack {
             throw ValidationException.of("Nome do cliente inválido", "Nome do cliente não pode ser nulo ou vazio");
         if (Objects.isNull(restauranteId.getId()))
             throw ValidationException.of("Id do restaurante ausente", "Deve-se informar o Id do restaurante");
-        if (restauranteId.getId()<1)
+        if (restauranteId.getId() < 1)
             throw ValidationException.of("Id do restaurante inválido", "id restaurante deve ser maior que zero");
     }
 

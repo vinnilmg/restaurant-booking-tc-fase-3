@@ -54,6 +54,9 @@ import com.fiap.restaurant.booking.core.usecases.reserva.impl.FindReservaByIdUse
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.GetAllReservasUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByCnpjUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoBairroUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoCidadeUseCase;
+import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoRuaUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMediaFeedbackUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
@@ -61,6 +64,9 @@ import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTi
 import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoBairroUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoRuaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByMediaFeedbackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByNomeUseCaseImpl;
@@ -121,6 +127,7 @@ public class BeansConfig {
     public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
         return new CreateFeedBackUseCaseImpl(feedBackGateway);
     }
+
     @Bean
     public AtualizaEnderecoUseCase atualizaEnderecoUseCase(FindEnderecoByIdUseCase findEnderecoByIdUseCase, EnderecoGateway enderecoGateway) {
         return new AtualizaEnderecoUseCaseImpl(findEnderecoByIdUseCase, enderecoGateway);
@@ -189,6 +196,21 @@ public class BeansConfig {
     @Bean
     public FindRestauranteByNomeUseCase findRestauranteByNomeUseCase(RestauranteGateway restauranteGateway) {
         return new FindRestauranteByNomeUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoRuaUseCase findRestauranteByEnderecoRuaUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoRuaUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoBairroUseCaseImpl(restauranteGateway);
+    }
+
+    @Bean
+    public FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase(RestauranteGateway restauranteGateway) {
+        return new FindRestauranteByEnderecoCidadeUseCaseImpl(restauranteGateway);
     }
 
     @Bean

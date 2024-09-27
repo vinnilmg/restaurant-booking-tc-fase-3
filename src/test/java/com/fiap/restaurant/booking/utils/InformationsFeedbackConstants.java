@@ -8,6 +8,7 @@ import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackE
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class InformationsFeedbackConstants {
 
@@ -60,7 +61,7 @@ public class InformationsFeedbackConstants {
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Long idRestaurante, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
-                InformationsRestauranteConstants.buildRestauranteTest(idRestaurante),
+                InformationsRestauranteConstants.buildRestauranteTest(),
                 "Cliente Teste",
                 avaliacao,
                 "Comentário aleatório",
@@ -100,8 +101,8 @@ public class InformationsFeedbackConstants {
         result.setNome("Restaurante Fictício");
         result.setCnpj("12345678901234");
         result.setTipoCulinaria(TipoCulinariaEnum.VEGETARIANA.name());
-        result.setInicioFuncionamento(LocalDateTime.of(2024, 9, 23, 11, 0));
-        result.setFimFuncionamento(LocalDateTime.of(2024, 9, 23, 23, 0));
+        result.setInicioFuncionamento(LocalTime.of(11, 0));
+        result.setFimFuncionamento(LocalTime.of(23, 0));
         result.setCapacidade(100);
         result.setMediaFeedback(4.5);
         return result;

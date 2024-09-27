@@ -94,6 +94,7 @@ public class ReservaController {
         return ResponseEntity.status(OK)
                 .body(reservaMapper.toReservaResponse(reserva));
     }
+
     @GetMapping("/canceled")
     public ResponseEntity<List<ReservaResponse>> getCanceledBookings() {
         final var reservas = findCanceledReservasUseCase.execute();

@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.RestauranteEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.RestauranteRepository;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,24 @@ public class RestauranteRepositoryGateway implements RestauranteGateway {
     @Override
     public List<Restaurante> findByNome(final String nome) {
         final var entities = restauranteRepository.findByNome(nome);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Restaurante> findByEnderecoRua(String rua) {
+        final var entities = restauranteRepository.findByEnderecoRua(rua);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Restaurante> findByEnderecoBairro(String bairro) {
+        final var entities = restauranteRepository.findByEnderecoBairro(bairro);
+        return restauranteEntityMapper.toDomains(entities);
+    }
+
+    @Override
+    public List<Restaurante> findByEnderecoCidade(String cidade) {
+        final var entities = restauranteRepository.findByEnderecoCidade(cidade);
         return restauranteEntityMapper.toDomains(entities);
     }
 

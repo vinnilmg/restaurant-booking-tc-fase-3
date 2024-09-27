@@ -6,6 +6,7 @@ import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
 
 import java.util.List;
+
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 
