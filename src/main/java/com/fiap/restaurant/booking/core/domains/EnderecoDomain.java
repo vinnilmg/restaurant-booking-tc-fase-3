@@ -25,12 +25,12 @@ public class EnderecoDomain implements Endereco {
             final String cep
     ) {
         this.id = idValidation(id);
-        this.rua = rua;
-        this.numero = numero;
+        this.rua = ruaValidation(rua);
+        this.numero = numeroValidation(numero);
         this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+        this.bairro = bairroValidation(bairro);
+        this.cidade = cidadeValidation(cidade);
+        this.estado = estadoValidation(estado);
         this.cep = cepValidation(cep);
     }
 

@@ -6,6 +6,12 @@ public class DefaultParamsConstants {
 
     public static final String DEFAULT_CPF = "83533067009";
     public static final Long DEFAULT_RESERVA_ID = 1L;
+    public static final Long DEFAULT_ENDERECO_ID = 1L;
+    public static final String DEFAULT_ENDERECO_RUA = "Rua Teste";
+    public static final String DEFAULT_ENDERECO_CIDADE = "São Paulo";
+    public static final String DEFAULT_ENDERECO_BAIRRO = "Centro";
+    public static final String DEFAULT_ENDERECO_CEP = "01512000";
+
 
     public static final String JSON_PATH_ID = "$.id";
     public static final String JSON_PATH_CPF = "$.cpfCliente";
