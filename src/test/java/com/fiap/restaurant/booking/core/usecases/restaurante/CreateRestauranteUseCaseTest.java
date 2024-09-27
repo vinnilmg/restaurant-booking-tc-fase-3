@@ -30,8 +30,8 @@ class CreateRestauranteUseCaseTest {
     }
 
     @Test
-    void shouldCreateRestaurant() {
-        final var restaurant = new RestauranteDomain(
+    void shouldCreateRestaurante() {
+        final var restaurante = new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
                 DEFAULT_ENDERECO_DOMAIN,
@@ -41,25 +41,25 @@ class CreateRestauranteUseCaseTest {
                 50,
                 5.0);
 
-        when(findRestauranteByCnpjUseCase.execute(restaurant.getCnpj()))
+        when(findRestauranteByCnpjUseCase.execute(restaurante.getCnpj()))
                 .thenReturn(Optional.empty());
 
-        when(restauranteGateway.create(restaurant))
+        when(restauranteGateway.create(restaurante))
                 .thenAnswer(i -> i.getArguments()[0]);
 
-        final var result = createRestauranteUseCase.execute(restaurant);
+        final var result = createRestauranteUseCase.execute(restaurante);
 
         assertThat(result)
                 .isNotNull()
-                .isEqualTo(restaurant);
+                .isEqualTo(restaurante);
 
-        verify(findRestauranteByCnpjUseCase).execute(restaurant.getCnpj());
-        verify(restauranteGateway).create(restaurant);
+        verify(findRestauranteByCnpjUseCase).execute(restaurante.getCnpj());
+        verify(restauranteGateway).create(restaurante);
     }
 
     @Test
-    void shouldThrowValidationExceptionWhenCreateRestaurantaWithCnpjAlreadyExistent() {
-        final var restaurant = new RestauranteDomain(
+    void shouldThrowValidationExceptionWhenCreateRestauranteWithCnpjAlreadyExistent() {
+        final var restaurante = new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
                 DEFAULT_ENDERECO_DOMAIN,
@@ -69,14 +69,14 @@ class CreateRestauranteUseCaseTest {
                 50,
                 5.0);
 
-        when(findRestauranteByCnpjUseCase.execute(restaurant.getCnpj()))
-                .thenReturn(Optional.of(restaurant));
+        when(findRestauranteByCnpjUseCase.execute(restaurante.getCnpj()))
+                .thenReturn(Optional.of(restaurante));
 
-        assertThatThrownBy(() -> createRestauranteUseCase.execute(restaurant))
+        assertThatThrownBy(() -> createRestauranteUseCase.execute(restaurante))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("CNPJ already exists");
 
-        verify(findRestauranteByCnpjUseCase).execute(restaurant.getCnpj());
+        verify(findRestauranteByCnpjUseCase).execute(restaurante.getCnpj());
         verifyNoInteractions(restauranteGateway);
     }
 
