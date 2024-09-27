@@ -25,8 +25,14 @@ allure serve target/allure-results
 ```
 <b>Obs: Precisa do allure na máquina</b>
 
-Para realizar a execução de todas as etapas de teste (unitário, integração e sistema), executar comando na raiz:
+Para realizar a execução de todas as etapas de teste (unitário, integração e sistema), executar comandos na raiz:
+- Testes unitários e integração:
 ```sh
-make build
+make test
 ```
+- Testes de sistema (comportamento):
+```sh
+system-test
+```
+
 <b>Obs: Precisa do make na máquina</b> 
