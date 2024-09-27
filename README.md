@@ -19,7 +19,14 @@ mvn test -Psystem-test
 <p>O relatório do Cucumber está sendo gerado no caminho abaixo: <br/>
 target/cucumber-reports/cucumber.html</p>
 
-Para gerar o relatório do allure (precisa do allure): <br/> 
+Para gerar o relatório do allure: <br/> 
 ```sh
-allure serve ${PATH}
+allure serve target/allure-results
 ```
+<b>Obs: Precisa do allure na máquina</b>
+
+Para realizar a execução de todas as etapas de teste (unitário, integração e sistema), executar comando na raiz:
+```sh
+make build
+```
+<b>Obs: Precisa do make na máquina</b> 

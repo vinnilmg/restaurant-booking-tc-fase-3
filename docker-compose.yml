@@ -1,0 +1,6 @@
+services:
+  restaurant-booking:
+    image: 'restaurant-booking-tc:latest'
+    build: .
+    ports:
+      - "8090:8090"
