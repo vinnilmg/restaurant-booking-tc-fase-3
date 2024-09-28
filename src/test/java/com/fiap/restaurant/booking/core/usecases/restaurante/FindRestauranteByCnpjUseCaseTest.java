@@ -49,9 +49,9 @@ public class FindRestauranteByCnpjUseCaseTest {
     }
 
     @Test
-    void shouldFindRestaurantByCnpj() {
+    void shouldFindRestauranteByCnpj() {
         final var cnpj = DEFAULT_CNPJ;
-        final var restaurant = new RestauranteDomain(
+        final var restaurante = new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
                 DEFAULT_ENDERECO_DOMAIN,
@@ -61,7 +61,7 @@ public class FindRestauranteByCnpjUseCaseTest {
                 50,
                 5.0);
 
-        final Optional<Restaurante> expected = Optional.of(restaurant);
+        final Optional<Restaurante> expected = Optional.of(restaurante);
 
         when(restauranteGateway.findByCnpj(cnpj)).thenReturn(expected);
 
