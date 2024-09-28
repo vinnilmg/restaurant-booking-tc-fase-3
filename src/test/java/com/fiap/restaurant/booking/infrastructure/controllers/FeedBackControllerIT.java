@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.infrastructure.controllers;
 
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackEntity;
+import com.fiap.restaurant.booking.utils.FeedBackValidationsMessages;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -28,8 +29,8 @@ class FeedBackControllerIT {
 
     private static final String ENDPOINT = "/api/feedbacks";
 
-    private final FeedBackEntity feedBackEntity = InformationsFeedbackConstants.FEEDBACK_FULL();
-    private final FeedBackRequest feedBackRequest = InformationsFeedbackConstants.FEEDBACK_REQUEST(feedBackEntity);
+    private final FeedBackEntity feedBackEntity = InformationsFeedbackConstants.buildFeedBackEntityFull();
+    private final FeedBackRequest feedBackRequest = InformationsFeedbackConstants.buildFeedbackRequestFromEntity(feedBackEntity);
 
     @LocalServerPort
     private int port;
@@ -72,7 +73,7 @@ class FeedBackControllerIT {
                     .delete(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.OK.value())
-                    .body("message", equalTo(InformationsFeedbackConstants.getMessageWhenDeleteAFeedback(id)));
+                    .body("message", equalTo(FeedBackValidationsMessages.getMessageWhenDeleteAFeedback(id)));
         }
 
         @Test
@@ -85,7 +86,7 @@ class FeedBackControllerIT {
                     .delete(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value())
-                    .body("message", equalTo(InformationsFeedbackConstants.getMessageIdFeedbackNotFound(id)));
+                    .body("message", equalTo(FeedBackValidationsMessages.getMessageIdFeedbackNotFound(id)));
         }
     }
 
@@ -129,7 +130,7 @@ class FeedBackControllerIT {
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value())
-                    .body("message", equalTo(InformationsFeedbackConstants.getMessageIdFeedbackNotFound(id)));
+                    .body("message", equalTo(FeedBackValidationsMessages.getMessageIdFeedbackNotFound(id)));
 
 
         }

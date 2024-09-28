@@ -13,52 +13,7 @@ import java.time.LocalTime;
 
 public class InformationsFeedbackConstants {
 
-    private static final String MESSAGE_ID_RESTAURANTE_NOT_FOUND = "Feedback with id restaurante %s not found";
-
-    private static final String MESSAGE_ID_FEEDBACK_NOT_FOUND = "Feedback with id %s not found";
-
-    public static final String MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL = "id restaurante cannot be null";
-
-    public static final String MESSAGE_WHEN_ID_FEEDBACK_IS_NULL = "id cannot be null";
-
-    public static final String MESSAGE_WHEN_NOME_CLIENTE_IS_EMPTY = "nomeCliente cannot be empty";
-
-    public static final String MESSAGE_WHEN_NOME_CLIENTE_FEEDBACK_NOT_FOUND = "feedbacks by nome cliente %s not found";
-
-    public static final String MESSAGE_WHEN_DELETE_A_FEEDBACK = "Feedback by id %s was deleted by success.";
-
-    public static final String NOME_CLIENTE_EXAMPLE_TESTE = "teste";
-
     public static final Long DEFAULT_FEEDBACK_ID = 1L;
-
-    public static final String ROUTE_CONTROLLER_DEFAULT = "/api/feedbacks";
-
-    public static final String ROUTE_CONTROLLER_FIND_BY_ID = ROUTE_CONTROLLER_DEFAULT.concat("/{id}");
-
-    public static final String ROUTE_CONTROLLER_DELETE_BY_ID = ROUTE_CONTROLLER_DEFAULT.concat("/{id}");
-
-    public static final String ROUTE_CONTROLLER_FIND_BY_RESTAURANTE_ID = ROUTE_CONTROLLER_DEFAULT.concat("/restaurante/{idRestaurante}");
-
-    public static final String ROUTE_CONTROLLER_FIND_BY_NOME_CLIENTE = ROUTE_CONTROLLER_DEFAULT.concat("/nome-cliente/{nomeCliente}");
-
-
-    public static final Long DEFAULT_RESTAURANTE_ID = 1L;
-
-    public static String getMessageIdRestauranteNotFound(Long idRestaurante) {
-        return String.format(MESSAGE_ID_RESTAURANTE_NOT_FOUND, idRestaurante);
-    }
-
-    public static String getMessageIdFeedbackNotFound(Long idFeedback) {
-        return String.format(MESSAGE_ID_FEEDBACK_NOT_FOUND, idFeedback);
-    }
-
-    public static String getMessageWhenDeleteAFeedback(Long idFeedback) {
-        return String.format(MESSAGE_WHEN_DELETE_A_FEEDBACK, idFeedback);
-    }
-
-    public static String getMessageWhenNomeClienteFeedbackNotFound(String nomeCliente) {
-        return String.format(MESSAGE_WHEN_NOME_CLIENTE_FEEDBACK_NOT_FOUND, nomeCliente);
-    }
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
@@ -75,7 +30,7 @@ public class InformationsFeedbackConstants {
     public static FeedBackEntity buildFeedBackTestEntity() {
         final var result = new FeedBackEntity();
         result.setId(null);
-        result.setRestaurante(RESTAURANTE_BY_DOMAIN_WITH_ID(InformationsRestauranteConstants.buildRestauranteTest()));
+        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(InformationsRestauranteConstants.buildRestauranteTest()));
         result.setNomeCliente("teste");
         result.setAvaliacao(1);
         result.setComentario("teste");
@@ -85,7 +40,7 @@ public class InformationsFeedbackConstants {
     public static FeedBackEntity FEEDBACK_BY_DOMAIN_WITH_ID(final FeedBack feedBack) {
         final var result = new FeedBackEntity();
         result.setId(1L);
-        result.setRestaurante(RESTAURANTE_BY_DOMAIN_WITH_ID(feedBack.getRestaurante()));
+        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(feedBack.getRestaurante()));
         result.setNomeCliente(feedBack.getNomeCliente());
         result.setAvaliacao(feedBack.getAvaliacao());
         result.setComentario(feedBack.getComentario());
@@ -94,16 +49,16 @@ public class InformationsFeedbackConstants {
     }
 
 
-    public static FeedBackRequest FEEDBACK_REQUEST() {
+    public static FeedBackRequest buildFeedbackRequest() {
         return new FeedBackRequest(1L, "Pablo Marçal", 1, "teste");
     }
 
-    public static FeedBackRequest FEEDBACK_REQUEST(FeedBackEntity feedBackEntity) {
+    public static FeedBackRequest buildFeedbackRequestFromEntity(FeedBackEntity feedBackEntity) {
         return new FeedBackRequest(feedBackEntity.getRestaurante().getId(), feedBackEntity.getNomeCliente(), feedBackEntity.getAvaliacao(), feedBackEntity.getComentario());
     }
 
 
-    public static RestauranteEntity RESTAURANTE_BY_DOMAIN_WITH_ID(final Restaurante restaurante) {
+    public static RestauranteEntity buildRestauranteEntityFromRestauranteDomain(final Restaurante restaurante) {
         final var result = new RestauranteEntity();
         result.setId(1L);
         result.setNome(restaurante.getNome());
@@ -117,7 +72,7 @@ public class InformationsFeedbackConstants {
     }
 
 
-    public static RestauranteEntity RESTAURANTE_FULL() {
+    public static RestauranteEntity buildRestauranteEntityFull() {
         final var result = new RestauranteEntity();
         result.setId(1L);
         result.setNome("Restaurante Fictício");
@@ -130,10 +85,10 @@ public class InformationsFeedbackConstants {
         return result;
     }
 
-    public static FeedBackEntity FEEDBACK_FULL() {
+    public static FeedBackEntity buildFeedBackEntityFull() {
         final var result = new FeedBackEntity();
         result.setId(1L);
-        result.setRestaurante(RESTAURANTE_FULL());
+        result.setRestaurante(buildRestauranteEntityFull());
         result.setNomeCliente("John Doe");
         result.setAvaliacao(5);
         result.setComentario("Excelente serviço!");

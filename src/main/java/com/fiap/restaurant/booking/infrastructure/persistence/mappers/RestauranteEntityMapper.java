@@ -7,13 +7,14 @@ import com.fiap.restaurant.booking.infrastructure.persistence.entities.Restauran
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {RestauranteMapper.class})
 public interface RestauranteEntityMapper {
 
-     EnderecoEntityMapper enderecoMapper = new EnderecoEntityMapperImpl();
+     EnderecoEntityMapper enderecoMapper = Mappers.getMapper(EnderecoEntityMapper.class);
 
     @Mapping(target = "nome", source = "nome")
     @Mapping(target = "cnpj", source = "cnpj")

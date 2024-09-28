@@ -12,6 +12,7 @@ import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMa
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.FeedBackMapperImpl;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
 import com.fiap.restaurant.booking.utils.ConverterUtils;
+import com.fiap.restaurant.booking.utils.FeedBackControllerRouters;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -88,7 +89,7 @@ public class FeedBackControllerTest {
         when(createFeedBackUseCase.execute(any(FeedBack.class))).thenReturn(feedback);
         when(findRestauranteByIdUseCase.execute(any(Long.class))).thenReturn(feedback.getRestaurante());
         mockMvc.perform(
-                post(InformationsFeedbackConstants.ROUTE_CONTROLLER_DEFAULT)
+                post(FeedBackControllerRouters.ROUTE_CONTROLLER_DEFAULT)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(ConverterUtils.toJsonString(feedBackMapper.toFeedbackResponse(feedback)))
         ).andExpect(status().isCreated());
@@ -105,7 +106,7 @@ public class FeedBackControllerTest {
         when(findFeedBackByIdUseCase.execute(id)).thenReturn(any(FeedBack.class));
 
         mockMvc.perform(
-                get(InformationsFeedbackConstants.ROUTE_CONTROLLER_FIND_BY_ID, id)
+                get(FeedBackControllerRouters.ROUTE_CONTROLLER_FIND_BY_ID, id)
         ).andExpect(status().isOk());
 
         verify(findFeedBackByIdUseCase, times(1)).execute(anyLong());
@@ -119,7 +120,7 @@ public class FeedBackControllerTest {
         when(findFeedBackByIdRestauranteUseCase.execute(id)).thenReturn(any(FeedBack.class));
 
         mockMvc.perform(
-                get(InformationsFeedbackConstants.ROUTE_CONTROLLER_FIND_BY_RESTAURANTE_ID, id)
+                get(FeedBackControllerRouters.ROUTE_CONTROLLER_FIND_BY_RESTAURANTE_ID, id)
         ).andExpect(status().isOk());
 
         verify(findFeedBackByIdRestauranteUseCase, times(1)).execute(anyLong());
@@ -135,7 +136,7 @@ public class FeedBackControllerTest {
         when(getAllFeedBackByNomeClienteUseCase.execute(paramNomeCliente)).thenReturn(mockFeedbackList);
 
         mockMvc.perform(
-                get(InformationsFeedbackConstants.ROUTE_CONTROLLER_FIND_BY_NOME_CLIENTE, paramNomeCliente)
+                get(FeedBackControllerRouters.ROUTE_CONTROLLER_FIND_BY_NOME_CLIENTE, paramNomeCliente)
         ).andExpect(status().isOk());
 
         verify(getAllFeedBackByNomeClienteUseCase, times(1)).execute(any(String.class));
@@ -148,7 +149,7 @@ public class FeedBackControllerTest {
         when(getAllFeedBackUseCase.execute()).thenReturn(mockFeedbackList);
 
         mockMvc.perform(
-                get(InformationsFeedbackConstants.ROUTE_CONTROLLER_DEFAULT)
+                get(FeedBackControllerRouters.ROUTE_CONTROLLER_DEFAULT)
         ).andExpect(status().isOk());
 
         verify(getAllFeedBackUseCase, times(1)).execute();
@@ -160,7 +161,7 @@ public class FeedBackControllerTest {
         when(deleteFeedBackUseCase.execute(id)).thenReturn(any(MessageResponse.class));
 
         mockMvc.perform(
-                delete(InformationsFeedbackConstants.ROUTE_CONTROLLER_DELETE_BY_ID, id)
+                delete(FeedBackControllerRouters.ROUTE_CONTROLLER_DELETE_BY_ID, id)
         ).andExpect(status().isOk());
 
         verify(deleteFeedBackUseCase, times(1)).execute(anyLong());

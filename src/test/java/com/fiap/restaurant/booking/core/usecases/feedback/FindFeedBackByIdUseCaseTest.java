@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdUseCaseImpl;
+import com.fiap.restaurant.booking.utils.FeedBackValidationsMessages;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +45,7 @@ class FindFeedBackByIdUseCaseTest {
     void shouldThrowValidationExceptionWhenIdIsNull() {
         assertThatThrownBy(() -> findFeedBackByIdUseCase.execute(null))
                 .isInstanceOf(ValidationException.class)
-                .hasMessage(InformationsFeedbackConstants.MESSAGE_WHEN_ID_FEEDBACK_IS_NULL);
+                .hasMessage(FeedBackValidationsMessages.MESSAGE_WHEN_ID_FEEDBACK_IS_NULL);
 
         verify(feedBackGateway, never()).findById(any());
     }
@@ -55,7 +56,7 @@ class FindFeedBackByIdUseCaseTest {
 
         assertThatThrownBy(() -> findFeedBackByIdUseCase.execute(DEFAULT_FEEDBACK_ID))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessage(InformationsFeedbackConstants.getMessageIdFeedbackNotFound(DEFAULT_FEEDBACK_ID));
+                .hasMessage(FeedBackValidationsMessages.getMessageIdFeedbackNotFound(DEFAULT_FEEDBACK_ID));
 
         verify(feedBackGateway, times(1)).findById(any());
 

@@ -28,7 +28,7 @@ public class FeedBackStepDefinition {
 
     @Dado("Que desejo deixar um feedback para um restaurante")
     public void queDesejoDeixarUmFeedBackParaUmRestaurante() {
-        request = InformationsFeedbackConstants.FEEDBACK_REQUEST();
+        request = InformationsFeedbackConstants.buildFeedbackRequest();
     }
 
     @Quando("o feedback for submetido")
