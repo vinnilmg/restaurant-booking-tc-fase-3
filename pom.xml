@@ -16,6 +16,7 @@
     <properties>
         <java.version>17</java.version>
         <allure.version>2.23.0</allure.version>
+        <gatling.version>3.9.5</gatling.version>
     </properties>
 
     <dependencyManagement>
@@ -162,6 +163,18 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- perfomance test -->
+        <dependency>
+            <groupId>io.gatling</groupId>
+            <artifactId>gatling-app</artifactId>
+            <version>${gatling.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -235,6 +248,23 @@
                             </includes>
                             <excludes combine.self="override">
                             </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Configuracao de profile para execucao dos testes de perfomance -->
+        <profile>
+            <id>perfomance-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.gatling</groupId>
+                        <artifactId>gatling-maven-plugin</artifactId>
+                        <version>4.3.7</version>
+                        <configuration>
+                            <simulationClass>com.fiap.restaurant.booking.performance.PerformanceSimulation</simulationClass>
                         </configuration>
                     </plugin>
                 </plugins>
