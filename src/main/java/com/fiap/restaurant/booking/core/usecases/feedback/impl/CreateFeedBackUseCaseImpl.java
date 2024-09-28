@@ -7,7 +7,7 @@ import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.CreateFeedBackUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 
-import java.util.Objects;
+import static java.util.Objects.isNull;
 
 public class CreateFeedBackUseCaseImpl implements CreateFeedBackUseCase {
 
@@ -22,10 +22,12 @@ public class CreateFeedBackUseCaseImpl implements CreateFeedBackUseCase {
     @Override
     public FeedBack execute(final FeedBack feedBack, final Long restauranteId) {
         Restaurante restaurante = findRestauranteByIdUseCase.execute(restauranteId);
-        if (Objects.isNull(feedBack.getId())) {
+
+        if (isNull(feedBack.getId())) {
             feedBack.setRestaurante(restaurante);
             return feedBackGateway.create(feedBack);
         }
+
         throw new ValidationException("id", "has to be null to create a new feedback");
     }
 }
