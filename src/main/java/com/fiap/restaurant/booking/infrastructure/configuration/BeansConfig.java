@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.infrastructure.configuration;
 
 import com.fiap.restaurant.booking.core.gateways.EnderecoGateway;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
+import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.endereco.AtualizaEnderecoUseCase;
@@ -34,6 +35,10 @@ import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdR
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.CreateMesaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -244,7 +249,18 @@ public class BeansConfig {
     }
 
     @Bean
+    public CreateMesaUseCase createMesaUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new CreateMesaUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
+    }
+
+    @Bean
     public DeleteFeedBackUseCase deleteFeedBackUseCase(FindFeedBackByIdUseCase findFeedBackByIdUseCase, FeedBackGateway feedBackGateway) {
         return new DeleteFeedBackUseCaseImpl(feedBackGateway, findFeedBackByIdUseCase);
     }
+
+    @Bean
+    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new FindMesaByIdUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
+    }
+
 }
