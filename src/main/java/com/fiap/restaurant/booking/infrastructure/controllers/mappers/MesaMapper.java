@@ -25,4 +25,6 @@ public interface MesaMapper {
     MesaResponse toMesaResponse(MesaDomain mesaDomain);
 
     MesaRequest toMesaDomain(Long restauranteId, Integer numeroMesa);
+
+
 }

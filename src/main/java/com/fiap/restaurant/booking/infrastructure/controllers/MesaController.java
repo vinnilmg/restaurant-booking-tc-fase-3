@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
+import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByStatusUseCase;
@@ -22,11 +23,13 @@ public class MesaController {
     private final CreateMesaUseCase createMesaUseCase;
     private final MesaMapper mesaMapper;
     private final FindMesaByIdUseCase findMesaByIdUseCase;
+    private final FindMesaByStatusUseCase findMesaByStatusUseCase;
 
-    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdUseCase findMesaByIdUseCase) {
+    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdUseCase findMesaByIdUseCase, FindMesaByStatusUseCase findMesaByStatusUseCase) {
         this.createMesaUseCase = createMesaUseCase;
         this.mesaMapper = mesaMapper;
         this.findMesaByIdUseCase = findMesaByIdUseCase;
+        this.findMesaByStatusUseCase = findMesaByStatusUseCase;
     }
 
     @PostMapping
@@ -42,11 +45,17 @@ public class MesaController {
                 .body(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<MesaResponse>> getAllMesas() {
-
-        return null;
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<MesaResponse>> getAllMesasFromStatus( @PathVariable StatusMesaEnum status) {
+//        var statusEnum = mesaMapper.toMesaDomain(status);
+//        final var response = mesaMapper.toMesaResponse(findMesaByStatusUseCase.execute(status));
+//        return ResponseEntity.ok(response);
+        var mesas = findMesaByStatusUseCase.execute(status);
+        // Mapeia o resultado para a resposta
+        var response = mesaMapper.toMesaResponse(mesas);
+        return ResponseEntity.status(201).body(response);
     }
+
     @GetMapping("/disponibilidade")
     public ResponseEntity<MesaResponse> getMesaByIdRestaurante(@RequestParam("restauranteId") Long restauranteId, @RequestParam("numeroMesa") Integer numeroMesa)
     {
