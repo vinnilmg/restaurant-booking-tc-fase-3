@@ -43,7 +43,7 @@ class DeleteFeedBackUseCaseTest {
     @Test
     void shouldBeDeleteFeedBack() {
         Optional<FeedBack> feedbackDomain = Optional.of(InformationsFeedbackConstants
-                .buildFeedBackTest(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID, 2L, Integer.valueOf(1))
+                .buildFeedBackTest(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID, Integer.valueOf(1))
         );
 
         when(feedBackGateway.findById(any())).thenReturn(feedbackDomain);

@@ -83,7 +83,7 @@ public class FeedBackControllerTest {
     @Test
     void createFeedbackRequestTest() throws Exception {
         var feedback = InformationsFeedbackConstants.buildFeedBackTest(1L,
-                1L, 1);
+                1);
 
         when(createFeedBackUseCase.execute(any(FeedBack.class))).thenReturn(feedback);
         when(findRestauranteByIdUseCase.execute(any(Long.class))).thenReturn(feedback.getRestaurante());

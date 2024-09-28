@@ -28,7 +28,7 @@ class FeedBackRepositoryGatewayTest {
 
     @Test
     void shouldCreateFeedBack() {
-        final var expected = InformationsFeedbackConstants.buildFeedBackTest(1L,1L,1);
+        final var expected = InformationsFeedbackConstants.buildFeedBackTest(1L, 1);
         final var entity = InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected);
 
         when(feedBackEntityMapper.toEntity(expected)).thenReturn(entity);
@@ -48,7 +48,7 @@ class FeedBackRepositoryGatewayTest {
 
     @Test
     void shouldFindAllFeedBacks() {
-        final List<FeedBack> expected = List.of(InformationsFeedbackConstants.buildFeedBackTest(1L,1L,1));
+        final List<FeedBack> expected = List.of(InformationsFeedbackConstants.buildFeedBackTest(1L, 1));
         final var entities = List.of(InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected.get(0)));
         when(feedBackRepository.findAll()).thenReturn(entities);
         when(feedBackEntityMapper.toDomains(entities)).thenReturn(expected);
@@ -67,7 +67,7 @@ class FeedBackRepositoryGatewayTest {
     @Test
     void shouldFindFeedBackById() {
         final var feedBackId = 1L;
-        final FeedBack expected = InformationsFeedbackConstants.buildFeedBackTest(1L,1L,1);
+        final FeedBack expected = InformationsFeedbackConstants.buildFeedBackTest(1L, 1);
         final var entity = InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected);
 
         when(feedBackRepository.findById(feedBackId)).thenReturn(Optional.of(entity));
@@ -87,7 +87,7 @@ class FeedBackRepositoryGatewayTest {
     @Test
     void shouldFindFeedBacksByNomeCliente() {
         final var nomeCliente = "John Doe";
-        final List<FeedBack> expected = List.of(InformationsFeedbackConstants.buildFeedBackTest(1L,1L,1));
+        final List<FeedBack> expected = List.of(InformationsFeedbackConstants.buildFeedBackTest(1L, 1));
         final var entities = List.of(InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected.get(0)));
 
         when(feedBackRepository.findAllByNomeCliente(nomeCliente)).thenReturn(entities);
@@ -107,7 +107,7 @@ class FeedBackRepositoryGatewayTest {
     @Test
     void shouldFindFeedBackByIdRestaurante() {
         final var restauranteId = 1L;
-        final FeedBack expected = InformationsFeedbackConstants.buildFeedBackTest(1L,1L,1);
+        final FeedBack expected = InformationsFeedbackConstants.buildFeedBackTest(1L, 1);
         final var entity = InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected);
 
         when(feedBackRepository.findByRestauranteId(restauranteId)).thenReturn(Optional.of(entity));

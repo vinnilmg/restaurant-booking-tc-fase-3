@@ -66,7 +66,6 @@ class FindFeedBackByIdUseCaseTest {
         Long idRestaurante = 2L;
         Optional<FeedBack> feedbackDomain = Optional.of(InformationsFeedbackConstants
                 .buildFeedBackTest(DEFAULT_FEEDBACK_ID,
-                        idRestaurante,
                         Integer.valueOf(2)));
 
         when(feedBackGateway.findById(DEFAULT_FEEDBACK_ID)).thenReturn(feedbackDomain);

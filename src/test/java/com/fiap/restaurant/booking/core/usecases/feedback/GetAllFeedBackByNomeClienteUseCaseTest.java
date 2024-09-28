@@ -64,7 +64,6 @@ class GetAllFeedBackByNomeClienteUseCaseTest {
     void shouldReturnFeedBackWhenFindByNomeCliente() {
         FeedBack feedback = InformationsFeedbackConstants.buildFeedBackTest(
                 DEFAULT_FEEDBACK_ID,
-                DEFAULT_RESTAURANTE_ID,
                 Integer.valueOf(1)
         );
         var listExampleReturn = List.of(feedback);

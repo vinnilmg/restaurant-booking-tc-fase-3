@@ -4,6 +4,7 @@ import com.fiap.restaurant.booking.core.domains.FeedBack;
 import com.fiap.restaurant.booking.core.domains.FeedBackDomain;
 import com.fiap.restaurant.booking.core.domains.Restaurante;
 import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
+import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
 
@@ -59,7 +60,7 @@ public class InformationsFeedbackConstants {
         return String.format(MESSAGE_WHEN_NOME_CLIENTE_FEEDBACK_NOT_FOUND, nomeCliente);
     }
 
-    public static FeedBackDomain buildFeedBackTest(Long idFeedback, Long idRestaurante, Integer avaliacao) {
+    public static FeedBackDomain buildFeedBackTest(Long idFeedback, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
                 InformationsRestauranteConstants.buildRestauranteTest(),
                 "Cliente Teste",
@@ -79,6 +80,11 @@ public class InformationsFeedbackConstants {
         result.setComentario(feedBack.getComentario());
         result.setDataHoraCriacao(feedBack.getDataHoraCriacao());
         return result;
+    }
+
+
+    public static FeedBackRequest FEEDBACK_REQUEST() {
+   return new FeedBackRequest(1L,"Pablo Marçal",1,"teste");
     }
 
     public static RestauranteEntity RESTAURANTE_BY_DOMAIN_WITH_ID(final Restaurante restaurante) {

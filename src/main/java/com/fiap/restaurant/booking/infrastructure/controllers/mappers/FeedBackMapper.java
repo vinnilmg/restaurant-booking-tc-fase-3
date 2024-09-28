@@ -13,11 +13,11 @@ import org.mapstruct.Mapping;
 public interface FeedBackMapper {
 
     default FeedBackDomain toFeedBackDomain(FeedBackRequest request, Restaurante restaurante) {
-        return new FeedBackDomain(null, restaurante,
+        return new FeedBackDomain(restaurante,
                 request.nomeCliente(),
                 request.avaliacao(),
                 request.comentario()
-                , null);
+                );
     }
 
     @Mapping(target = "restauranteId", expression = "java(feedBack.getRestaurante().getId())")
