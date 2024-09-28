@@ -12,6 +12,7 @@ import com.fiap.restaurant.booking.core.usecases.reserva.GetAllReservasUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.ReservaMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.ReservaRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.ReservaResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,7 @@ import java.util.List;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
+@Slf4j
 @RequestMapping("/api/bookings")
 @RestController
 public class ReservaController {
