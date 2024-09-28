@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.gateways;
 
+import com.fiap.restaurant.booking.core.domains.Mesa;
 import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.MesaEntityMapper;
@@ -26,18 +27,18 @@ public class MesaRepositoryGateway implements MesaGateway {
     }
 
     @Override
-    public Optional<MesaDomain> findById(Long id) {
+    public Optional<MesaDomain> findById(Long id, Integer numeroMesa) {
         return mesaRepository.findById(id)
                 .map(mesaEntityMapper::toDomain);
     }
 
-    @Override
-    public List<MesaDomain> findByStatus(String status) {
-        return List.of();
-    }
+//    @Override
+//    public Optional<Mesa> findByIdRestauranteAndNumeroMesa(Long idRestaurante, Integer numeroMesa) {
+//        return Optional.empty();
+//    }
 
     @Override
-    public List<MesaDomain> findByRestauranteId(Long restauranteId) {
+    public List<MesaDomain> findByStatus(String status) {
         return List.of();
     }
 

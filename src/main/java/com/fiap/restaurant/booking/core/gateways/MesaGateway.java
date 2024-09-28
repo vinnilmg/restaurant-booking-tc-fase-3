@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.core.gateways;
 
+import com.fiap.restaurant.booking.core.domains.Mesa;
 import com.fiap.restaurant.booking.core.domains.MesaDomain;
 
 import java.util.List;
@@ -9,11 +10,11 @@ public interface MesaGateway {
 
     MesaDomain create(MesaDomain mesa);
 
-    Optional<MesaDomain> findById(Long id);
+    Optional<MesaDomain> findById(Long id, Integer numeroMesa);
+
+//    Optional<Mesa> findByIdRestauranteAndNumeroMesa(Long idRestaurante, Integer numeroMesa);
 
     List<MesaDomain> findByStatus(String status);
-
-    List<MesaDomain> findByRestauranteId(Long restauranteId);
 
     void delete(Long id);
 }

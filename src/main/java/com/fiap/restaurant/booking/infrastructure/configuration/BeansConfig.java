@@ -36,7 +36,9 @@ import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdU
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.impl.CreateMesaUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -255,4 +257,10 @@ public class BeansConfig {
     public DeleteFeedBackUseCase deleteFeedBackUseCase(FindFeedBackByIdUseCase findFeedBackByIdUseCase, FeedBackGateway feedBackGateway) {
         return new DeleteFeedBackUseCaseImpl(feedBackGateway, findFeedBackByIdUseCase);
     }
+
+    @Bean
+    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new FindMesaByIdUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
+    }
+
 }

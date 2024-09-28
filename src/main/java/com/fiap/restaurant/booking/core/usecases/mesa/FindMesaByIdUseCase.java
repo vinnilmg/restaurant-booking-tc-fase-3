@@ -1,8 +1,8 @@
 package com.fiap.restaurant.booking.core.usecases.mesa;
 
-import com.fiap.restaurant.booking.core.domains.Mesa;
+import com.fiap.restaurant.booking.core.domains.MesaDomain;
 
 public interface FindMesaByIdUseCase {
 
-    Mesa execute(Long id);
+    MesaDomain execute(Long idRestaurante, Integer numeroMesa);
 }

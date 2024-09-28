@@ -23,4 +23,6 @@ public interface MesaMapper {
     @Mapping(target = "mesa", source = "numeroDaMesa")
 //    @Mapping(target = "restauranteId", expression = "java(mesa.getRestaurante().getId())")
     MesaResponse toMesaResponse(MesaDomain mesaDomain);
+
+    MesaRequest toMesaDomain(Long restauranteId, Integer numeroMesa);
 }
