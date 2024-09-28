@@ -14,7 +14,7 @@ INSERT INTO restaurante (
     FIM_FUNCIONAMENTO
 )
 VALUES
-    ('Padaria do seu Zé', '20094036000199', 1, 'BRASILEIRA', 40, 5.0, '08:00:00', '17:00:00');
+    ('Padaria do seu Zé', '20094036000199', (select max(endereco.id) from endereco), 'BRASILEIRA', 40, 5.0, '08:00:00', '17:00:00');
 
 INSERT INTO reserva
     (CPF_CLIENTE, DATA_HORA_RESERVA, STATUS, DATA_HORA_CRIACAO)

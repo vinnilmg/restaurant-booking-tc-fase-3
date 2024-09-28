@@ -1,5 +1,7 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
+import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackEntity;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
@@ -26,8 +28,12 @@ class FeedBackControllerIT {
 
     private static final String ENDPOINT = "/api/feedbacks";
 
+    private final FeedBackEntity feedBackEntity = InformationsFeedbackConstants.FEEDBACK_FULL();
+    private final FeedBackRequest feedBackRequest = InformationsFeedbackConstants.FEEDBACK_REQUEST(feedBackEntity);
+
     @LocalServerPort
     private int port;
+
 
     @BeforeEach
     void setup() {
@@ -39,7 +45,6 @@ class FeedBackControllerIT {
     class Create {
         @Test
         void shouldCreateFeedBack() {
-            final var feedBackRequest = InformationsFeedbackConstants.FEEDBACK_REQUEST();
 
             given()
                     .filter(new AllureRestAssured())
@@ -50,10 +55,41 @@ class FeedBackControllerIT {
                     .then()
                     .statusCode(HttpStatus.CREATED.value())
                     .body(matchesJsonSchemaInClasspath(FEEDBACK_SCHEMA))
-                    .body("clienteNome", equalTo(feedBackRequest.nomeCliente()))
+                    .body("nomeCliente", equalTo(feedBackRequest.nomeCliente()))
                     .body("comentario", equalTo(feedBackRequest.comentario()));
         }
     }
+
+    @Nested
+    class Delete {
+        @Test
+        void shouldDeleteFeedBack() {
+            final var id = 1L;
+
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
+                    .delete(ENDPOINT.concat("/{id}"), id)
+                    .then()
+                    .statusCode(HttpStatus.OK.value())
+                    .body("message", equalTo(InformationsFeedbackConstants.getMessageWhenDeleteAFeedback(id)));
+        }
+
+        @Test
+        void shouldThrowNotFoundWhenDeleteFeedBackWithNonExistentId() {
+            final var id = 10000L;
+
+            given()
+                    .filter(new AllureRestAssured())
+                    .when()
+                    .delete(ENDPOINT.concat("/{id}"), id)
+                    .then()
+                    .statusCode(HttpStatus.NOT_FOUND.value())
+                    .body("message", equalTo(InformationsFeedbackConstants.getMessageIdFeedbackNotFound(id)));
+        }
+    }
+
+
 
     @Nested
     class Get {
@@ -85,7 +121,7 @@ class FeedBackControllerIT {
 
         @Test
         void shouldThrowNotFoundWhenFeedBackIdIsNotExists() {
-            final var id = 10000;
+            final var id = 10000L;
 
             given()
                     .filter(new AllureRestAssured())
@@ -93,50 +129,25 @@ class FeedBackControllerIT {
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.NOT_FOUND.value())
-                    .body("message", equalTo("FeedBack not found"));
+                    .body("message", equalTo(InformationsFeedbackConstants.getMessageIdFeedbackNotFound(id)));
+
+
         }
 
         @Test
-        void shouldGetFeedBacksByClienteNome() {
-            final var clienteNome = "João Silva";
+        void shouldGetFeedBacksByNomeCliente() {
+            final var nomeCliente = feedBackRequest.nomeCliente();
 
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/customers/{nome}"), clienteNome)
+                    .get(ENDPOINT.concat("/nome-cliente/{nomeCliente}"), nomeCliente)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
-                    .body("[0].clienteNome", equalTo(clienteNome))
+                    .body("[0].nomeCliente", equalTo(nomeCliente))
                     .body(matchesJsonSchemaInClasspath(FEEDBACK_LIST_SCHEMA));
         }
     }
 
-    @Nested
-    class Delete {
-        @Test
-        void shouldDeleteFeedBack() {
-            final var id = 1;
-
-            given()
-                    .filter(new AllureRestAssured())
-                    .when()
-                    .delete(ENDPOINT.concat("/{id}"), id)
-                    .then()
-                    .statusCode(HttpStatus.NO_CONTENT.value());
-        }
-
-        @Test
-        void shouldThrowNotFoundWhenDeleteFeedBackWithNonExistentId() {
-            final var id = 10000;
-
-            given()
-                    .filter(new AllureRestAssured())
-                    .when()
-                    .delete(ENDPOINT.concat("/{id}"), id)
-                    .then()
-                    .statusCode(HttpStatus.NOT_FOUND.value())
-                    .body("message", equalTo("FeedBack not found"));
-        }
-    }
 }

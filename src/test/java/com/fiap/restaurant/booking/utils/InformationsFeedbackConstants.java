@@ -71,6 +71,17 @@ public class InformationsFeedbackConstants {
     }
 
 
+
+    public static FeedBackEntity buildFeedBackTestEntity() {
+        final var result = new FeedBackEntity();
+        result.setId(null);
+        result.setRestaurante(RESTAURANTE_BY_DOMAIN_WITH_ID(InformationsRestauranteConstants.buildRestauranteTest()));
+        result.setNomeCliente("teste");
+        result.setAvaliacao(1);
+        result.setComentario("teste");
+        return result;
+    }
+
     public static FeedBackEntity FEEDBACK_BY_DOMAIN_WITH_ID(final FeedBack feedBack) {
         final var result = new FeedBackEntity();
         result.setId(1L);
@@ -84,8 +95,13 @@ public class InformationsFeedbackConstants {
 
 
     public static FeedBackRequest FEEDBACK_REQUEST() {
-   return new FeedBackRequest(1L,"Pablo Marçal",1,"teste");
+        return new FeedBackRequest(1L, "Pablo Marçal", 1, "teste");
     }
+
+    public static FeedBackRequest FEEDBACK_REQUEST(FeedBackEntity feedBackEntity) {
+        return new FeedBackRequest(feedBackEntity.getRestaurante().getId(), feedBackEntity.getNomeCliente(), feedBackEntity.getAvaliacao(), feedBackEntity.getComentario());
+    }
+
 
     public static RestauranteEntity RESTAURANTE_BY_DOMAIN_WITH_ID(final Restaurante restaurante) {
         final var result = new RestauranteEntity();

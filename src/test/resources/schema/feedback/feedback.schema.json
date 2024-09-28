@@ -33,7 +33,6 @@
     },
     "dataHoraCriacao": {
       "type": "string",
-      "format": "date-time",
       "description": "The date and time when the feedback was created."
     }
   }
