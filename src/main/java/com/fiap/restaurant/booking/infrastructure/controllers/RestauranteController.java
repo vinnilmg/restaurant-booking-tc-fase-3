@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
+import com.fiap.restaurant.booking.core.usecases.endereco.CreateEnderecoUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.CreateRestauranteUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoBairroUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByEnderecoCidadeUseCase;
@@ -9,6 +10,7 @@ import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByMe
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByNomeUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByTipoCulinariaUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.GetAllRestaurantesUseCase;
+import com.fiap.restaurant.booking.infrastructure.controllers.mappers.EnderecoMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.RestauranteMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.RestauranteRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.RestauranteResponse;
@@ -37,7 +39,9 @@ public class RestauranteController {
     private final FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase;
     private final FindRestauranteByTipoCulinariaUseCase findRestauranteByTipoCulinariaUseCase;
     private final FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase;
+    private final CreateEnderecoUseCase createEnderecoUseCase;
     private final RestauranteMapper restauranteMapper;
+    private final EnderecoMapper enderecoMapper;
 
     public RestauranteController(CreateRestauranteUseCase createRestauranteUseCase,
                                  GetAllRestaurantesUseCase getAllRestaurantesUseCase,
@@ -47,8 +51,8 @@ public class RestauranteController {
                                  FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase,
                                  FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase,
                                  FindRestauranteByTipoCulinariaUseCase findRestauranteByTipoCulinariaUseCase,
-                                 FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase,
-                                 RestauranteMapper restauranteMapper) {
+                                 FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase, CreateEnderecoUseCase createEnderecoUseCase,
+                                 RestauranteMapper restauranteMapper, EnderecoMapper enderecoMapper) {
         this.createRestauranteUseCase = createRestauranteUseCase;
         this.getAllRestaurantesUseCase = getAllRestaurantesUseCase;
         this.findRestauranteByIdUseCase = findRestauranteByIdUseCase;
@@ -58,12 +62,16 @@ public class RestauranteController {
         this.findRestauranteByEnderecoCidadeUseCase = findRestauranteByEnderecoCidadeUseCase;
         this.findRestauranteByTipoCulinariaUseCase = findRestauranteByTipoCulinariaUseCase;
         this.findRestauranteByMediaFeedbackUseCase = findRestauranteByMediaFeedbackUseCase;
+        this.createEnderecoUseCase = createEnderecoUseCase;
         this.restauranteMapper = restauranteMapper;
+        this.enderecoMapper = enderecoMapper;
     }
 
     @PostMapping
     public ResponseEntity<RestauranteResponse> createRestaurant(@RequestBody final RestauranteRequest request) {
-        final var restaurant = createRestauranteUseCase.execute(restauranteMapper.toRestaurante(request));
+
+        final var endereco = createEnderecoUseCase.execute(enderecoMapper.toEndereco(request.endereco()));
+        final var restaurant = createRestauranteUseCase.execute(restauranteMapper.toRestaurante(request, endereco));
         return ResponseEntity
                 .status(CREATED)
                 .body(restauranteMapper.toRestauranteResponse(restaurant));

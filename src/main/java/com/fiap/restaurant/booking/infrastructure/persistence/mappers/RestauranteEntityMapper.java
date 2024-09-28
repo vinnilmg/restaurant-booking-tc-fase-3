@@ -16,12 +16,12 @@ public interface RestauranteEntityMapper {
 
     @Mapping(target = "nome", source = "nome")
     @Mapping(target = "cnpj", source = "cnpj")
-    @Mapping(target = "endereco", source = "endereco")
     @Mapping(target = "tipoCulinaria", source = "tipoCulinaria")
     @Mapping(target = "inicioFuncionamento", source = "inicioFuncionamento")
     @Mapping(target = "fimFuncionamento", source = "fimFuncionamento")
     @Mapping(target = "capacidade", source = "capacidade")
     @Mapping(target = "mediaFeedback", source = "mediaFeedback")
+    @Mapping(target = "endereco", ignore = true)
     RestauranteEntity toEntity(Restaurante restaurante);
 
     default Restaurante toDomain(RestauranteEntity restaurante) {
@@ -29,7 +29,8 @@ public interface RestauranteEntityMapper {
                 restaurante.getId(),
                 restaurante.getNome(),
                 restaurante.getCnpj(),
-                (Endereco) restaurante.getEndereco(),
+                null,
+                //restaurante.getEndereco(),
                 restaurante.getTipoCulinaria(),
                 restaurante.getInicioFuncionamento(),
                 restaurante.getFimFuncionamento(),
