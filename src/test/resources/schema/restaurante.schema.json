@@ -24,8 +24,6 @@
       "type": "string"
     },
     "endereco": {
-      "type": "array",
-      "items": {
         "rua": {
           "type": "string"
         },
@@ -47,7 +45,6 @@
         "cep": {
           "type": "string"
         }
-      }
     },
     "tipoCulinaria": {
       "type": "string"
@@ -62,7 +59,7 @@
       "type": "integer"
     },
     "mediaFeedback": {
-      "type": "double"
+      "type": "number"
     }
   }
 }

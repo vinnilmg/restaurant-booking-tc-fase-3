@@ -101,7 +101,7 @@ public class RestauranteControllerIT {
 
         @Test
         void shouldGetRestaurantByName() {
-            final var name = "Name";
+            final var name = "Restaurante Exemplo";
 
             given()
                     .filter(new AllureRestAssured())
@@ -116,46 +116,46 @@ public class RestauranteControllerIT {
 
         @Test
         void shouldGetRestaurantByRua() {
-            final var rua = "Rua numero 1";
+            final var street = "Praça da República";
 
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/street/{street}"))
+                    .get(ENDPOINT.concat("/street/{street}"), street)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
-                    .body("[0].endereco.rua", equalTo(rua))
+                    .body("[0].endereco.rua", equalTo(street))
                     .body(matchesJsonSchemaInClasspath(RESTAURANTE_LIST_SCHEMA));
         }
 
         @Test
         void shouldGetRestaurantByBairro() {
-            final var bairro = "Vila Bela";
+            final var district = "Vila Bela";
 
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/district/{district}"))
+                    .get(ENDPOINT.concat("/district/{district}"), district)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
-                    .body("[0].endereco.bairro", equalTo(bairro))
+                    .body("[0].endereco.bairro", equalTo(district))
                     .body(matchesJsonSchemaInClasspath(RESTAURANTE_LIST_SCHEMA));
         }
 
         @Test
         void shouldGetRestaurantByCidade() {
-            final var cidade = "São Paulo";
+            final var city = "São Paulo";
 
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/city/{city}"))
+                    .get(ENDPOINT.concat("/city/{city}"), city)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
-                    .body("[0].endereco.cidade", equalTo(cidade))
+                    .body("[0].endereco.cidade", equalTo(city))
                     .body(matchesJsonSchemaInClasspath(RESTAURANTE_LIST_SCHEMA));
         }
 
@@ -166,7 +166,7 @@ public class RestauranteControllerIT {
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/cuisine/{cuisine}"))
+                    .get(ENDPOINT.concat("/cuisine/{cuisine}"), tipoCulinaria)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
@@ -181,7 +181,7 @@ public class RestauranteControllerIT {
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("/feedback/{feedback}"))
+                    .get(ENDPOINT.concat("/feedback/{feedback}"), mediaFeedback)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("$", hasSize(greaterThan(0)))
