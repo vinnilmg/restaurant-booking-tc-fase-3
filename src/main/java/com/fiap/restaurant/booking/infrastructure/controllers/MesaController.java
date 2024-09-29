@@ -21,7 +21,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/mesa")
+@RequestMapping("/api/tables")
 public class MesaController {
 
     private final CreateMesaUseCase createMesaUseCase;

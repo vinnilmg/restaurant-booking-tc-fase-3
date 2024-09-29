@@ -115,7 +115,7 @@ class ReservaControllerTest {
                 .thenReturn(reserva);
 
         when(createReservaUseCase.execute(request.restauranteId(), request.mesaId(), reserva))
-                .thenAnswer(i -> i.getArgument(0));
+                .thenReturn(reserva);
 
         when(reservaMapper.toReservaResponse(reserva))
                 .thenReturn(ReservaResponseFixture.BY_DOMAIN(reserva));

@@ -39,16 +39,18 @@ public class RestauranteController {
     private final FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase;
     private final RestauranteMapper restauranteMapper;
 
-    public RestauranteController(CreateRestauranteUseCase createRestauranteUseCase,
-                                 GetAllRestaurantesUseCase getAllRestaurantesUseCase,
-                                 FindRestauranteByIdUseCase findRestauranteByIdUseCase,
-                                 FindRestauranteByNomeUseCase findRestauranteByNomeUseCase,
-                                 FindRestauranteByEnderecoRuaUseCase findRestauranteByEnderecoRuaUseCase,
-                                 FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase,
-                                 FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase,
-                                 FindRestauranteByTipoCulinariaUseCase findRestauranteByTipoCulinariaUseCase,
-                                 FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase,
-                                 RestauranteMapper restauranteMapper) {
+    public RestauranteController(
+            CreateRestauranteUseCase createRestauranteUseCase,
+            GetAllRestaurantesUseCase getAllRestaurantesUseCase,
+            FindRestauranteByIdUseCase findRestauranteByIdUseCase,
+            FindRestauranteByNomeUseCase findRestauranteByNomeUseCase,
+            FindRestauranteByEnderecoRuaUseCase findRestauranteByEnderecoRuaUseCase,
+            FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase,
+            FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase,
+            FindRestauranteByTipoCulinariaUseCase findRestauranteByTipoCulinariaUseCase,
+            FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase,
+            RestauranteMapper restauranteMapper
+    ) {
         this.createRestauranteUseCase = createRestauranteUseCase;
         this.getAllRestaurantesUseCase = getAllRestaurantesUseCase;
         this.findRestauranteByIdUseCase = findRestauranteByIdUseCase;
@@ -124,5 +126,4 @@ public class RestauranteController {
         return ResponseEntity.status(OK)
                 .body(restauranteMapper.toRestauranteResponse(restaurantes));
     }
-
 }

@@ -27,7 +27,7 @@ public class RestauranteDomainFixture {
                 id,
                 "testeRestaurante",
                 "64589238000187",
-                EnderecoDomainFixture.OTHER(),
+                EnderecoDomainFixture.NOVO(),
                 TipoCulinariaEnum.MINEIRA.name(),
                 LocalTime.now().minusHours(4),
                 LocalTime.now(),

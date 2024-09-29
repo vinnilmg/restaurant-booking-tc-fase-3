@@ -16,6 +16,7 @@ public class ReservaEntityFixture {
         result.setStatus(reserva.getStatus());
         result.setDataHoraReserva(reserva.getDataHoraReserva());
         result.setDataHoraCriacao(reserva.getDataHoraCriacao());
+        result.setMesa(MesaEntityFixture.BY_DOMAIN(reserva.getMesa()));
         result.setId(1L);
         return result;
     }
@@ -27,6 +28,7 @@ public class ReservaEntityFixture {
         result.setCpfCliente(DEFAULT_CPF);
         result.setDataHoraReserva(LocalDateTime.now().plusDays(3));
         result.setDataHoraCriacao(LocalDateTime.now());
+        result.setMesa(MesaEntityFixture.FULL());
         return result;
     }
 

@@ -7,8 +7,9 @@ import com.fiap.restaurant.booking.infrastructure.persistence.entities.MesaEntit
 public class MesaDomainFixture {
 
     public static MesaDomain DISPONIVEL() {
-        return MesaDomain.createInstanceRequestValidation(
+        return new MesaDomain(
                 1L,
+                RestauranteDomainFixture.FULL_WITH_ID(1L),
                 1,
                 StatusMesaEnum.DISPONIVEL
         );
