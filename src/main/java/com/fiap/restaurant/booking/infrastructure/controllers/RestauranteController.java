@@ -51,7 +51,8 @@ public class RestauranteController {
                                  FindRestauranteByEnderecoBairroUseCase findRestauranteByEnderecoBairroUseCase,
                                  FindRestauranteByEnderecoCidadeUseCase findRestauranteByEnderecoCidadeUseCase,
                                  FindRestauranteByTipoCulinariaUseCase findRestauranteByTipoCulinariaUseCase,
-                                 FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase, CreateEnderecoUseCase createEnderecoUseCase,
+                                 FindRestauranteByMediaFeedbackUseCase findRestauranteByMediaFeedbackUseCase,
+                                 CreateEnderecoUseCase createEnderecoUseCase,
                                  RestauranteMapper restauranteMapper, EnderecoMapper enderecoMapper) {
         this.createRestauranteUseCase = createRestauranteUseCase;
         this.getAllRestaurantesUseCase = getAllRestaurantesUseCase;

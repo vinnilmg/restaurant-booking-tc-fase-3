@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.utils;
 
 import com.fiap.restaurant.booking.core.domains.EnderecoDomain;
+import com.fiap.restaurant.booking.infrastructure.controllers.request.EnderecoRequest;
 
 
 public class DefaultParamsConstants {
@@ -26,7 +27,23 @@ public class DefaultParamsConstants {
                     "Rio de Janeiro",
                     "RJ",
                     " 20520090");
-    public static final String DEFAULT_TIME = "08:00";
+
+    public static final EnderecoRequest DEFAULT_ENDERECO_REQUEST =
+            new EnderecoRequest(
+                    "Rua Cristiano Olsen",
+                    "22",
+                    null,
+                    "Jardim Sumaré",
+                    "Araçatuba",
+                    "SP",
+                    "16015244"
+            );
+
+    public static final String DEFAULT_INICIO_FUNCIONAMENTO = "11:00";
+    public static final String DEFAULT_FIM_FUNCIONAMENTO = "21:00";
+    public static final Integer DEFAULT_CAPACIDADE = 100;
+    public static final Double DEFAULT_MEDIA_FEEDBACK = 5.0;
+
     public static final String JSON_PATH_ID = "$.id";
     public static final String JSON_PATH_CPF = "$.cpfCliente";
     public static final String JSON_PATH_STATUS = "$.status";

@@ -124,7 +124,7 @@ public class RestauranteDomainTest {
                 DEFAULT_CNPJ,
                 DEFAULT_ENDERECO_DOMAIN,
                 DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
+                DEFAULT_INICIO_FUNCIONAMENTO,
                 null,
                 null,
                 null))
@@ -170,8 +170,8 @@ public class RestauranteDomainTest {
         final var cnpj = DEFAULT_CNPJ;
         final var endereco = DEFAULT_ENDERECO_DOMAIN;
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = DEFAULT_TIME;
-        final var fimFuncionamento = DEFAULT_TIME;
+        final var inicioFuncionameto = DEFAULT_INICIO_FUNCIONAMENTO;
+        final var fimFuncionamento = DEFAULT_FIM_FUNCIONAMENTO;
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 

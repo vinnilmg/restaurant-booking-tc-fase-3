@@ -1,10 +1,10 @@
 package com.fiap.restaurant.booking.core.usecases.restaurante;
 
 import com.fiap.restaurant.booking.core.domains.Restaurante;
-import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,15 +35,7 @@ public class FindRestauranteByEnderecoCidadeUseCaseTest {
     @Test
     void shouldFindRestaurantByEnderecoCidade() {
         final var cidade = DEFAULT_ENDERECO_DOMAIN.getCidade();
-        final var restaurant = new RestauranteDomain(
-                DEFAULT_NOME,
-                DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
-                DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
-                DEFAULT_TIME,
-                50,
-                5.0);
+        final var restaurant = RestauranteDomainFixture.NOVO();
 
         final List<Restaurante> expected = List.of(restaurant);
 

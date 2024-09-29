@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "nome",
+      "cnpj",
+      "endereco",
+      "tipoCulinaria",
+      "inicioFuncionamento",
+      "fimFuncionamento",
+      "capacidade",
+      "mediaFeedback"
+    ],
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "nome": {
+        "type": "string"
+      },
+      "cnpj": {
+        "type": "string"
+      },
+      "endereco": {
+        "type": "array",
+        "items": {
+          "rua": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "complemento": {
+            "type": "string"
+          },
+          "bairro": {
+            "type": "string"
+          },
+          "cidade": {
+            "type": "string"
+          },
+          "estado": {
+            "type": "string"
+          },
+          "cep": {
+            "type": "string"
+          }
+        }
+      },
+      "tipoCulinaria": {
+        "type": "string"
+      },
+      "inicioFuncionamento": {
+        "type": "string"
+      },
+      "fimFuncionamento": {
+        "type": "string"
+      },
+      "capacidade": {
+        "type": "integer"
+      },
+      "mediaFeedback": {
+        "type": "double"
+      }
+    }
+    }
+}
