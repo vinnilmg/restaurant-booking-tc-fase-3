@@ -38,8 +38,8 @@ class GetAllFeedBackUseCaseTest {
     @Test
     void shouldGetAllFeedbacks() {
         final List<FeedBack> feedBackDomainsList = List.of(
-                InformationsFeedbackConstants.buildFeedBackTest(1L, 2L, 1),
-                InformationsFeedbackConstants.buildFeedBackTest(2L, 2L, 1)
+                InformationsFeedbackConstants.buildFeedBackTest(1L, 1),
+                InformationsFeedbackConstants.buildFeedBackTest(2L, 1)
         );
 
         when(feedBackGateway.findAll()).thenReturn(feedBackDomainsList);

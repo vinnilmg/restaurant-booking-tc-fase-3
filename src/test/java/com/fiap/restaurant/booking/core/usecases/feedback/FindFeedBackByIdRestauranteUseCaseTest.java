@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.utils.FeedBackValidationsMessages;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,8 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Optional;
+import java.util.List;
 
+import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
@@ -43,7 +45,7 @@ class FindFeedBackByIdRestauranteUseCaseTest {
         assertThatThrownBy(() ->
                 findFeedBackByIdRestauranteUseCase.execute(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessage(InformationsFeedbackConstants.getMessageIdRestauranteNotFound(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID)
+                .hasMessage(FeedBackValidationsMessages.getMessageIdRestauranteNotFound(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID)
                         , InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID);
 
         verify(feedBackGateway, times(1)).findByIdRestaurante(any());
@@ -53,26 +55,28 @@ class FindFeedBackByIdRestauranteUseCaseTest {
     void shouldThrowValidationExceptionWhenIdIsNull() {
         assertThatThrownBy(() -> findFeedBackByIdRestauranteUseCase.execute(null))
                 .isInstanceOf(ValidationException.class)
-                .hasMessage(InformationsFeedbackConstants.MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL);
+                .hasMessage(FeedBackValidationsMessages.MESSAGE_WHEN_ID_RESTAURANTE_IS_NULL);
 
         verify(feedBackGateway, never()).findByIdRestaurante(any());
     }
 
     @Test
     void shouldReturnFeedbackByIdRestaurante() {
-        Long idRestaurante = 2L;
 
-        Optional<FeedBack> feedbackDomain = Optional.of(InformationsFeedbackConstants
-                .buildFeedBackTest(InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID, idRestaurante, Integer.valueOf(1))
-        );
+        List<FeedBack> feedbackList = List.of(InformationsFeedbackConstants.buildFeedBackTest(
+                DEFAULT_FEEDBACK_ID,
+                Integer.valueOf(1)
+        ));
 
-        when(feedBackGateway.findByIdRestaurante(idRestaurante)).thenReturn(feedbackDomain);
+        Long idRestaurante = feedbackList.get(0).getId();
+
+        when(feedBackGateway.findByIdRestaurante(idRestaurante)).thenReturn(feedbackList);
 
         final var result = findFeedBackByIdRestauranteUseCase.execute(idRestaurante);
 
         assertThat(result)
                 .isNotNull()
-                .isEqualTo(feedbackDomain.get());
+                .isEqualTo(feedbackList);
 
         verify(feedBackGateway, times(1)).findByIdRestaurante(any());
     }
