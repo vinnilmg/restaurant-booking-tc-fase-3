@@ -17,7 +17,8 @@ public class ReservaDomainFixture {
                 DEFAULT_CPF,
                 StatusReservaEnum.SOLICITADA.name(),
                 LocalDateTime.now().plusDays(5),
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                MesaDomainFixture.DISPONIVEL()
         );
     }
 
@@ -27,7 +28,8 @@ public class ReservaDomainFixture {
                 DEFAULT_CPF,
                 StatusReservaEnum.CANCELADA.name(),
                 LocalDateTime.now().plusDays(5),
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                MesaDomainFixture.DISPONIVEL()
         );
     }
 
@@ -37,7 +39,8 @@ public class ReservaDomainFixture {
                 DEFAULT_CPF,
                 StatusReservaEnum.CONFIRMADA.name(),
                 LocalDateTime.now().plusDays(5),
-                LocalDateTime.now()
+                LocalDateTime.now(),
+                MesaDomainFixture.DISPONIVEL()
         );
     }
 
@@ -47,7 +50,8 @@ public class ReservaDomainFixture {
                 entity.getCpfCliente(),
                 entity.getStatus(),
                 entity.getDataHoraReserva(),
-                entity.getDataHoraCriacao()
+                entity.getDataHoraCriacao(),
+                MesaDomainFixture.BY_ENTITY(entity.getMesa())
         );
     }
 }

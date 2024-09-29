@@ -1,12 +1,12 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-import static com.fiap.restaurant.booking.utils.InformationsRestauranteConstants.buildRestauranteTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,7 +17,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     null,
-                    buildRestauranteTest(),
+                    RestauranteDomainFixture.buildRestauranteTest(),
                     "test",
                     null,
                     "test",
@@ -30,7 +30,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    buildRestauranteTest(),
+                    RestauranteDomainFixture.buildRestauranteTest(),
                     null,
                     1,
                     "test",
@@ -43,7 +43,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    buildRestauranteTest(),
+                    RestauranteDomainFixture.buildRestauranteTest(),
                     "test",
                     0,
                     "test",
@@ -56,7 +56,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    buildRestauranteTest(),
+                    RestauranteDomainFixture.buildRestauranteTest(),
                     "test",
                     6,
                     "test",
@@ -73,7 +73,14 @@ public class FeedbackDomainTest {
         String comment = "Great service!";
 
         Assertions.assertThrows(ValidationException.class, () -> {
-            new FeedBackDomain(id, buildRestauranteTest(), clientName, rating, comment, LocalDateTime.now());
+            new FeedBackDomain(
+                    id,
+                    RestauranteDomainFixture.buildRestauranteTest(),
+                    clientName,
+                    rating,
+                    comment,
+                    LocalDateTime.now()
+            );
         });
     }
 
@@ -86,7 +93,7 @@ public class FeedbackDomainTest {
 
         FeedBackDomain feedback = new FeedBackDomain(
                 id,
-                buildRestauranteTest(),
+                RestauranteDomainFixture.buildRestauranteTest(),
                 clientName,
                 rating,
                 comment,
@@ -99,7 +106,6 @@ public class FeedbackDomainTest {
         assertEquals(rating, feedback.getAvaliacao());
         assertEquals(comment, feedback.getComentario());
     }
-
 
 
 }

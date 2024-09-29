@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
+import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +55,7 @@ public class FindRestauranteByCnpjUseCaseTest {
         final var restaurante = new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 DEFAULT_TIPO_CULINARIA,
                 DEFAULT_TIME,
                 DEFAULT_TIME,

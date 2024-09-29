@@ -11,8 +11,8 @@ public class ReservaRequestFixture {
 
     public static ReservaRequest FULL() {
         return new ReservaRequest(
-                1,
-                1,
+                1L,
+                1L,
                 DEFAULT_CPF,
                 toDefaultFormat(LocalDateTime.now().plusDays(5))
         );

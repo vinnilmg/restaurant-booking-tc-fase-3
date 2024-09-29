@@ -7,6 +7,7 @@ import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.FeedBackRequest;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.FeedBackEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,7 +18,7 @@ public class InformationsFeedbackConstants {
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
-                InformationsRestauranteConstants.buildRestauranteTest(),
+                RestauranteDomainFixture.buildRestauranteTest(),
                 "Cliente Teste",
                 avaliacao,
                 "Comentário aleatório",
@@ -30,7 +31,7 @@ public class InformationsFeedbackConstants {
     public static FeedBackEntity buildFeedBackTestEntity() {
         final var result = new FeedBackEntity();
         result.setId(null);
-        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(InformationsRestauranteConstants.buildRestauranteTest()));
+        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(RestauranteDomainFixture.buildRestauranteTest()));
         result.setNomeCliente("teste");
         result.setAvaliacao(1);
         result.setComentario("teste");

@@ -36,6 +36,7 @@ public class ReservaEntityFixture {
         result.setCpfCliente(DEFAULT_CPF);
         result.setDataHoraReserva(LocalDateTime.now().plusDays(3));
         result.setDataHoraCriacao(LocalDateTime.now());
+        result.setMesa(MesaEntityFixture.FULL());
         return result;
     }
 }

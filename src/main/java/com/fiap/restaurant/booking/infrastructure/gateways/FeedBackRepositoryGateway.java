@@ -11,16 +11,13 @@ import java.util.Optional;
 
 @Component
 public class FeedBackRepositoryGateway implements FeedBackGateway {
-
     private final FeedBackRepository feedBackRepository;
-
     private final FeedBackEntityMapper feedBackEntityMapper;
 
     public FeedBackRepositoryGateway(FeedBackRepository feedBackRepository, FeedBackEntityMapper feedBackEntityMapper) {
         this.feedBackRepository = feedBackRepository;
         this.feedBackEntityMapper = feedBackEntityMapper;
     }
-
 
     @Override
     public FeedBack create(FeedBack feedBack) {

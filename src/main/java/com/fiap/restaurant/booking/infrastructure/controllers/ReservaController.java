@@ -70,9 +70,14 @@ public class ReservaController {
 
     @PostMapping
     public ResponseEntity<ReservaResponse> createBooking(@RequestBody final ReservaRequest request) {
-        final var reserva = createReservaUseCase.execute(reservaMapper.toReserva(request));
+        final var reserva = reservaMapper.toReserva(request);
+        final var createdReserva = createReservaUseCase.execute(
+                request.restauranteId(),
+                request.mesaId(),
+                reserva
+        );
         return ResponseEntity.status(CREATED)
-                .body(reservaMapper.toReservaResponse(reserva));
+                .body(reservaMapper.toReservaResponse(createdReserva));
     }
 
     @GetMapping

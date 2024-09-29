@@ -114,7 +114,7 @@ class ReservaControllerTest {
         when(reservaMapper.toReserva(request))
                 .thenReturn(reserva);
 
-        when(createReservaUseCase.execute(reserva))
+        when(createReservaUseCase.execute(request.restauranteId(), request.mesaId(), reserva))
                 .thenAnswer(i -> i.getArgument(0));
 
         when(reservaMapper.toReservaResponse(reserva))
@@ -131,7 +131,7 @@ class ReservaControllerTest {
                 .andExpect(jsonPath(JSON_PATH_DATA_HORA_CRIACAO).value(reserva.getDataHoraCriacaoFormatted()));
 
         verify(reservaMapper).toReserva(request);
-        verify(createReservaUseCase).execute(reserva);
+        verify(createReservaUseCase).execute(request.restauranteId(), request.mesaId(), reserva);
         verify(reservaMapper).toReservaResponse(reserva);
     }
 

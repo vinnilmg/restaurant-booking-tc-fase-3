@@ -1,6 +1,5 @@
 package com.fiap.restaurant.booking.infrastructure.persistence.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,8 +33,7 @@ public class RestauranteEntity {
     @NotNull
     private String cnpj;
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private EnderecoEntity endereco;
 

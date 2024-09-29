@@ -3,7 +3,7 @@ package com.fiap.restaurant.booking.core.domains;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 
-import java.util.Objects;
+import static java.util.Objects.isNull;
 
 public class MesaDomain implements Mesa {
     private Long id;
@@ -11,24 +11,11 @@ public class MesaDomain implements Mesa {
     private Restaurante restaurante;
     private StatusMesaEnum status;
 
-    public MesaDomain(final Long id, final Restaurante idDoRestaurante, final Integer numeroDaMesa, StatusMesaEnum status) {
+    public MesaDomain(final Long id, final Restaurante restaurante, final Integer numeroDaMesa, StatusMesaEnum status) {
         validationToCreateInstance(id, numeroDaMesa, status);
         this.id = id;
         this.numeroDaMesa = numeroDaMesa;
-        this.restaurante = idDoRestaurante;
-        this.status = status;
-    }
-
-    public MesaDomain(final Integer numeroDaMesa, final Restaurante idDoRestaurante, StatusMesaEnum status) {
-        this.numeroDaMesa = numeroDaMesa;
-        this.restaurante = idDoRestaurante;
-        this.status = status;
-    }
-
-    public MesaDomain(Long id, Integer numeroDaMesa, Restaurante idDoRestaurante, StatusMesaEnum status) {
-        this.id = id;
-        this.numeroDaMesa = numeroDaMesa;
-        this.restaurante = idDoRestaurante;
+        this.restaurante = restaurante;
         this.status = status;
     }
 
@@ -74,16 +61,16 @@ public class MesaDomain implements Mesa {
     private void validationToCreateInstance(Long id, Integer numeroDaMesa, StatusMesaEnum status) {
         if (numeroDaMesa <= 0 || numeroDaMesa > 100)
             throw ValidationException.of("numeroDaMesa", "Numero da mesa deve ser entre 1 e 100");
-        if (Objects.isNull(status) || status.equals(""))
+        if (isNull(status) || status.equals(""))
             throw ValidationException.of("Status", "Status deve ser valido");
     }
 
     private static void validationFromRequest(Long idRestaurante, Integer numeroDaMesa, StatusMesaEnum status) {
-        if (Objects.isNull(status))
+        if (isNull(status))
             throw ValidationException.of("Status invalido", "Status não pode ser nulo");
         if (numeroDaMesa <= 0 || numeroDaMesa > 100)
             throw ValidationException.of("Mesa invalida", "Numero da mesa deve ser entre 1 e 100");
-        if (Objects.isNull(idRestaurante))
+        if (isNull(idRestaurante))
             throw ValidationException.of("Id do restaurante ausente", "Deve-se informar o Id do restaurante");
         if (idRestaurante < 1)
             throw ValidationException.of("Id do restaurante inválido", "id restaurante deve ser maior que zero");

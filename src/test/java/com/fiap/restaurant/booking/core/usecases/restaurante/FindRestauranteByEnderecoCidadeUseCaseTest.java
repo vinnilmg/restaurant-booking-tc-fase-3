@@ -5,17 +5,23 @@ import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByEnderecoCidadeUseCaseImpl;
+import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIME;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-public class FindRestauranteByEnderecoCidadeUseCaseTest {
+class FindRestauranteByEnderecoCidadeUseCaseTest {
     private FindRestauranteByEnderecoCidadeUseCaseImpl findRestauranteByEnderecoCidadeUseCase;
     private RestauranteGateway restauranteGateway;
 
@@ -34,11 +40,11 @@ public class FindRestauranteByEnderecoCidadeUseCaseTest {
 
     @Test
     void shouldFindRestaurantByEnderecoCidade() {
-        final var cidade = DEFAULT_ENDERECO_DOMAIN.getCidade();
+        final var cidade = EnderecoDomainFixture.OTHER().getCidade();
         final var restaurant = new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 DEFAULT_TIPO_CULINARIA,
                 DEFAULT_TIME,
                 DEFAULT_TIME,
