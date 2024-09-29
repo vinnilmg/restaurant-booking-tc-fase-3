@@ -35,7 +35,7 @@ public class MesaRepositoryGateway implements MesaGateway {
 
     @Override
     public List<MesaDomain> findByStatus(StatusMesaEnum status) {
-        return List.of();
+        return mesaEntityMapper.toDomains(mesaRepository.findByStatus(String.valueOf(status)));
     }
 
     @Override

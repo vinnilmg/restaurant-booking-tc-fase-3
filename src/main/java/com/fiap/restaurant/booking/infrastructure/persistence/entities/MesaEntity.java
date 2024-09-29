@@ -17,14 +17,14 @@ import lombok.Setter;
 public class MesaEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int numeroDaMesa;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo")
-    private StatusMesaEnum status;
+    private String status;
     @ManyToOne
     private RestauranteEntity restaurante;
 }

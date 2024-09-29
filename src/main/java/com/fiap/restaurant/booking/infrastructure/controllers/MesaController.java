@@ -4,7 +4,6 @@ import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByStatusUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.MesaMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.MesaRequest;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MesaResponse;
@@ -13,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -46,14 +46,13 @@ public class MesaController {
     }
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<List<MesaResponse>> getAllMesasFromStatus( @PathVariable StatusMesaEnum status) {
-//        var statusEnum = mesaMapper.toMesaDomain(status);
-//        final var response = mesaMapper.toMesaResponse(findMesaByStatusUseCase.execute(status));
-//        return ResponseEntity.ok(response);
-        var mesas = findMesaByStatusUseCase.execute(status);
+    public ResponseEntity<List<MesaResponse>> getAllMesasFromStatus( @PathVariable String status) {
+        StatusMesaEnum statusMesaEnum = StatusMesaEnum.valueOf(status.toUpperCase());
+        var mesasComStatus = findMesaByStatusUseCase.execute(statusMesaEnum);
+
         // Mapeia o resultado para a resposta
-        var response = mesaMapper.toMesaResponse(mesas);
-        return ResponseEntity.status(201).body(response);
+        var response = mesaMapper.toMesaResponse(mesasComStatus);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/disponibilidade")
