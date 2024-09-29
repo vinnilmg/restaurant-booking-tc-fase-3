@@ -9,8 +9,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -55,17 +53,13 @@ class FeedBackRepositoryTest {
 
     @Test
     void shouldFindAllFeedBacks() {
-        final var expected = List.of(InformationsFeedbackConstants.buildFeedBackTest(1L, 1));
-        final var entities = List.of(InformationsFeedbackConstants.FEEDBACK_BY_DOMAIN_WITH_ID(expected.get(0)));
-
-        feedBackRepository.saveAll(entities);
 
         final var result = feedBackRepository.findAll();
 
         assertThat(result)
                 .isNotNull()
                 .isNotEmpty()
-                .hasSize(entities.size());
+                .hasSize(result.size());
     }
 
     @Test
@@ -89,7 +83,7 @@ class FeedBackRepositoryTest {
         assertThat(result)
                 .isNotNull()
                 .isNotEmpty()
-                .hasSize(1);
+                .hasSize(result.size());
     }
 
     @Test

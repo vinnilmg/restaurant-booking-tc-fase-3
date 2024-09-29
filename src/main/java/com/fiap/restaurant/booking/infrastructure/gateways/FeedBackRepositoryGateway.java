@@ -50,9 +50,8 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     }
 
     @Override
-    public Optional<FeedBack> findByIdRestaurante(Long id) {
-        return feedBackRepository.findByRestauranteId(id)
-                .map(feedBackEntityMapper::toDomain);
+    public List<FeedBack> findByIdRestaurante(Long id) {
+        return feedBackEntityMapper.toDomains(feedBackRepository.findByRestauranteId(id));
     }
 
     @Override

@@ -20,3 +20,5 @@ VALUES
 
 INSERT INTO feedback (id, restaurante_id, nome_cliente, avaliacao, comentario, data_hora_criacao)
 VALUES (1, 1, 'John Doe', 5, 'Excelente serviço!', '2024-09-28T12:34:56');
+INSERT INTO feedback (id, restaurante_id, nome_cliente, avaliacao, comentario, data_hora_criacao)
+VALUES (2, 1, 'John Doe', 5, 'Excelente serviço!', '2024-09-28T12:34:56');

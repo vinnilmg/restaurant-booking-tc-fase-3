@@ -117,7 +117,7 @@ public class FeedBackControllerTest {
 
         Long id = 1L;
 
-        when(findFeedBackByIdRestauranteUseCase.execute(id)).thenReturn(any(FeedBack.class));
+        when(findFeedBackByIdRestauranteUseCase.execute(id)).thenReturn(anyList());
 
         mockMvc.perform(
                 get(FeedBackControllerRouters.ROUTE_CONTROLLER_FIND_BY_RESTAURANTE_ID, id)

@@ -60,7 +60,7 @@ public class FeedBackController {
     @PostMapping
     public ResponseEntity<FeedBackResponse> createFeedback(@RequestBody final FeedBackRequest feedBackRequest) {
 
-        var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest,findRestauranteByIdUseCase.execute(feedBackRequest.restauranteId()));
+        var feedbackDomain = feedBackMapper.toFeedBackDomain(feedBackRequest, findRestauranteByIdUseCase.execute(feedBackRequest.restauranteId()));
 
         final var response = feedBackMapper.toFeedbackResponse(createFeedBackUseCase.execute(feedbackDomain));
 
@@ -78,8 +78,12 @@ public class FeedBackController {
     }
 
     @GetMapping("/restaurante/{idRestaurante}")
-    public ResponseEntity<FeedBackResponse> getFeedbacksByIdRestaurante(@PathVariable final Long idRestaurante) {
-        final var response = feedBackMapper.toFeedbackResponse(findFeedBackByIdRestauranteUseCase.execute(idRestaurante));
+    public ResponseEntity<List<FeedBackResponse>> getFeedbacksByIdRestaurante(@PathVariable final Long idRestaurante) {
+        final var response = findFeedBackByIdRestauranteUseCase.execute(idRestaurante)
+                .stream()
+                .map(feedBackMapper::toFeedbackResponse)
+                .toList();
+
         return ResponseEntity.status(OK).body(response);
     }
 

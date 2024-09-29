@@ -9,11 +9,6 @@ Funcionalidade: Feedback
     Entao deve criar o feedback com sucesso
     E apresentar o feedback
 
-  @smoke @high
-  Cenario: Buscar Todos os Feedbacks
-    Dado que existam feedbacks
-    Quando efetuar a busca de todos os feedbacks
-    Entao deve apresentar todos os feedbacks
 
   Cenario: Buscar Feedbacks pelo Nome do Cliente
     Dado que existam feedbacks
@@ -25,7 +20,15 @@ Funcionalidade: Feedback
     Quando efetuar a busca de feedbacks pelo id do restaurante
     Entao deve apresentar os feedbacks do restaurante solicitado
 
-  Cenario: Deletar um Feedback
-    Dado que desejo deletar um feedback
+
+  @smoke @high
+  Cenario: Buscar Todos os Feedbacks
+    Dado que existam feedbacks
+    Quando efetuar a busca de todos os feedbacks
+    Entao deve apresentar todos os feedbacks
+
+  Cenário: Deletar um feedback existente
+    Dado que existam feedbacks
+    E e desejo deletar um feedback
     Quando o feedback existir
-    Entao deve deletar o feedback com sucesso
+    Então deve deletar o feedback com sucesso
