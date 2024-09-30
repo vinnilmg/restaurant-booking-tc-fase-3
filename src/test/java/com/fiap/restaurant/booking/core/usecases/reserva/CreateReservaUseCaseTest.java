@@ -65,8 +65,51 @@ class CreateReservaUseCaseTest {
                 .isNotNull()
                 .isEqualTo(reserva);
 
+        verify(findRestauranteByIdUseCase).execute(restauranteId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verify(findReservaByCpfUseCase).execute(reserva.getCpf());
         verify(reservaGateway).create(reserva);
+    }
+
+    @Test
+    void shouldThrowIllegalArgumentExceptionWhenCreateReservaWithDifferentRestaurantFoundById() {
+        final var reserva = ReservaDomainFixture.SOLICITADA();
+        final var restauranteId = 1L;
+        final var mesaId = 1L;
+
+        when(findRestauranteByIdUseCase.execute(restauranteId))
+                .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(2L));
+
+        assertThatThrownBy(() -> createReservaUseCase.execute(restauranteId, mesaId, reserva))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Different restaurant found");
+
+        verify(findRestauranteByIdUseCase).execute(restauranteId);
+        verifyNoInteractions(findMesaByIdUseCase);
+        verifyNoInteractions(findReservaByCpfUseCase);
+        verifyNoInteractions(reservaGateway);
+    }
+
+    @Test
+    void shouldThrowIllegalArgumentExceptionWhenCreateReservaWithDifferentTableFoundById() {
+        final var reserva = ReservaDomainFixture.SOLICITADA();
+        final var restauranteId = 1L;
+        final var mesaId = 1L;
+
+        when(findRestauranteByIdUseCase.execute(restauranteId))
+                .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
+
+        when(findMesaByIdUseCase.execute(mesaId))
+                .thenReturn(MesaDomainFixture.FULL_WITH_IDS(2L, restauranteId));
+
+        assertThatThrownBy(() -> createReservaUseCase.execute(restauranteId, mesaId, reserva))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Different table found");
+
+        verify(findRestauranteByIdUseCase).execute(restauranteId);
+        verify(findMesaByIdUseCase).execute(mesaId);
+        verifyNoInteractions(findReservaByCpfUseCase);
+        verifyNoInteractions(reservaGateway);
     }
 
     @Test
@@ -88,6 +131,33 @@ class CreateReservaUseCaseTest {
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("User already contains booking in progress");
 
+        verify(findRestauranteByIdUseCase).execute(restauranteId);
+        verify(findMesaByIdUseCase).execute(mesaId);
+        verify(findReservaByCpfUseCase).execute(reserva.getCpf());
+        verifyNoInteractions(reservaGateway);
+    }
+
+    @Test
+    void shouldThrowValidationExceptionWhenCreateReservaWithReservedTable() {
+        final var reserva = ReservaDomainFixture.SOLICITADA();
+        final var restauranteId = 1L;
+        final var mesaId = 1L;
+
+        when(findRestauranteByIdUseCase.execute(restauranteId))
+                .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
+
+        when(findMesaByIdUseCase.execute(mesaId))
+                .thenReturn(MesaDomainFixture.FULL_WITH_ID_AND_RESERVADA(mesaId, restauranteId));
+
+        when(findReservaByCpfUseCase.execute(reserva.getCpf()))
+                .thenReturn(List.of());
+
+        assertThatThrownBy(() -> createReservaUseCase.execute(restauranteId, mesaId, reserva))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Mesa is already reserved");
+
+        verify(findRestauranteByIdUseCase).execute(restauranteId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verify(findReservaByCpfUseCase).execute(reserva.getCpf());
         verifyNoInteractions(reservaGateway);
     }

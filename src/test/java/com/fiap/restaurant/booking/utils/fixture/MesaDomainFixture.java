@@ -24,6 +24,15 @@ public class MesaDomainFixture {
         );
     }
 
+    public static MesaDomain FULL_WITH_ID_AND_RESERVADA(final Long id, final Long resturanteId) {
+        return new MesaDomain(
+                id,
+                RestauranteDomainFixture.FULL_WITH_ID(resturanteId),
+                1,
+                StatusMesaEnum.RESERVADA
+        );
+    }
+
     public static MesaDomain BY_ENTITY(final MesaEntity entity) {
         return new MesaDomain(
                 entity.getId(),

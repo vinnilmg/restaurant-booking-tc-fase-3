@@ -37,8 +37,8 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
         }
 
         final var mesa = findMesaByIdUseCase.execute(mesaId);
-        if (!mesa.getId().equals(mesaId)) {
-            throw new IllegalArgumentException("Different mesa found");
+        if (!mesa.getId().equals(mesaId) || !mesa.getRestaurante().getId().equals(restauranteId)) {
+            throw new IllegalArgumentException("Different table found");
         }
 
         final var userBookings = findReservaByCpfUseCase.execute(reserva.getCpf());
