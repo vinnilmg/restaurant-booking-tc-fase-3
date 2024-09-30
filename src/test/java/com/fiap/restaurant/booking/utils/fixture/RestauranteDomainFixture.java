@@ -1,11 +1,19 @@
 package com.fiap.restaurant.booking.utils.fixture;
 
 import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
+import com.fiap.restaurant.booking.core.domains.enums.TipoCulinariaEnum;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.RestauranteEntity;
-import com.fiap.restaurant.booking.infrastructure.persistence.mappers.EnderecoEntityMapper;
 
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
-import static org.mapstruct.factory.Mappers.getMapper;
+import java.time.LocalTime;
+
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CAPACIDADE;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_ENDERECO_DOMAIN;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_FIM_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_INICIO_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_MEDIA_FEEDBACK;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 
 public class RestauranteDomainFixture {
     public static RestauranteDomain NOVO() {
@@ -22,19 +30,30 @@ public class RestauranteDomainFixture {
     }
 
     public static RestauranteDomain BY_ENTITY(final RestauranteEntity entity) {
-        final var enderecoDomain = getMapper(EnderecoEntityMapper.class)
-                .toDomain(entity.getEndereco());
-
         return new RestauranteDomain(
                 entity.getId(),
                 entity.getNome(),
                 entity.getCnpj(),
-                enderecoDomain,
+                EnderecoDomainFixture.BY_ENTITY(entity.getEndereco()),
                 entity.getTipoCulinaria(),
                 entity.getInicioFuncionamento(),
                 entity.getFimFuncionamento(),
                 entity.getCapacidade(),
                 entity.getMediaFeedback()
+        );
+    }
+
+    public static RestauranteDomain FULL_WITH_ID(final Long id) {
+        return new RestauranteDomain(
+                id,
+                "testeRestaurante",
+                "64589238000187",
+                EnderecoDomainFixture.NOVO(),
+                TipoCulinariaEnum.MINEIRA.name(),
+                LocalTime.now().minusHours(4),
+                LocalTime.now(),
+                4,
+                4.5
         );
     }
 }

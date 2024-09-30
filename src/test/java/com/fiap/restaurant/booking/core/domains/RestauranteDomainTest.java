@@ -8,8 +8,9 @@ import java.time.LocalTime;
 
 import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalTime;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_FIM_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_INICIO_FUNCIONAMENTO;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIME;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

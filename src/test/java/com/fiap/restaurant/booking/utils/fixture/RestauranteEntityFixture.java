@@ -7,7 +7,8 @@ import com.fiap.restaurant.booking.infrastructure.persistence.mappers.EnderecoEn
 
 import java.time.LocalTime;
 
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
 import static org.mapstruct.factory.Mappers.getMapper;
 
 public class RestauranteEntityFixture {
@@ -33,12 +34,10 @@ public class RestauranteEntityFixture {
         result.setId(1L);
         result.setNome(DEFAULT_NOME);
         result.setCnpj(DEFAULT_CNPJ);
-        final var endereco = getMapper(EnderecoEntityMapper.class)
-                .toEntity(DEFAULT_ENDERECO_DOMAIN);
-        result.setEndereco(endereco);
+        result.setEndereco(EnderecoEntityFixture.BY_DOMAIN(EnderecoDomainFixture.NOVO()));
         result.setTipoCulinaria(TipoCulinariaEnum.JAPONESA.name());
-        result.setInicioFuncionamento(LocalTime.of(10,0));
-        result.setFimFuncionamento(LocalTime.of(22,0));
+        result.setInicioFuncionamento(LocalTime.of(10, 0));
+        result.setFimFuncionamento(LocalTime.of(22, 0));
         result.setCapacidade(50);
         result.setMediaFeedback(5.0);
         return result;
@@ -48,14 +47,26 @@ public class RestauranteEntityFixture {
         final var result = new RestauranteEntity();
         result.setNome(DEFAULT_NOME);
         result.setCnpj(DEFAULT_CNPJ);
-        final var endereco = getMapper(EnderecoEntityMapper.class)
-                .toEntity(DEFAULT_ENDERECO_DOMAIN);
-        result.setEndereco(endereco);
+        result.setEndereco(EnderecoEntityFixture.BY_DOMAIN(EnderecoDomainFixture.NOVO()));
         result.setTipoCulinaria(TipoCulinariaEnum.JAPONESA.name());
-        result.setInicioFuncionamento(LocalTime.of(10,0));
-        result.setFimFuncionamento(LocalTime.of(22,0));
+        result.setInicioFuncionamento(LocalTime.of(10, 0));
+        result.setFimFuncionamento(LocalTime.of(22, 0));
         result.setCapacidade(50);
         result.setMediaFeedback(5.0);
         return result;
+    }
+
+    public static RestauranteEntity BY_DOMAIN(final Restaurante restaurante) {
+        final var entity = new RestauranteEntity();
+        entity.setId(restaurante.getId());
+        entity.setNome(restaurante.getNome());
+        entity.setCnpj(restaurante.getCnpj());
+        entity.setEndereco(EnderecoEntityFixture.BY_DOMAIN(restaurante.getEndereco()));
+        entity.setTipoCulinaria(restaurante.getTipoCulinaria());
+        entity.setCapacidade(restaurante.getCapacidade());
+        entity.setMediaFeedback(restaurante.getMediaFeedback());
+        entity.setInicioFuncionamento(restaurante.getInicioFuncionamento());
+        entity.setFimFuncionamento(restaurante.getFimFuncionamento());
+        return entity;
     }
 }

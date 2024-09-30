@@ -70,7 +70,6 @@ public class RestauranteController {
 
     @PostMapping
     public ResponseEntity<RestauranteResponse> createRestaurant(@RequestBody final RestauranteRequest request) {
-
         final var endereco = createEnderecoUseCase.execute(enderecoMapper.toEndereco(request.endereco()));
         final var restaurant = createRestauranteUseCase.execute(restauranteMapper.toRestaurante(request, endereco));
         return ResponseEntity

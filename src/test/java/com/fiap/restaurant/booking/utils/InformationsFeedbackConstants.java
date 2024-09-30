@@ -13,12 +13,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class InformationsFeedbackConstants {
-
     public static final Long DEFAULT_FEEDBACK_ID = 1L;
 
     public static FeedBackDomain buildFeedBackTest(Long idFeedback, Integer avaliacao) {
         return new FeedBackDomain(idFeedback,
-                RestauranteDomainFixture.buildRestauranteTest(),
+                RestauranteDomainFixture.NOVO(),
                 "Cliente Teste",
                 avaliacao,
                 "Comentário aleatório",
@@ -27,11 +26,10 @@ public class InformationsFeedbackConstants {
     }
 
 
-
     public static FeedBackEntity buildFeedBackTestEntity() {
         final var result = new FeedBackEntity();
         result.setId(null);
-        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(RestauranteDomainFixture.buildRestauranteTest()));
+        result.setRestaurante(buildRestauranteEntityFromRestauranteDomain(RestauranteDomainFixture.NOVO()));
         result.setNomeCliente("teste");
         result.setAvaliacao(1);
         result.setComentario("teste");

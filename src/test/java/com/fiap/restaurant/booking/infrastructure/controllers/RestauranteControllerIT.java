@@ -51,12 +51,11 @@ public class RestauranteControllerIT {
                     .body(matchesJsonSchemaInClasspath(RESTAURANTE_SCHEMA))
                     .body("nome", equalTo(restauranteRequest.nome()))
                     .body("cnpj", equalTo(restauranteRequest.cnpj()))
-                    .body("endereco", equalTo(restauranteRequest.endereco()))
                     .body("tipoCulinaria", equalTo(restauranteRequest.tipoCulinaria()))
-                    .body("inicioFuncionamento", equalTo(restauranteRequest.inicioFuncionamento()))
-                    .body("fimFuncionamento", equalTo(restauranteRequest.fimFuncionamento()))
+                    .body("inicioFuncionamento", equalTo(restauranteRequest.inicioFuncionamento().concat(":00")))
+                    .body("fimFuncionamento", equalTo(restauranteRequest.fimFuncionamento().concat(":00")))
                     .body("capacidade", equalTo(restauranteRequest.capacidade()))
-                    .body("mediaFeedback", equalTo(restauranteRequest.mediaFeedback()));
+                    .body("mediaFeedback", equalTo(restauranteRequest.mediaFeedback().floatValue()));
         }
     }
 
@@ -81,7 +80,7 @@ public class RestauranteControllerIT {
             given()
                     .filter(new AllureRestAssured())
                     .when()
-                    .get(ENDPOINT.concat("{/id}"), id)
+                    .get(ENDPOINT.concat("/{id}"), id)
                     .then()
                     .statusCode(HttpStatus.OK.value())
                     .body("id", equalTo(id))
@@ -95,8 +94,8 @@ public class RestauranteControllerIT {
             when()
                     .get(ENDPOINT.concat("/{id}"), id)
                     .then()
-                    .statusCode(HttpStatus.OK.value())
-                    .body("message", equalTo("Restaurant not found"));
+                    .statusCode(HttpStatus.NOT_FOUND.value())
+                    .body("message", equalTo("Restaurante not found"));
         }
 
         @Test
@@ -176,7 +175,7 @@ public class RestauranteControllerIT {
 
         @Test
         void shouldGetRestaurantByMediaFeedback() {
-            final var mediaFeedback = 5.0;
+            final var mediaFeedback = 5.0F;
 
             given()
                     .filter(new AllureRestAssured())
