@@ -17,7 +17,7 @@ public interface FeedBackMapper {
                 request.nomeCliente(),
                 request.avaliacao(),
                 request.comentario()
-                );
+        );
     }
 
     @Mapping(target = "restauranteId", expression = "java(feedBack.getRestaurante().getId())")

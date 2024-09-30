@@ -91,10 +91,10 @@ public class RestauranteStepDefinition {
 
     @Quando("efetuar a busca de um restaurante pelo nome dele")
     public void efetuar_a_busca_de_um_restaurante_pelo_nome_dele() {
-       request = RestauranteRequestFixture.FULL();
-       String nome = request.nome();
-       response = when()
-               .get(ENDPOINT.concat("/name/{name}"), nome);
+        request = RestauranteRequestFixture.FULL();
+        String nome = request.nome();
+        response = when()
+                .get(ENDPOINT.concat("/name/{name}"), nome);
     }
 
     @Quando("efetuar a busca de um restaurante pela rua dele")
@@ -136,9 +136,4 @@ public class RestauranteStepDefinition {
         response = when()
                 .get(ENDPOINT.concat("/cuisine/{cuisine}"), tipoCulinaria);
     }
-
-
-
-
-
 }

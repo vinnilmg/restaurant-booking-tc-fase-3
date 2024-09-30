@@ -17,10 +17,13 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.fiap.restaurant.booking.utils.FeedBackValidationsMessages.getMessageWhenNomeClienteFeedbackNotFound;
-import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.*;
+import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.DEFAULT_FEEDBACK_ID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class GetAllFeedBackByNomeClienteUseCaseTest {
 
@@ -48,7 +51,7 @@ class GetAllFeedBackByNomeClienteUseCaseTest {
                 .isInstanceOf(ValidationException.class)
                 .hasMessage(FeedBackValidationsMessages.MESSAGE_WHEN_NOME_CLIENTE_IS_EMPTY);
 
-        verify(feedBackGateway,never()).findAllByNomeCliente(anyString());
+        verify(feedBackGateway, never()).findAllByNomeCliente(anyString());
     }
 
     @Test

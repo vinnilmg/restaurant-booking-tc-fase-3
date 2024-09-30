@@ -1,6 +1,7 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
 import com.fiap.restaurant.booking.utils.fixture.RestauranteRequestFixture;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -10,13 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
-import io.qameta.allure.restassured.AllureRestAssured;
 
-import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.*;
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESTAURANTE_LIST_SCHEMA;
+import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.RESTAURANTE_SCHEMA;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
