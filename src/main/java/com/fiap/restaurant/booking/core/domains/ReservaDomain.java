@@ -16,19 +16,22 @@ public class ReservaDomain implements Reserva {
     private Long id;
     private LocalDateTime dataHoraCriacao;
     private StatusReservaEnum status;
+    private Mesa mesa;
 
     public ReservaDomain(
             final Long id,
             final String cpf,
             final String status,
             final LocalDateTime dataHoraReserva,
-            final LocalDateTime dataHoraCriacao
+            final LocalDateTime dataHoraCriacao,
+            final Mesa mesa
     ) {
         this.id = idValidation(id);
         this.cpf = cpfValidation(cpf);
         this.status = statusValidation(status);
         this.dataHoraReserva = dataHoraReserva;
         this.dataHoraCriacao = dataHoraCriacao;
+        this.mesa = mesa;
     }
 
     public ReservaDomain(
@@ -49,6 +52,11 @@ public class ReservaDomain implements Reserva {
     @Override
     public String getCpf() {
         return cpf;
+    }
+
+    @Override
+    public Mesa getMesa() {
+        return mesa;
     }
 
     @Override
@@ -94,6 +102,11 @@ public class ReservaDomain implements Reserva {
     @Override
     public boolean isConfirmed() {
         return status.equals(StatusReservaEnum.CONFIRMADA);
+    }
+
+    @Override
+    public void fillMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
     private static Long idValidation(final Long id) {

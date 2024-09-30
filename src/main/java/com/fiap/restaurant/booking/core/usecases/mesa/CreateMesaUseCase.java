@@ -1,10 +1,8 @@
 package com.fiap.restaurant.booking.core.usecases.mesa;
 
-import com.fiap.restaurant.booking.core.domains.MesaDomain;
-import com.fiap.restaurant.booking.core.domains.Restaurante;
+import com.fiap.restaurant.booking.core.domains.Mesa;
 
 @FunctionalInterface
 public interface CreateMesaUseCase {
-
-    MesaDomain execute(MesaDomain mesaDomain, Long idRestaurante);
+    Mesa execute(Mesa mesaDomain, Long idRestaurante);
 }

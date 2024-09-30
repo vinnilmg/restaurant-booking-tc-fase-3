@@ -15,7 +15,7 @@ public interface FeedBackGateway {
 
     Optional<FeedBack> findById(Long id);
 
-    Optional<FeedBack> findByIdRestaurante(Long id);
+    List<FeedBack> findByIdRestaurante(Long id);
 
     void delete(Long id);
 }

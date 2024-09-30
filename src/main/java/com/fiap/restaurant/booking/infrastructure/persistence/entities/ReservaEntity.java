@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 
@@ -40,5 +43,8 @@ public class ReservaEntity {
     @CreationTimestamp
     private LocalDateTime dataHoraCriacao;
 
-    // TODO: Id da mesa (nao implementado)
+    @NotNull
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private MesaEntity mesa;
 }

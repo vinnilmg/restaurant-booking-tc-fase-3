@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/feedback-list-response.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "restauranteId",
+      "nomeCliente",
+      "avaliacao",
+      "comentario",
+      "dataHoraCriacao"
+    ],
+    "properties": {
+      "id": {
+        "type": "integer",
+        "description": "The unique identifier for the feedback."
+      },
+      "restauranteId": {
+        "type": "integer",
+        "description": "The ID of the restaurant related to this feedback."
+      },
+      "nomeCliente": {
+        "type": "string",
+        "description": "The name of the customer providing the feedback."
+      },
+      "avaliacao": {
+        "type": "integer",
+        "description": "The rating provided by the customer, typically between 1 and 5."
+      },
+      "comentario": {
+        "type": "string",
+        "description": "Optional comment provided by the customer."
+      },
+      "dataHoraCriacao": {
+        "type": "string",
+        "description": "The date and time when the feedback was created."
+      }
+    }
+  }
+}

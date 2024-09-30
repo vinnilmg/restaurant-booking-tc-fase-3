@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -42,5 +43,8 @@ public class EnderecoEntity {
 
     @NotNull
     private String cep;
+
+    @OneToOne(mappedBy = "endereco")
+    private RestauranteEntity restaurante;
 
 }

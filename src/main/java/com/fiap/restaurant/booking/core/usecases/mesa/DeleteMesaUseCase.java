@@ -1,8 +1,7 @@
 package com.fiap.restaurant.booking.core.usecases.mesa;
 
-import com.fiap.restaurant.booking.core.domains.MesaDomain;
+import com.fiap.restaurant.booking.core.domains.Mesa;
 
 public interface DeleteMesaUseCase {
-
-    MesaDomain execute(Long id);
+    Mesa execute(Long id);
 }

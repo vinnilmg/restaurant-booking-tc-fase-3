@@ -11,10 +11,16 @@ public class ReservaRequestFixture {
 
     public static ReservaRequest FULL() {
         return new ReservaRequest(
-                1,
-                1,
+                1L,
+                1L,
                 DEFAULT_CPF,
-                toDefaultFormat(LocalDateTime.now().plusDays(5))
+                toDefaultFormat(LocalDateTime.of(
+                        2025,
+                        01,
+                        01,
+                        12,
+                        0)
+                )
         );
     }
 }

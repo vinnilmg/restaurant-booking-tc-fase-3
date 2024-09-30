@@ -9,11 +9,13 @@ import java.util.Optional;
 
 public interface MesaGateway {
 
-    MesaDomain create(MesaDomain mesa);
+    Mesa create(Mesa mesa);
 
-    Optional<MesaDomain> findById(Long id, Integer numeroMesa);
+    Optional<Mesa> findById(Long id);
 
-    List<MesaDomain> findByStatus(StatusMesaEnum status);
+    Optional<Mesa> findById(Long id, Integer numeroMesa);
+
+    List<Mesa> findByStatus(StatusMesaEnum status);
 
     void delete(Long id);
 }

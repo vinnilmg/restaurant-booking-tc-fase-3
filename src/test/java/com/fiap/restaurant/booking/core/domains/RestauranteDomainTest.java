@@ -1,12 +1,17 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalTime;
 
 import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalTime;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_FIM_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_INICIO_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -59,17 +64,17 @@ public class RestauranteDomainTest {
 
     @Test
     void shouldThrowValidationExceptionWhenEnderecoIsNull() {
-            assertThatThrownBy(() -> new RestauranteDomain(
-                    DEFAULT_NOME,
-                    DEFAULT_CNPJ,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null))
-                    .isInstanceOf(ValidationException.class)
-                    .hasMessage("Restaurante Endereco cannot be null");
+        assertThatThrownBy(() -> new RestauranteDomain(
+                DEFAULT_NOME,
+                DEFAULT_CNPJ,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null))
+                .isInstanceOf(ValidationException.class)
+                .hasMessage("Restaurante Endereco cannot be null");
     }
 
     @Test
@@ -77,7 +82,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 null,
                 null,
                 null,
@@ -92,7 +97,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 "whatever",
                 null,
                 null,
@@ -107,7 +112,7 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 DEFAULT_TIPO_CULINARIA,
                 null,
                 null,
@@ -122,9 +127,9 @@ public class RestauranteDomainTest {
         assertThatThrownBy(() -> new RestauranteDomain(
                 DEFAULT_NOME,
                 DEFAULT_CNPJ,
-                DEFAULT_ENDERECO_DOMAIN,
+                EnderecoDomainFixture.OTHER(),
                 DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
+                DEFAULT_INICIO_FUNCIONAMENTO,
                 null,
                 null,
                 null))
@@ -168,10 +173,10 @@ public class RestauranteDomainTest {
     void shouldConstructRestauranteDomain() {
         final var nome = DEFAULT_NOME;
         final var cnpj = DEFAULT_CNPJ;
-        final var endereco = DEFAULT_ENDERECO_DOMAIN;
+        final var endereco = EnderecoDomainFixture.OTHER();
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = DEFAULT_TIME;
-        final var fimFuncionamento = DEFAULT_TIME;
+        final var inicioFuncionameto = DEFAULT_INICIO_FUNCIONAMENTO;
+        final var fimFuncionamento = DEFAULT_FIM_FUNCIONAMENTO;
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 
@@ -219,10 +224,10 @@ public class RestauranteDomainTest {
         final var id = 1L;
         final var nome = DEFAULT_NOME;
         final var cnpj = DEFAULT_CNPJ;
-        final var endereco = DEFAULT_ENDERECO_DOMAIN;
+        final var endereco = EnderecoDomainFixture.OTHER();
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = LocalTime.of(11,0);
-        final var fimFuncionamento = LocalTime.of(20,0);
+        final var inicioFuncionameto = LocalTime.of(11, 0);
+        final var fimFuncionamento = LocalTime.of(20, 0);
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 

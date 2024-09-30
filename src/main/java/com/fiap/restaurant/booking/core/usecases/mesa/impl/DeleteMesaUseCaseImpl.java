@@ -4,11 +4,11 @@ import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.core.usecases.mesa.DeleteMesaUseCase;
 
-public class DeletemesausecaseImpl implements DeleteMesaUseCase {
+public class DeleteMesaUseCaseImpl implements DeleteMesaUseCase {
 
     private final MesaGateway mesaGateway;
 
-    public DeletemesausecaseImpl(MesaGateway mesaGateway) {
+    public DeleteMesaUseCaseImpl(MesaGateway mesaGateway) {
         this.mesaGateway = mesaGateway;
     }
 

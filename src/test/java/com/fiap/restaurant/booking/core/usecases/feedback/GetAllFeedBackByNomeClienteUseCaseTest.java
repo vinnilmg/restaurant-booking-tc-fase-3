@@ -5,6 +5,7 @@ import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.FeedBackGateway;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
+import com.fiap.restaurant.booking.utils.FeedBackValidationsMessages;
 import com.fiap.restaurant.booking.utils.InformationsFeedbackConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.Collections;
 import java.util.List;
 
+import static com.fiap.restaurant.booking.utils.FeedBackValidationsMessages.getMessageWhenNomeClienteFeedbackNotFound;
 import static com.fiap.restaurant.booking.utils.InformationsFeedbackConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -44,34 +46,33 @@ class GetAllFeedBackByNomeClienteUseCaseTest {
     void shouldThrowValidationExceptionWhenNomeClienteIsEmpty() {
         assertThatThrownBy(() -> getAllFeedBackByNomeClienteUseCase.execute(""))
                 .isInstanceOf(ValidationException.class)
-                .hasMessage(MESSAGE_WHEN_NOME_CLIENTE_IS_EMPTY);
+                .hasMessage(FeedBackValidationsMessages.MESSAGE_WHEN_NOME_CLIENTE_IS_EMPTY);
 
         verify(feedBackGateway,never()).findAllByNomeCliente(anyString());
     }
 
     @Test
     void shouldThrowNotFoundWhenNomeClienteNotFoundByListFeedback() {
-        when(feedBackGateway.findAllByNomeCliente(NOME_CLIENTE_EXAMPLE_TESTE)).thenReturn(Collections.emptyList());
+        when(feedBackGateway.findAllByNomeCliente(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE)).thenReturn(Collections.emptyList());
 
-        assertThatThrownBy(() -> getAllFeedBackByNomeClienteUseCase.execute(NOME_CLIENTE_EXAMPLE_TESTE))
+        assertThatThrownBy(() -> getAllFeedBackByNomeClienteUseCase.execute(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE))
                 .isInstanceOf(NotFoundException.class)
-                .hasMessage(getMessageWhenNomeClienteFeedbackNotFound(NOME_CLIENTE_EXAMPLE_TESTE));
+                .hasMessage(getMessageWhenNomeClienteFeedbackNotFound(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE));
 
-        verify(feedBackGateway).findAllByNomeCliente(NOME_CLIENTE_EXAMPLE_TESTE);
+        verify(feedBackGateway).findAllByNomeCliente(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE);
     }
 
     @Test
     void shouldReturnFeedBackWhenFindByNomeCliente() {
         FeedBack feedback = InformationsFeedbackConstants.buildFeedBackTest(
                 DEFAULT_FEEDBACK_ID,
-                DEFAULT_RESTAURANTE_ID,
                 Integer.valueOf(1)
         );
         var listExampleReturn = List.of(feedback);
 
-        when(feedBackGateway.findAllByNomeCliente(NOME_CLIENTE_EXAMPLE_TESTE)).thenReturn(listExampleReturn);
+        when(feedBackGateway.findAllByNomeCliente(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE)).thenReturn(listExampleReturn);
 
-        var result = getAllFeedBackByNomeClienteUseCase.execute(NOME_CLIENTE_EXAMPLE_TESTE);
+        var result = getAllFeedBackByNomeClienteUseCase.execute(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE);
 
         assertThat(result)
                 .isNotNull()
@@ -81,6 +82,6 @@ class GetAllFeedBackByNomeClienteUseCaseTest {
                     assertThat(feedbackReturned).isEqualTo(feedback);
                 });
 
-        verify(feedBackGateway).findAllByNomeCliente(NOME_CLIENTE_EXAMPLE_TESTE);
+        verify(feedBackGateway).findAllByNomeCliente(FeedBackValidationsMessages.NOME_CLIENTE_EXAMPLE_TESTE);
     }
 }

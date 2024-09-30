@@ -37,10 +37,12 @@ import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByN
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByRestauranteUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByStatusUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.impl.CreateMesaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByStatusUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByRestauranteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -86,8 +88,13 @@ import org.springframework.context.annotation.Configuration;
 public class BeansConfig {
 
     @Bean
-    public CreateReservaUseCase createReservaUseCase(ReservaGateway reservaGateway, FindReservaByCpfUseCase findReservaByCpfUseCase) {
-        return new CreateReservaUseCaseImpl(reservaGateway, findReservaByCpfUseCase);
+    public CreateReservaUseCase createReservaUseCase(
+            ReservaGateway reservaGateway,
+            FindRestauranteByIdUseCase findRestauranteByIdUseCase,
+            FindMesaByIdUseCase findMesaByIdUseCase,
+            FindReservaByCpfUseCase findReservaByCpfUseCase
+    ) {
+        return new CreateReservaUseCaseImpl(reservaGateway, findRestauranteByIdUseCase, findMesaByIdUseCase, findReservaByCpfUseCase);
     }
 
     @Bean
@@ -131,8 +138,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
-        return new CreateFeedBackUseCaseImpl(feedBackGateway, findRestauranteByIdUseCase);
+    public CreateFeedBackUseCase createFeedBackUseCase(FeedBackGateway feedBackGateway) {
+        return new CreateFeedBackUseCaseImpl(feedBackGateway);
     }
 
     @Bean
@@ -261,10 +268,14 @@ public class BeansConfig {
     }
 
     @Bean
-    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
-        return new FindMesaByIdUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
+    public FindMesaByRestauranteUseCase findMesaByRestauranteUseCase(MesaGateway mesaGateway, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new FindMesaByRestauranteUseCaseImpl(mesaGateway, findRestauranteByIdUseCase);
     }
 
+    @Bean
+    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway) {
+        return new FindMesaByIdUseCaseImpl(mesaGateway);
+    }
     @Bean
     public FindMesaByStatusUseCase findMesaByStatusUseCase(MesaGateway mesaGateway) {
         return new FindMesaByStatusUseCaseImpl(mesaGateway);

@@ -9,6 +9,8 @@ public interface Reserva {
 
     String getCpf();
 
+    Mesa getMesa();
+
     String getStatus();
 
     LocalDateTime getDataHoraReserva();
@@ -26,4 +28,6 @@ public interface Reserva {
     boolean isCanceled();
 
     boolean isConfirmed();
+
+    void fillMesa(Mesa mesa);
 }

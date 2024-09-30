@@ -15,12 +15,11 @@ import java.util.Optional;
 @Component
 @AllArgsConstructor
 public class MesaRepositoryGateway implements MesaGateway {
-
     private final MesaRepository mesaRepository;
     private final MesaEntityMapper mesaEntityMapper;
 
     @Override
-    public MesaDomain create(MesaDomain mesa) {
+    public Mesa create(final Mesa mesa) {
         return mesaEntityMapper.toDomain(
                 mesaRepository.save(mesaEntityMapper.toEntity(mesa)
                 )
@@ -28,13 +27,23 @@ public class MesaRepositoryGateway implements MesaGateway {
     }
 
     @Override
-    public Optional<MesaDomain> findById(Long id, Integer numeroMesa) {
+    public Optional<Mesa> findById(Long id) {
         return mesaRepository.findById(id)
                 .map(mesaEntityMapper::toDomain);
     }
 
     @Override
-    public List<MesaDomain> findByStatus(StatusMesaEnum status) {
+    public Optional<Mesa> findById(Long id, Integer numeroMesa) {
+        return Optional.empty();
+    }
+
+//    @Override
+//    public Optional<Mesa> findByIdRestauranteAndNumeroMesa(Long idRestaurante, Integer numeroMesa) {
+//        return Optional.empty();
+//    }
+
+    @Override
+    public List<Mesa> findByStatus(StatusMesaEnum status) {
         return mesaEntityMapper.toDomains(mesaRepository.findByStatus(String.valueOf(status)));
     }
 
