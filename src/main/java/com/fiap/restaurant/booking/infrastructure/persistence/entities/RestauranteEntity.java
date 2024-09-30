@@ -33,6 +33,7 @@ public class RestauranteEntity {
     @NotNull
     private String cnpj;
 
+    @NotNull
     @OneToOne
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private EnderecoEntity endereco;

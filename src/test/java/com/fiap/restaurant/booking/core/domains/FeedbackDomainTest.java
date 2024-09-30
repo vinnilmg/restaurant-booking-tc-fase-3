@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class FeedbackDomainTest {
+class FeedbackDomainTest {
 
     @Test
     void shouldThrowExceptionWhenRatingIsNull() {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     null,
-                    RestauranteDomainFixture.buildRestauranteTest(),
+                    RestauranteDomainFixture.NOVO(),
                     "test",
                     null,
                     "test",
@@ -30,7 +30,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    RestauranteDomainFixture.buildRestauranteTest(),
+                    RestauranteDomainFixture.NOVO(),
                     null,
                     1,
                     "test",
@@ -43,7 +43,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    RestauranteDomainFixture.buildRestauranteTest(),
+                    RestauranteDomainFixture.NOVO(),
                     "test",
                     0,
                     "test",
@@ -56,7 +56,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     Long.parseLong("1"),
-                    RestauranteDomainFixture.buildRestauranteTest(),
+                    RestauranteDomainFixture.NOVO(),
                     "test",
                     6,
                     "test",
@@ -75,7 +75,7 @@ public class FeedbackDomainTest {
         Assertions.assertThrows(ValidationException.class, () -> {
             new FeedBackDomain(
                     id,
-                    RestauranteDomainFixture.buildRestauranteTest(),
+                    RestauranteDomainFixture.NOVO(),
                     clientName,
                     rating,
                     comment,
@@ -93,7 +93,7 @@ public class FeedbackDomainTest {
 
         FeedBackDomain feedback = new FeedBackDomain(
                 id,
-                RestauranteDomainFixture.buildRestauranteTest(),
+                RestauranteDomainFixture.NOVO(),
                 clientName,
                 rating,
                 comment,
@@ -106,6 +106,4 @@ public class FeedbackDomainTest {
         assertEquals(rating, feedback.getAvaliacao());
         assertEquals(comment, feedback.getComentario());
     }
-
-
 }

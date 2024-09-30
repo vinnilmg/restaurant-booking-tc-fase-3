@@ -6,7 +6,28 @@ import com.fiap.restaurant.booking.infrastructure.persistence.entities.Restauran
 
 import java.time.LocalTime;
 
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CAPACIDADE;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_ENDERECO_DOMAIN;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_FIM_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_INICIO_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_MEDIA_FEEDBACK;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
+
 public class RestauranteDomainFixture {
+    public static RestauranteDomain NOVO() {
+        return new RestauranteDomain(
+                DEFAULT_NOME,
+                DEFAULT_CNPJ,
+                DEFAULT_ENDERECO_DOMAIN,
+                DEFAULT_TIPO_CULINARIA,
+                DEFAULT_INICIO_FUNCIONAMENTO,
+                DEFAULT_FIM_FUNCIONAMENTO,
+                DEFAULT_CAPACIDADE,
+                DEFAULT_MEDIA_FEEDBACK
+        );
+    }
 
     public static RestauranteDomain BY_ENTITY(final RestauranteEntity entity) {
         return new RestauranteDomain(
@@ -28,20 +49,6 @@ public class RestauranteDomainFixture {
                 "testeRestaurante",
                 "64589238000187",
                 EnderecoDomainFixture.NOVO(),
-                TipoCulinariaEnum.MINEIRA.name(),
-                LocalTime.now().minusHours(4),
-                LocalTime.now(),
-                4,
-                4.5
-        );
-    }
-
-    public static RestauranteDomain buildRestauranteTest() {
-        return new RestauranteDomain(
-                1L,
-                "testeRestaurante",
-                "64589238000187",
-                EnderecoDomainFixture.OTHER(),
                 TipoCulinariaEnum.MINEIRA.name(),
                 LocalTime.now().minusHours(4),
                 LocalTime.now(),

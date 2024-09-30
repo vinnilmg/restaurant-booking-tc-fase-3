@@ -5,7 +5,7 @@ import com.fiap.restaurant.booking.core.domains.Endereco;
 public record RestauranteRequest(
         String nome,
         String cnpj,
-        Endereco endereco,
+        EnderecoRequest endereco,
         String tipoCulinaria,
         String inicioFuncionamento,
         String fimFuncionamento,

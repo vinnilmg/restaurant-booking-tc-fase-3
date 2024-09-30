@@ -8,8 +8,9 @@ import java.time.LocalTime;
 
 import static com.fiap.restaurant.booking.utils.DateTimeUtils.toLocalTime;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_FIM_FUNCIONAMENTO;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_INICIO_FUNCIONAMENTO;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIME;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -128,7 +129,7 @@ public class RestauranteDomainTest {
                 DEFAULT_CNPJ,
                 EnderecoDomainFixture.OTHER(),
                 DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
+                DEFAULT_INICIO_FUNCIONAMENTO,
                 null,
                 null,
                 null))
@@ -174,8 +175,8 @@ public class RestauranteDomainTest {
         final var cnpj = DEFAULT_CNPJ;
         final var endereco = EnderecoDomainFixture.OTHER();
         final var tipoCulinaria = DEFAULT_TIPO_CULINARIA;
-        final var inicioFuncionameto = DEFAULT_TIME;
-        final var fimFuncionamento = DEFAULT_TIME;
+        final var inicioFuncionameto = DEFAULT_INICIO_FUNCIONAMENTO;
+        final var fimFuncionamento = DEFAULT_FIM_FUNCIONAMENTO;
         final var capacidade = 50;
         final var mediaFeedback = 5.0;
 

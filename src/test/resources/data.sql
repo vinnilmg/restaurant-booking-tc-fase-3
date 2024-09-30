@@ -1,11 +1,15 @@
 INSERT INTO endereco
     (RUA, NUMERO, COMPLEMENTO, BAIRRO, CIDADE, ESTADO, CEP)
-VALUES ('Rua numero 1', '52', 'ap 05', 'Vila Bela', 'Brusque', 'SP', '02998050');
+VALUES ('Rua numero 1', '52', 'ap 05', 'Vila Bela', 'Brusque', 'SP', '02998050'),
+       ('Praça da República', '130', 'B', 'República', 'São Paulo', 'SP', '01045001');
 
 INSERT INTO restaurante
-    (NOME, CNPJ, TIPO_CULINARIA, CAPACIDADE, MEDIA_FEEDBACK, INICIO_FUNCIONAMENTO, FIM_FUNCIONAMENTO)
+(NOME, CNPJ, ENDERECO_ID, TIPO_CULINARIA, INICIO_FUNCIONAMENTO,
+ FIM_FUNCIONAMENTO, CAPACIDADE, MEDIA_FEEDBACK)
 VALUES
-    ('Padaria do seu Zé', '20094036000199', 'BRASILEIRA', 40, 5.0, '08:00:00', '17:00:00');
+    ('Padaria do seu Zé', '20094036000199', 2, 'BRASILEIRA', '08:00:00', '17:00:00', 40, 5.0),
+    ('Restaurante Exemplo', '12345678000190', (select max(endereco.id) from endereco),
+     'ITALIANA', '08:00:00', '22:00:00', 100, 5.0);
 
 INSERT INTO mesa
     (NUMERO_DA_MESA, STATUS, RESTAURANTE_ID)
@@ -14,6 +18,7 @@ VALUES
     (2, 'RESERVADA', 1),
     (3, 'DISPONIVEL', 1),
     (4, 'DISPONIVEL', 1);
+
 
 INSERT INTO reserva
     (CPF_CLIENTE, DATA_HORA_RESERVA, STATUS, DATA_HORA_CRIACAO, MESA_ID)

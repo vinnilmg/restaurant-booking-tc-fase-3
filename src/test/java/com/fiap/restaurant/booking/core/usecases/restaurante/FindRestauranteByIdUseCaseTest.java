@@ -1,28 +1,20 @@
 package com.fiap.restaurant.booking.core.usecases.restaurante;
 
-import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByIdUseCaseImpl;
-import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_NOME;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIME;
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_TIPO_CULINARIA;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-class FindRestauranteByIdUseCaseTest {
+public class FindRestauranteByIdUseCaseTest {
     private FindRestauranteByIdUseCaseImpl findRestauranteByIdUseCase;
     private RestauranteGateway restauranteGateway;
 
@@ -66,15 +58,7 @@ class FindRestauranteByIdUseCaseTest {
     @Test
     void shouldFindRestauranteById() {
         final var id = 1L;
-        final var restaurante = new RestauranteDomain(
-                DEFAULT_NOME,
-                DEFAULT_CNPJ,
-                EnderecoDomainFixture.OTHER(),
-                DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
-                DEFAULT_TIME,
-                50,
-                5.0);
+        final var restaurante = RestauranteDomainFixture.NOVO();
 
         when(restauranteGateway.findById(id)).thenReturn(Optional.of(restaurante));
 

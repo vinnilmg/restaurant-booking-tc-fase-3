@@ -1,11 +1,10 @@
 package com.fiap.restaurant.booking.core.usecases.restaurante;
 
 import com.fiap.restaurant.booking.core.domains.Restaurante;
-import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.FindRestauranteByCnpjUseCaseImpl;
-import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,15 +51,7 @@ public class FindRestauranteByCnpjUseCaseTest {
     @Test
     void shouldFindRestauranteByCnpj() {
         final var cnpj = DEFAULT_CNPJ;
-        final var restaurante = new RestauranteDomain(
-                DEFAULT_NOME,
-                DEFAULT_CNPJ,
-                EnderecoDomainFixture.OTHER(),
-                DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
-                DEFAULT_TIME,
-                50,
-                5.0);
+        final var restaurante = RestauranteDomainFixture.NOVO();
 
         final Optional<Restaurante> expected = Optional.of(restaurante);
 

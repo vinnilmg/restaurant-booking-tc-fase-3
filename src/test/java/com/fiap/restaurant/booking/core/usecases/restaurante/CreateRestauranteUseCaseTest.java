@@ -4,7 +4,7 @@ import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
-import com.fiap.restaurant.booking.utils.fixture.EnderecoDomainFixture;
+import com.fiap.restaurant.booking.utils.fixture.RestauranteDomainFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,15 +32,7 @@ class CreateRestauranteUseCaseTest {
 
     @Test
     void shouldCreateRestaurante() {
-        final var restaurante = new RestauranteDomain(
-                DEFAULT_NOME,
-                DEFAULT_CNPJ,
-                EnderecoDomainFixture.OTHER(),
-                DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
-                DEFAULT_TIME,
-                50,
-                5.0);
+        final var restaurante = RestauranteDomainFixture.NOVO();
 
         when(findRestauranteByCnpjUseCase.execute(restaurante.getCnpj()))
                 .thenReturn(Optional.empty());
@@ -60,15 +52,7 @@ class CreateRestauranteUseCaseTest {
 
     @Test
     void shouldThrowValidationExceptionWhenCreateRestauranteWithCnpjAlreadyExistent() {
-        final var restaurante = new RestauranteDomain(
-                DEFAULT_NOME,
-                DEFAULT_CNPJ,
-                EnderecoDomainFixture.OTHER(),
-                DEFAULT_TIPO_CULINARIA,
-                DEFAULT_TIME,
-                DEFAULT_TIME,
-                50,
-                5.0);
+        final var restaurante = RestauranteDomainFixture.NOVO();
 
         when(findRestauranteByCnpjUseCase.execute(restaurante.getCnpj()))
                 .thenReturn(Optional.of(restaurante));

@@ -1,5 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.controllers.mappers;
 
+import com.fiap.restaurant.booking.core.domains.Endereco;
 import com.fiap.restaurant.booking.core.domains.Restaurante;
 import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.RestauranteRequest;
@@ -13,11 +14,11 @@ import java.util.List;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RestauranteMapper {
 
-    default RestauranteDomain toRestaurante(RestauranteRequest request) {
+    default RestauranteDomain toRestaurante(RestauranteRequest request, Endereco endereco) {
         return new RestauranteDomain(
                 request.nome(),
                 request.cnpj(),
-                request.endereco(),
+                endereco,
                 request.tipoCulinaria(),
                 request.inicioFuncionamento(),
                 request.fimFuncionamento(),
