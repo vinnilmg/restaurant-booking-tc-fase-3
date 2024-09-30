@@ -43,6 +43,15 @@ public class PerformanceSimulation extends Simulation {
             .get("/api/bookings/requested")
             .check(status().is(HttpStatus.OK.value()));
 
+    ActionBuilder buscarRestaurantesRequest = http("Buscar restaurantes")
+            .get("/api/restaurants")
+            .check(status().is(HttpStatus.OK.value()))
+            .check(jsonPath(JSON_PATH_LIST_ID).saveAs("restauranteId"));
+
+    ActionBuilder buscarRestaurantePorIdRequest = http("Buscar restaurante por ID")
+            .get("/api/restaurants/#{restauranteId}")
+            .check(status().is(HttpStatus.OK.value()));
+
     ScenarioBuilder cenarioBuscarReservas = scenario("Buscar reservas")
             .exec(buscarReservasRequest);
 
@@ -58,6 +67,13 @@ public class PerformanceSimulation extends Simulation {
 
     ScenarioBuilder cenarioBuscarReservasSolicitadas = scenario("Buscar reservas solicitadas")
             .exec(buscarReservasConfirmadasRequest);
+
+    ScenarioBuilder cenarioBuscarRestaurantes = scenario("Buscar restaurantes")
+            .exec(buscarRestaurantesRequest);
+
+    ScenarioBuilder cenarioBuscarRestaurantePorId = scenario("Buscar restaurante por ID")
+            .exec(buscarRestaurantesRequest)
+            .exec(buscarRestaurantePorIdRequest);
 
     {
         setUp(
