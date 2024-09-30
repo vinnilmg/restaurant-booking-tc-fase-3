@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
 @Transactional
-class FeedBackRepositoryTest {
+class FeedBackRepositoryIT {
 
     @Autowired
     private FeedBackRepository feedBackRepository;

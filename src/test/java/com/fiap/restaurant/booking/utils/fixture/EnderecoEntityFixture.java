@@ -30,4 +30,16 @@ public class EnderecoEntityFixture {
         entity.setCep(endereco.getCep());
         return entity;
     }
+
+    public static EnderecoEntity WITHOUT_ID() {
+        final var entity = new EnderecoEntity();
+        entity.setRua("Rua numero 1");
+        entity.setNumero("52");
+        entity.setComplemento("ap 05");
+        entity.setBairro("Vila Bela");
+        entity.setCidade("Brusque");
+        entity.setEstado("SP");
+        entity.setCep("02998050");
+        return entity;
+    }
 }
