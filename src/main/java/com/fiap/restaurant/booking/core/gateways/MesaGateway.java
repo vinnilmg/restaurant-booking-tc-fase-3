@@ -19,4 +19,6 @@ public interface MesaGateway {
     void deleteByRestaurantIdAndNumeroMesa(Long restauranteId, Integer numeroMesa);
 
     Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa );
+
+    List<Mesa> findByRestauranteId(Long idRestaurante);
 }

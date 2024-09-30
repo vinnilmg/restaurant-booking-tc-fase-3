@@ -29,13 +29,12 @@ public interface MesaMapper {
 
     MesaRequest toMesaDomain(Long restauranteId, Integer numeroMesa);
 
-    List<MesaResponse> toMesaResponse(List<MesaDomain> mesasDomain);
+    List<MesaResponse> toMesaResponse(List<Mesa> mesas);
 
     default Mesa toMesa(final MesaDomain mesaDomain) {
         return mesaDomain;
     }
 
-    // Conversão de Mesa para MesaDomain
     default MesaDomain toMesaDomain(final Mesa mesa) {
         if (mesa instanceof MesaDomain) {
             return (MesaDomain) mesa;

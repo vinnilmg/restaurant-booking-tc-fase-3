@@ -2,7 +2,7 @@ package com.fiap.restaurant.booking.core.usecases.reserva;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.CreateReservaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.utils.fixture.MesaDomainFixture;
@@ -24,7 +24,7 @@ class CreateReservaUseCaseTest {
     private CreateReservaUseCaseImpl createReservaUseCase;
     private ReservaGateway reservaGateway;
     private FindRestauranteByIdUseCase findRestauranteByIdUseCase;
-    private FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase;
+    private FindMesaByIdUseCase findMesaByIdUseCase;
     private FindReservaByCpfUseCase findReservaByCpfUseCase;
 
     @BeforeEach
@@ -32,11 +32,11 @@ class CreateReservaUseCaseTest {
         reservaGateway = mock(ReservaGateway.class);
         findReservaByCpfUseCase = mock(FindReservaByCpfUseCase.class);
         findRestauranteByIdUseCase = mock(FindRestauranteByIdUseCase.class);
-        findMesaByIdRestauranteUseCase = mock(FindMesaByIdRestauranteUseCase.class);
+        findMesaByIdUseCase = mock(FindMesaByIdUseCase.class);
         createReservaUseCase = new CreateReservaUseCaseImpl(
                 reservaGateway,
                 findRestauranteByIdUseCase,
-                findMesaByIdRestauranteUseCase,
+                findMesaByIdUseCase,
                 findReservaByCpfUseCase
         );
     }
@@ -50,7 +50,7 @@ class CreateReservaUseCaseTest {
         when(findRestauranteByIdUseCase.execute(restauranteId))
                 .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
 
-        when(findMesaByIdRestauranteUseCase.execute(mesaId))
+        when(findMesaByIdUseCase.execute(mesaId))
                 .thenReturn(MesaDomainFixture.FULL_WITH_IDS(mesaId, restauranteId));
 
         when(findReservaByCpfUseCase.execute(reserva.getCpf()))
@@ -66,7 +66,7 @@ class CreateReservaUseCaseTest {
                 .isEqualTo(reserva);
 
         verify(findRestauranteByIdUseCase).execute(restauranteId);
-        verify(findMesaByIdRestauranteUseCase).execute(mesaId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verify(findReservaByCpfUseCase).execute(reserva.getCpf());
         verify(reservaGateway).create(reserva);
     }
@@ -85,7 +85,7 @@ class CreateReservaUseCaseTest {
                 .hasMessage("Different restaurant found");
 
         verify(findRestauranteByIdUseCase).execute(restauranteId);
-        verifyNoInteractions(findMesaByIdRestauranteUseCase);
+        verifyNoInteractions(findMesaByIdUseCase);
         verifyNoInteractions(findReservaByCpfUseCase);
         verifyNoInteractions(reservaGateway);
     }
@@ -99,7 +99,7 @@ class CreateReservaUseCaseTest {
         when(findRestauranteByIdUseCase.execute(restauranteId))
                 .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
 
-        when(findMesaByIdRestauranteUseCase.execute(mesaId))
+        when(findMesaByIdUseCase.execute(mesaId))
                 .thenReturn(MesaDomainFixture.FULL_WITH_IDS(2L, restauranteId));
 
         assertThatThrownBy(() -> createReservaUseCase.execute(restauranteId, mesaId, reserva))
@@ -107,7 +107,7 @@ class CreateReservaUseCaseTest {
                 .hasMessage("Different table found");
 
         verify(findRestauranteByIdUseCase).execute(restauranteId);
-        verify(findMesaByIdRestauranteUseCase).execute(mesaId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verifyNoInteractions(findReservaByCpfUseCase);
         verifyNoInteractions(reservaGateway);
     }
@@ -121,7 +121,7 @@ class CreateReservaUseCaseTest {
         when(findRestauranteByIdUseCase.execute(restauranteId))
                 .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
 
-        when(findMesaByIdRestauranteUseCase.execute(mesaId))
+        when(findMesaByIdUseCase.execute(mesaId))
                 .thenReturn(MesaDomainFixture.FULL_WITH_IDS(mesaId, restauranteId));
 
         when(findReservaByCpfUseCase.execute(reserva.getCpf()))
@@ -132,7 +132,7 @@ class CreateReservaUseCaseTest {
                 .hasMessage("User already contains booking in progress");
 
         verify(findRestauranteByIdUseCase).execute(restauranteId);
-        verify(findMesaByIdRestauranteUseCase).execute(mesaId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verify(findReservaByCpfUseCase).execute(reserva.getCpf());
         verifyNoInteractions(reservaGateway);
     }
@@ -146,7 +146,7 @@ class CreateReservaUseCaseTest {
         when(findRestauranteByIdUseCase.execute(restauranteId))
                 .thenReturn(RestauranteDomainFixture.FULL_WITH_ID(restauranteId));
 
-        when(findMesaByIdRestauranteUseCase.execute(mesaId))
+        when(findMesaByIdUseCase.execute(mesaId))
                 .thenReturn(MesaDomainFixture.FULL_WITH_ID_AND_RESERVADA(mesaId, restauranteId));
 
         when(findReservaByCpfUseCase.execute(reserva.getCpf()))
@@ -157,7 +157,7 @@ class CreateReservaUseCaseTest {
                 .hasMessage("Mesa is already reserved");
 
         verify(findRestauranteByIdUseCase).execute(restauranteId);
-        verify(findMesaByIdRestauranteUseCase).execute(mesaId);
+        verify(findMesaByIdUseCase).execute(mesaId);
         verify(findReservaByCpfUseCase).execute(reserva.getCpf());
         verifyNoInteractions(reservaGateway);
     }

@@ -45,12 +45,16 @@ public   class MesaRepositoryGateway implements MesaGateway {
         List<MesaEntity> mesaEntities = mesaRepository.findByStatus(status);
         List<Mesa> mesaDomains = mesaEntityMapper.toDomains(mesaEntities);
         return mesaDomains;
-//        return mesaEntityMapper.toDomains(mesaEntities);
     }
 
     @Override
     public Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa) {
         return mesaRepository.findByRestauranteIdAndNumeroDaMesa(idRestaurante,numeroMesa).map(mesaEntityMapper::toDomain);
+    }
+
+    @Override
+    public List<Mesa> findByRestauranteId(Long idRestaurante) {
+        return mesaRepository.findByRestauranteId(idRestaurante).stream().map(mesaEntityMapper::toDomain).toList();
     }
 
     @Transactional

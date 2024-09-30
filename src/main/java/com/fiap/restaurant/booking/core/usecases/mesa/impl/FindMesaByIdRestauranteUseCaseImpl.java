@@ -1,26 +1,21 @@
 package com.fiap.restaurant.booking.core.usecases.mesa.impl;
 
 import com.fiap.restaurant.booking.core.domains.Mesa;
-import com.fiap.restaurant.booking.core.exceptions.NotFoundException;
-import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesasByIdRestauranteUseCase;
 
-import static java.util.Objects.isNull;
+import java.util.List;
 
-public class FindMesaByIdRestauranteUseCaseImpl implements FindMesaByIdRestauranteUseCase {
+public class FindMesaByIdRestauranteUseCaseImpl implements FindMesasByIdRestauranteUseCase {
+
     private final MesaGateway mesaGateway;
 
     public FindMesaByIdRestauranteUseCaseImpl(MesaGateway mesaGateway) {
         this.mesaGateway = mesaGateway;
     }
 
-
-
     @Override
-    public Mesa execute(final Long id) {
-        if (isNull(id) || id < 0) throw ValidationException.of("Mesa Id", "cannot be null or negative");
-        return mesaGateway.findById(id)
-                .orElseThrow(() -> NotFoundException.of("Mesa"));
+    public List<Mesa> execute(Long restauranteId) {
+        return mesaGateway.findByRestauranteId(restauranteId);
     }
 }

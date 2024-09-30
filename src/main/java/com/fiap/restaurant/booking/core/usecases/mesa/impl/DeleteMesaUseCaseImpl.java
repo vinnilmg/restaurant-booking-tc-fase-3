@@ -3,7 +3,6 @@ package com.fiap.restaurant.booking.core.usecases.mesa.impl;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.core.usecases.mesa.DeleteMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindIdRestauranteAndNumeroMesa;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdRestauranteUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.response.MessageResponse;
 

@@ -4,7 +4,7 @@ import com.fiap.restaurant.booking.core.domains.Reserva;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdRestauranteUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.FindReservaByCpfUseCase;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
@@ -14,18 +14,18 @@ import static org.apache.commons.collections.CollectionUtils.isNotEmpty;
 public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
     private final ReservaGateway reservaGateway;
     private final FindRestauranteByIdUseCase findRestauranteByIdUseCase;
-    private final FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase;
+    private final FindMesaByIdUseCase findMesaByIdUseCase;
     private final FindReservaByCpfUseCase findReservaByCpfUseCase;
 
     public CreateReservaUseCaseImpl(
             ReservaGateway reservaGateway,
             FindRestauranteByIdUseCase findRestauranteByIdUseCase,
-            FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase,
+            FindMesaByIdUseCase findMesaByIdUseCase,
             FindReservaByCpfUseCase findReservaByCpfUseCase
     ) {
         this.reservaGateway = reservaGateway;
         this.findRestauranteByIdUseCase = findRestauranteByIdUseCase;
-        this.findMesaByIdRestauranteUseCase = findMesaByIdRestauranteUseCase;
+        this.findMesaByIdUseCase = findMesaByIdUseCase;
         this.findReservaByCpfUseCase = findReservaByCpfUseCase;
     }
 
@@ -36,7 +36,7 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
             throw new IllegalArgumentException("Different restaurant found");
         }
 
-        final var mesa = findMesaByIdRestauranteUseCase.execute(mesaId);
+        final var mesa = findMesaByIdUseCase.execute(mesaId);
         if (!mesa.getId().equals(mesaId) || !mesa.getRestaurante().getId().equals(restauranteId)) {
             throw new IllegalArgumentException("Different table found");
         }

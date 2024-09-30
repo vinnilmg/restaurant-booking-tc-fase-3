@@ -85,10 +85,10 @@ public class BeansConfig {
     public CreateReservaUseCase createReservaUseCase(
             ReservaGateway reservaGateway,
             FindRestauranteByIdUseCase findRestauranteByIdUseCase,
-            FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase,
+            FindMesaByIdUseCase findMesaByIdUseCase,
             FindReservaByCpfUseCase findReservaByCpfUseCase
     ) {
-        return new CreateReservaUseCaseImpl(reservaGateway, findRestauranteByIdUseCase, findMesaByIdRestauranteUseCase, findReservaByCpfUseCase);
+        return new CreateReservaUseCaseImpl(reservaGateway, findRestauranteByIdUseCase, findMesaByIdUseCase, findReservaByCpfUseCase);
     }
 
     @Bean
@@ -267,8 +267,8 @@ public class BeansConfig {
     }
 
     @Bean
-    public FindMesaByIdRestauranteUseCase findMesaByIdUseCase(MesaGateway mesaGateway) {
-        return new FindMesaByIdRestauranteUseCaseImpl(mesaGateway);
+    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway) {
+        return new FindMesaByIdUseCaseImpl(mesaGateway);
     }
     @Bean
     public FindMesaByStatusUseCase findMesaByStatusUseCase(MesaGateway mesaGateway) {
@@ -283,6 +283,11 @@ public class BeansConfig {
     @Bean
     public FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa(MesaGateway mesaGateway){
         return new FindIdRestauranteAndNumeroMesaImpl(mesaGateway);
+    }
+
+    @Bean
+    public FindMesasByIdRestauranteUseCase findMesasByIdRestauranteUseCase(MesaGateway mesaGateway) {
+        return new FindMesaByIdRestauranteUseCaseImpl(mesaGateway);
     }
 
 }

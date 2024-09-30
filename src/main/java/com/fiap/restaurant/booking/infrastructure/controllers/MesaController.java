@@ -20,18 +20,20 @@ public class MesaController {
 
     private final CreateMesaUseCase createMesaUseCase;
     private final MesaMapper mesaMapper;
-    private final FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase;
+    private final FindMesaByIdUseCase findMesaByIdUseCase;
     private final FindMesaByStatusUseCase findMesaByStatusUseCase;
     private final DeleteMesaUseCase deleteMesaUseCase;
     private final FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa;
+    private final FindMesasByIdRestauranteUseCase findMesasByIdRestauranteUseCase;
 
-    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase, FindMesaByStatusUseCase findMesaByStatusUseCase, DeleteMesaUseCase deleteMesaUseCase, FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa) {
+    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdUseCase findMesaByIdUseCase, FindMesaByStatusUseCase findMesaByStatusUseCase, DeleteMesaUseCase deleteMesaUseCase, FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa, FindMesasByIdRestauranteUseCase findMesasByIdRestauranteUseCase) {
         this.createMesaUseCase = createMesaUseCase;
         this.mesaMapper = mesaMapper;
-        this.findMesaByIdRestauranteUseCase = findMesaByIdRestauranteUseCase;
+        this.findMesaByIdUseCase = findMesaByIdUseCase;
         this.findMesaByStatusUseCase = findMesaByStatusUseCase;
         this.deleteMesaUseCase = deleteMesaUseCase;
         this.findIdRestauranteAndNumeroMesa = findIdRestauranteAndNumeroMesa;
+        this.findMesasByIdRestauranteUseCase = findMesasByIdRestauranteUseCase;
     }
 
     @PostMapping
@@ -41,9 +43,6 @@ public class MesaController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(mesaMapper.toMesaResponse(mesa));
     }
-
-    @GetMapping
-    public ResponseEntity<List<MesaResponse>> getAllMesas() {return null;}
 
     @GetMapping("/status/{status}")
     public ResponseEntity<List<MesaResponse>> getAllMesasFromStatus(@PathVariable String status) {
@@ -57,8 +56,10 @@ public class MesaController {
     }
 
     @GetMapping("/restaurant/{id}")
-    public ResponseEntity<MesaResponse> getAllTablesFromRestaurantId(@PathVariable Long id) {
-        return null;
+    public ResponseEntity <List<MesaResponse>> getAllTablesFromRestaurantId(@PathVariable Long id) {
+        var mesas = findMesasByIdRestauranteUseCase.execute(id);
+        var response = mesaMapper.toMesaResponse(mesas);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/disponibilidade")

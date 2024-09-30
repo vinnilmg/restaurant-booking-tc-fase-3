@@ -14,4 +14,6 @@ public interface MesaRepository extends JpaRepository<MesaEntity, Long>
     List<MesaEntity> findByStatus(StatusMesaEnum status);
 
     void deleteByRestauranteIdAndNumeroDaMesa(Long restauranteId, Integer numeroDaMesa);
+
+    List<MesaEntity> findByRestauranteId(Long idRestaurante);
 }
