@@ -109,7 +109,7 @@ public class FeedBackStepDefinition {
                 .body(matchesJsonSchemaInClasspath(FEEDBACK_LIST_SCHEMA));
     }
 
-    @Dado("e desejo deletar um feedback")
+    @Dado("desejo deletar um feedback")
     public void eDesejoDeletarUmFeedback() {
         response = when().get(ENDPOINT);
 

@@ -68,7 +68,7 @@ public class RestauranteStepDefinition {
                 .body("$", hasSize(greaterThan(0)));
     }
 
-    @Entao("deve apresentar todos os restaurantes")
+    @Entao("deve apresentar os restaurantes")
     public void deve_apresentar_todos_os_restaurantes() {
         response
                 .then()
@@ -79,14 +79,6 @@ public class RestauranteStepDefinition {
     public void efetuar_a_busca_de_restaurante_específico() {
         response = when()
                 .get(ENDPOINT.concat("/{id}"), 1);
-    }
-
-    @Entao("deve apresentar o resultado")
-    public void deve_apresentar_o_resultado() {
-        response
-                .then()
-                .statusCode(HttpStatus.OK.value())
-                .body(matchesJsonSchemaInClasspath(RESTAURANTE_SCHEMA));
     }
 
     @Quando("efetuar a busca de um restaurante pelo nome dele")
