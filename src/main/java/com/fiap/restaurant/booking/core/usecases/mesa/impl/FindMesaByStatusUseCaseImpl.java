@@ -1,6 +1,6 @@
 package com.fiap.restaurant.booking.core.usecases.mesa.impl;
 
-import com.fiap.restaurant.booking.core.domains.MesaDomain;
+import com.fiap.restaurant.booking.core.domains.Mesa;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
@@ -17,7 +17,7 @@ public class FindMesaByStatusUseCaseImpl implements FindMesaByStatusUseCase {
     }
 
     @Override
-    public List<MesaDomain> execute(StatusMesaEnum status) {
+    public List<Mesa> execute(StatusMesaEnum status) {
         if (status == null || !status.toString().equals("DISPONIVEL") && !status.toString().equals("RESERVADA")) {
             throw ValidationException.of("Status", "Status must be DISPONIVEL or RESERVADA");
         }

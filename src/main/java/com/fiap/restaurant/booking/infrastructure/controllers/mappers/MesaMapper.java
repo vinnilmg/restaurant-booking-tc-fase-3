@@ -24,11 +24,21 @@ public interface MesaMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "mesa", source = "numeroDaMesa")
-//    @Mapping(target = "restauranteId", expression = "java(mesa.getRestaurante().getId())")
     MesaResponse toMesaResponse(Mesa mesaDomain);
 
     MesaRequest toMesaDomain(Long restauranteId, Integer numeroMesa);
 
     List<MesaResponse> toMesaResponse(List<MesaDomain> mesasDomain);
 
+    default Mesa toMesa(final MesaDomain mesaDomain) {
+        return mesaDomain;
+    }
+
+    // Conversão de Mesa para MesaDomain
+    default MesaDomain toMesaDomain(final Mesa mesa) {
+        if (mesa instanceof MesaDomain) {
+            return (MesaDomain) mesa;
+        }
+        return null;
+    }
 }

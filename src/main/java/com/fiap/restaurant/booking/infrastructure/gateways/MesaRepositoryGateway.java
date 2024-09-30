@@ -4,6 +4,7 @@ import com.fiap.restaurant.booking.core.domains.Mesa;
 import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.MesaEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.MesaEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.MesaRepository;
 import lombok.AllArgsConstructor;
@@ -44,7 +45,8 @@ public class MesaRepositoryGateway implements MesaGateway {
 
     @Override
     public List<Mesa> findByStatus(StatusMesaEnum status) {
-        return mesaEntityMapper.toDomains(mesaRepository.findByStatus(String.valueOf(status)));
+        List<MesaEntity> mesaEntities = mesaRepository.findByStatus(String.valueOf(status));
+        return mesaEntityMapper.toDomains(mesaEntities);
     }
 
     @Override

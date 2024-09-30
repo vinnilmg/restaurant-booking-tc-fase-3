@@ -25,7 +25,7 @@ public interface MesaEntityMapper {
         );
     }
 
-    default List<MesaDomain> toDomains(List<MesaEntity> mesaEntities) {
+    default List<Mesa> toDomains(List<MesaEntity> mesaEntities) {
         return mesaEntities
                 .stream()
                 .map(this::toDomain)
