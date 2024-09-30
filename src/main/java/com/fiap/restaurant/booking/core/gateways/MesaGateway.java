@@ -17,5 +17,5 @@ public interface MesaGateway {
 
     List<Mesa> findByStatus(StatusMesaEnum status);
 
-    void delete(Long id);
+    void delete(Long restauranteId, Integer numeroMesa);
 }

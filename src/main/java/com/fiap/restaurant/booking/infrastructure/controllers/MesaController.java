@@ -1,9 +1,9 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
-import com.fiap.restaurant.booking.core.domains.Mesa;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.DeleteMesaUseCase;
+import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdRestauranteUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByStatusUseCase;
 import com.fiap.restaurant.booking.infrastructure.controllers.mappers.MesaMapper;
 import com.fiap.restaurant.booking.infrastructure.controllers.request.MesaRequest;
@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -22,14 +23,16 @@ public class MesaController {
 
     private final CreateMesaUseCase createMesaUseCase;
     private final MesaMapper mesaMapper;
-    private final FindMesaByIdUseCase findMesaByIdUseCase;
+    private final FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase;
     private final FindMesaByStatusUseCase findMesaByStatusUseCase;
+    private final DeleteMesaUseCase deleteMesaUseCase;
 
-    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdUseCase findMesaByIdUseCase, FindMesaByStatusUseCase findMesaByStatusUseCase) {
+    public MesaController(CreateMesaUseCase createMesaUseCase, MesaMapper mesaMapper, FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase, FindMesaByStatusUseCase findMesaByStatusUseCase, DeleteMesaUseCase deleteMesaUseCase) {
         this.createMesaUseCase = createMesaUseCase;
         this.mesaMapper = mesaMapper;
-        this.findMesaByIdUseCase = findMesaByIdUseCase;
+        this.findMesaByIdRestauranteUseCase = findMesaByIdRestauranteUseCase;
         this.findMesaByStatusUseCase = findMesaByStatusUseCase;
+        this.deleteMesaUseCase = deleteMesaUseCase;
     }
 
     @PostMapping
@@ -44,25 +47,27 @@ public class MesaController {
     public ResponseEntity<List<MesaResponse>> getAllMesas() {return null;}
 
     @GetMapping("/status/{status}")
-    public ResponseEntity<MesaResponse> getAllMesasFromStatus(@PathVariable String status) {
+    public ResponseEntity<List<MesaResponse>> getAllMesasFromStatus(@PathVariable String status) {
         StatusMesaEnum statusMesaEnum = StatusMesaEnum.valueOf(status.toUpperCase());
         var mesasComStatus = findMesaByStatusUseCase.execute(statusMesaEnum);
 
-        // Mapeia o resultado para a resposta
-        var response = mesaMapper.toMesaResponse((Mesa) mesasComStatus);
+        var response = mesasComStatus.stream()
+                .map(mesaMapper::toMesaResponse)
+                .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
 
 //    @GetMapping("/disponibilidade")
-//    public ResponseEntity<MesaResponse> getMesaByIdRestaurante(@RequestParam("restauranteId") Long restauranteId, @RequestParam("numeroMesa") Integer numeroMesa)
+//    public ResponseEntity<MesaResponse> getMesaByIdRestaurante(@RequestParam("restauranteId") Long restauranteId, @RequestParam("numeroMesa") Long numeroMesa)
 //    {
-////        var mesaDomain = mesaMapper.toMesaDomain(restauranteId, numeroMesa);
-//        final var response = mesaMapper.toMesaResponse(findMesaByIdUseCase.execute(restauranteId, numeroMesa));
+//        var mesaDomain = mesaMapper.toMesaDomain(restauranteId, numeroMesa);
+//        final var response = mesaMapper.toMesaResponse(findMesaByIdRestauranteUseCase.execute(restauranteId, numeroMesa));
 //        return ResponseEntity.status(201).body(response);
 //    }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<MesaResponse> deleteMesa(@PathVariable Long id) {
-        return null;
+    @DeleteMapping
+    public ResponseEntity<MesaResponse> deleteMesa(@RequestParam Long restauranteId, @RequestParam Integer numeroMesa) {
+        final var mesa = deleteMesaUseCase.execute(restauranteId, numeroMesa);
+        return ResponseEntity.noContent().build();
     }
 }

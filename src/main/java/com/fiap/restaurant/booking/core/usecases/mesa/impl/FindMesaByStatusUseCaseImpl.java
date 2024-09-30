@@ -18,7 +18,7 @@ public class FindMesaByStatusUseCaseImpl implements FindMesaByStatusUseCase {
 
     @Override
     public List<Mesa> execute(StatusMesaEnum status) {
-        if (status == null || !status.toString().equals("DISPONIVEL") && !status.toString().equals("RESERVADA")) {
+        if (status == null || !status.equals(StatusMesaEnum.DISPONIVEL) && !status.equals(StatusMesaEnum.RESERVADA)) {
             throw ValidationException.of("Status", "Status must be DISPONIVEL or RESERVADA");
         }
         return mesaGateway.findByStatus(status);

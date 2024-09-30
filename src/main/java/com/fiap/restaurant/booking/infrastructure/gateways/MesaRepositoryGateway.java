@@ -7,6 +7,8 @@ import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.MesaEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.MesaEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.MesaRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class MesaRepositoryGateway implements MesaGateway {
+public   class MesaRepositoryGateway implements MesaGateway {
     private final MesaRepository mesaRepository;
     private final MesaEntityMapper mesaEntityMapper;
 
@@ -38,19 +40,19 @@ public class MesaRepositoryGateway implements MesaGateway {
         return Optional.empty();
     }
 
-//    @Override
-//    public Optional<Mesa> findByIdRestauranteAndNumeroMesa(Long idRestaurante, Integer numeroMesa) {
-//        return Optional.empty();
-//    }
-
     @Override
     public List<Mesa> findByStatus(StatusMesaEnum status) {
         List<MesaEntity> mesaEntities = mesaRepository.findByStatus(String.valueOf(status));
-        return mesaEntityMapper.toDomains(mesaEntities);
+        List<Mesa> mesaDomains = mesaEntityMapper.toDomains(mesaEntities);
+        return mesaDomains;
+//        return mesaEntityMapper.toDomains(mesaEntities);
     }
 
+    @Transactional
     @Override
-    public void delete(Long id) {
-
+    public void delete(Long id, Integer numeroMesa) {
+        mesaRepository.deleteByRestauranteIdAndNumeroDaMesa(id, numeroMesa);
+        mesaRepository.flush();
     }
+
 }

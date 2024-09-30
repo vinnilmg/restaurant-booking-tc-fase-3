@@ -35,14 +35,8 @@ import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdR
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.FindFeedBackByIdUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackByNomeClienteUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.feedback.impl.GetAllFeedBackUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.mesa.CreateMesaUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByRestauranteUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByStatusUseCase;
-import com.fiap.restaurant.booking.core.usecases.mesa.impl.CreateMesaUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByIdUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByStatusUseCaseImpl;
-import com.fiap.restaurant.booking.core.usecases.mesa.impl.FindMesaByRestauranteUseCaseImpl;
+import com.fiap.restaurant.booking.core.usecases.mesa.*;
+import com.fiap.restaurant.booking.core.usecases.mesa.impl.*;
 import com.fiap.restaurant.booking.core.usecases.reserva.CancelReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.ConfirmReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
@@ -91,10 +85,10 @@ public class BeansConfig {
     public CreateReservaUseCase createReservaUseCase(
             ReservaGateway reservaGateway,
             FindRestauranteByIdUseCase findRestauranteByIdUseCase,
-            FindMesaByIdUseCase findMesaByIdUseCase,
+            FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase,
             FindReservaByCpfUseCase findReservaByCpfUseCase
     ) {
-        return new CreateReservaUseCaseImpl(reservaGateway, findRestauranteByIdUseCase, findMesaByIdUseCase, findReservaByCpfUseCase);
+        return new CreateReservaUseCaseImpl(reservaGateway, findRestauranteByIdUseCase, findMesaByIdRestauranteUseCase, findReservaByCpfUseCase);
     }
 
     @Bean
@@ -273,12 +267,17 @@ public class BeansConfig {
     }
 
     @Bean
-    public FindMesaByIdUseCase findMesaByIdUseCase(MesaGateway mesaGateway) {
-        return new FindMesaByIdUseCaseImpl(mesaGateway);
+    public FindMesaByIdRestauranteUseCase findMesaByIdUseCase(MesaGateway mesaGateway) {
+        return new FindMesaByIdRestauranteUseCaseImpl(mesaGateway);
     }
     @Bean
     public FindMesaByStatusUseCase findMesaByStatusUseCase(MesaGateway mesaGateway) {
         return new FindMesaByStatusUseCaseImpl(mesaGateway);
+    }
+
+    @Bean
+    public DeleteMesaUseCase deleteMesaUseCase(MesaGateway mesaGateway, FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase) {
+        return new DeleteMesaUseCaseImpl(mesaGateway, findMesaByIdRestauranteUseCase);
     }
 
 }
