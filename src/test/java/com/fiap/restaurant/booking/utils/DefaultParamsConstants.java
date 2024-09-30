@@ -44,6 +44,7 @@ public class DefaultParamsConstants {
     public static final Integer DEFAULT_CAPACIDADE = 100;
     public static final Double DEFAULT_MEDIA_FEEDBACK = 5.0;
 
+    public static final String DEFAULT_TIME = "08:00";
     public static final String JSON_PATH_ID = "$.id";
     public static final String JSON_PATH_CPF = "$.cpfCliente";
     public static final String JSON_PATH_STATUS = "$.status";

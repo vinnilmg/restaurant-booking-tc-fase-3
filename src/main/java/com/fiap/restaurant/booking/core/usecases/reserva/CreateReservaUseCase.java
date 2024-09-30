@@ -4,5 +4,5 @@ import com.fiap.restaurant.booking.core.domains.Reserva;
 
 @FunctionalInterface
 public interface CreateReservaUseCase {
-    Reserva execute(Reserva reserva);
+    Reserva execute(Long restauranteId, Long mesaId, Reserva reserva);
 }

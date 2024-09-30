@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
+import com.fiap.restaurant.booking.utils.fixture.MesaDomainFixture;
 import com.fiap.restaurant.booking.utils.fixture.ReservaDomainFixture;
 import org.junit.jupiter.api.Test;
 
@@ -92,6 +93,7 @@ class ReservaDomainTest {
                 null,
                 null,
                 null,
+                null,
                 null))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("Reserva Id cannot be null");
@@ -101,6 +103,7 @@ class ReservaDomainTest {
     void shouldThrowValidationExceptionWhenIdIsNegative() {
         assertThatThrownBy(() -> new ReservaDomain(
                 -1L,
+                null,
                 null,
                 null,
                 null,
@@ -141,13 +144,14 @@ class ReservaDomainTest {
         final var status = StatusReservaEnum.SOLICITADA.name();
         final var dataHoraReserva = LocalDateTime.now().plusDays(5);
         final var dataHoraCriacao = LocalDateTime.now();
-
+        final var mesa = MesaDomainFixture.DISPONIVEL();
         final var result = new ReservaDomain(
                 1L,
                 cpf,
                 status,
                 dataHoraReserva,
-                dataHoraCriacao
+                dataHoraCriacao,
+                mesa
         );
 
         assertThat(result)

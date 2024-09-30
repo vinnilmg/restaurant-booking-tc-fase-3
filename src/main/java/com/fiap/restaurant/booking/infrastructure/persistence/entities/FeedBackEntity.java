@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 public class FeedBackEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "restaurante can't be null")

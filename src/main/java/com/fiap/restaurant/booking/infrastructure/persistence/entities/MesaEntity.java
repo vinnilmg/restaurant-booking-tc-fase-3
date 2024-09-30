@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,16 +17,18 @@ import lombok.Setter;
 @Entity
 @Table(name = "mesa")
 public class MesaEntity {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int numeroDaMesa;
+    @NotNull
+    private Integer numeroDaMesa;
 
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo")
     private StatusMesaEnum status;
+
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private RestauranteEntity restaurante;
 }

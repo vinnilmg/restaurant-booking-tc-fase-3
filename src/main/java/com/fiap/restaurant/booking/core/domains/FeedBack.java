@@ -9,8 +9,6 @@ public interface FeedBack {
 
     Restaurante getRestaurante();
 
-    Restaurante setRestaurante(Restaurante restaurante);
-
     String getNomeCliente();
 
     Integer getAvaliacao();

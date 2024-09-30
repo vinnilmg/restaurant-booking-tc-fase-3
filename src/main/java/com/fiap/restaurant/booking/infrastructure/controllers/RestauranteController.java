@@ -133,5 +133,4 @@ public class RestauranteController {
         return ResponseEntity.status(OK)
                 .body(restauranteMapper.toRestauranteResponse(restaurantes));
     }
-
 }

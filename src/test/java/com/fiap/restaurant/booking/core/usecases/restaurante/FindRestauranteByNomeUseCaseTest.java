@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
 import static org.mockito.Mockito.*;
 
-public class FindRestauranteByNomeUseCaseTest {
+class FindRestauranteByNomeUseCaseTest {
     private FindRestauranteByNomeUseCaseImpl findRestauranteByNomeUseCase;
     private RestauranteGateway restauranteGateway;
 
@@ -26,7 +26,7 @@ public class FindRestauranteByNomeUseCaseTest {
 
     @Test
     void shouldThrowValidationExceptionWhenNomeIsNull() {
-        assertThatThrownBy(()-> findRestauranteByNomeUseCase.execute(null))
+        assertThatThrownBy(() -> findRestauranteByNomeUseCase.execute(null))
                 .isInstanceOf(ValidationException.class)
                 .hasMessage("Nome cannot be null");
 

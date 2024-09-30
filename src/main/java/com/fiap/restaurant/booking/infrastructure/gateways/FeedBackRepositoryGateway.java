@@ -11,16 +11,13 @@ import java.util.Optional;
 
 @Component
 public class FeedBackRepositoryGateway implements FeedBackGateway {
-
     private final FeedBackRepository feedBackRepository;
-
     private final FeedBackEntityMapper feedBackEntityMapper;
 
     public FeedBackRepositoryGateway(FeedBackRepository feedBackRepository, FeedBackEntityMapper feedBackEntityMapper) {
         this.feedBackRepository = feedBackRepository;
         this.feedBackEntityMapper = feedBackEntityMapper;
     }
-
 
     @Override
     public FeedBack create(FeedBack feedBack) {
@@ -50,9 +47,8 @@ public class FeedBackRepositoryGateway implements FeedBackGateway {
     }
 
     @Override
-    public Optional<FeedBack> findByIdRestaurante(Long id) {
-        return feedBackRepository.findByRestauranteId(id)
-                .map(feedBackEntityMapper::toDomain);
+    public List<FeedBack> findByIdRestaurante(Long id) {
+        return feedBackEntityMapper.toDomains(feedBackRepository.findByRestauranteId(id));
     }
 
     @Override

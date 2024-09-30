@@ -1,8 +1,8 @@
 package com.fiap.restaurant.booking.infrastructure.controllers.request;
 
 public record ReservaRequest(
-        Integer restauranteId,
-        Integer mesaId,
+        Long restauranteId,
+        Long mesaId,
         String cpfCliente,
         String dataHoraReserva
 ) {

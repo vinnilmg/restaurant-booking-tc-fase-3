@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
 import static org.mockito.Mockito.*;
 
-public class FindRestauranteByTipoCulinariaUseCaseTest {
+class FindRestauranteByTipoCulinariaUseCaseTest {
     private FindRestauranteByTipoCulinariaUseCaseImpl findRestauranteByTipoCulinariaUseCase;
     private RestauranteGateway restauranteGateway;
 
