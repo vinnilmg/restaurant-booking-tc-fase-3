@@ -36,7 +36,7 @@ class CreateFeedBackUseCaseTest {
     @Test
     void shouldBeCreateFeedBack() {
         var feedBackToReturned = InformationsFeedbackConstants.buildFeedBackTest(1L, 1);
-        var feedbackToCreate = InformationsFeedbackConstants.buildFeedBackTest(1L,1);
+        var feedbackToCreate = InformationsFeedbackConstants.buildFeedBackTest(1L, 1);
 
         when(feedBackGateway.create(any())).thenReturn(feedBackToReturned);
 

@@ -20,7 +20,7 @@ public class FeedBackDomain implements FeedBack {
     private LocalDateTime dataHoraCriacao;
 
     public FeedBackDomain(Long id, Restaurante restaurante, String nomeCliente, Integer avaliacao, String comentario, LocalDateTime dataHoraCriacao) {
-        validationToCreateInstance(id,restaurante, nomeCliente, avaliacao,dataHoraCriacao);
+        validationToCreateInstance(id, restaurante, nomeCliente, avaliacao, dataHoraCriacao);
         this.id = id;
         this.restauranteId = restaurante;
         this.nomeCliente = nomeCliente;
@@ -28,6 +28,7 @@ public class FeedBackDomain implements FeedBack {
         this.comentario = comentario;
         this.dataHoraCriacao = dataHoraCriacao;
     }
+
     public FeedBackDomain(Restaurante restaurante, String nomeCliente, Integer avaliacao, String comentario) {
         validationToCreateInstance(restaurante, nomeCliente, avaliacao);
         this.restauranteId = restaurante;
@@ -37,16 +38,18 @@ public class FeedBackDomain implements FeedBack {
     }
 
 
-    private void validationToCreateInstance(Long id,Restaurante restauranteId, String nomeCliente, Integer avaliacao,LocalDateTime dataHoraCriacao) {
+    private void validationToCreateInstance(Long id, Restaurante restauranteId, String nomeCliente, Integer avaliacao, LocalDateTime dataHoraCriacao) {
         validateAvaliacao(avaliacao);
         validateNomeCliente(nomeCliente);
         validaDataHoraCriacao(dataHoraCriacao);
         validateIdFeedback(id);
     }
+
     private void validationToCreateInstance(Restaurante restauranteId, String nomeCliente, Integer avaliacao) {
         validateAvaliacao(avaliacao);
         validateNomeCliente(nomeCliente);
     }
+
     public void validateAvaliacao(Integer avaliacao) {
         if (Objects.isNull(avaliacao))
             throw ValidationException.of("Nota de avaliação invalida", "Nota de avaliação não pode ser nulo");

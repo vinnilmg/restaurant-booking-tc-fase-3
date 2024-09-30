@@ -10,10 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
+import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.DEFAULT_CNPJ;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 public class FindRestauranteByCnpjUseCaseTest {
     private FindRestauranteByCnpjUseCaseImpl findRestauranteByCnpjUseCase;

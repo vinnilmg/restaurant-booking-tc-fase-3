@@ -11,7 +11,7 @@ public class ConverterUtils {
     public static String toJsonString(final Object object) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        return  objectMapper.writeValueAsString(object);
+        return objectMapper.writeValueAsString(object);
     }
 
     @SneakyThrows

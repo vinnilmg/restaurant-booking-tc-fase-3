@@ -19,7 +19,9 @@ import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.FEEDBA
 import static com.fiap.restaurant.booking.utils.SchemaDefinitionConstants.FEEDBACK_SCHEMA;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -89,7 +91,6 @@ class FeedBackControllerIT {
                     .body("message", equalTo(FeedBackValidationsMessages.getMessageIdFeedbackNotFound(id)));
         }
     }
-
 
 
     @Nested

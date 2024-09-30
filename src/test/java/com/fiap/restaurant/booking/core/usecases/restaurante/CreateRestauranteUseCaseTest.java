@@ -1,6 +1,5 @@
 package com.fiap.restaurant.booking.core.usecases.restaurante;
 
-import com.fiap.restaurant.booking.core.domains.RestauranteDomain;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.RestauranteGateway;
 import com.fiap.restaurant.booking.core.usecases.restaurante.impl.CreateRestauranteUseCaseImpl;
@@ -10,10 +9,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
-import static com.fiap.restaurant.booking.utils.DefaultParamsConstants.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
 
 class CreateRestauranteUseCaseTest {
     private CreateRestauranteUseCaseImpl createRestauranteUseCase;
