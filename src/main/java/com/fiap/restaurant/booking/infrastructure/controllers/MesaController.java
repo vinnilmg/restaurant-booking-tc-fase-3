@@ -57,6 +57,11 @@ public class MesaController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/restaurant/{id}")
+    public ResponseEntity<MesaResponse> getAllTablesFromRestaurantId(@PathVariable Long id) {
+        return null;
+    }
+
 //    @GetMapping("/disponibilidade")
 //    public ResponseEntity<MesaResponse> getMesaByIdRestaurante(@RequestParam("restauranteId") Long restauranteId, @RequestParam("numeroMesa") Long numeroMesa)
 //    {

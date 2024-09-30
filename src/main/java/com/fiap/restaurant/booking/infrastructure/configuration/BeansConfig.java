@@ -276,8 +276,13 @@ public class BeansConfig {
     }
 
     @Bean
-    public DeleteMesaUseCase deleteMesaUseCase(MesaGateway mesaGateway, FindMesaByIdRestauranteUseCase findMesaByIdRestauranteUseCase) {
-        return new DeleteMesaUseCaseImpl(mesaGateway, findMesaByIdRestauranteUseCase);
+    public DeleteMesaUseCase deleteMesaUseCase(MesaGateway mesaGateway, FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa, FindRestauranteByIdUseCase findRestauranteByIdUseCase) {
+        return new DeleteMesaUseCaseImpl(mesaGateway, findIdRestauranteAndNumeroMesa, findRestauranteByIdUseCase);
+    }
+
+    @Bean
+    public FindIdRestauranteAndNumeroMesa findIdRestauranteAndNumeroMesa(MesaGateway mesaGateway){
+        return new FindIdRestauranteAndNumeroMesaImpl(mesaGateway);
     }
 
 }

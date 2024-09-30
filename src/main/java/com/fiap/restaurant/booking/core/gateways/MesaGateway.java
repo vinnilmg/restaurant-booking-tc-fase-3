@@ -1,7 +1,6 @@
 package com.fiap.restaurant.booking.core.gateways;
 
 import com.fiap.restaurant.booking.core.domains.Mesa;
-import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 
 import java.util.List;
@@ -17,5 +16,7 @@ public interface MesaGateway {
 
     List<Mesa> findByStatus(StatusMesaEnum status);
 
-    void delete(Long restauranteId, Integer numeroMesa);
+    void deleteByRestaurantIdAndNumeroMesa(Long restauranteId, Integer numeroMesa);
+
+    Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa );
 }

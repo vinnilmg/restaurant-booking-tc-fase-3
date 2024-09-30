@@ -48,9 +48,14 @@ public   class MesaRepositoryGateway implements MesaGateway {
 //        return mesaEntityMapper.toDomains(mesaEntities);
     }
 
+    @Override
+    public Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa) {
+        return mesaRepository.findByRestauranteIdAndNumeroDaMesa(idRestaurante,numeroMesa).map(mesaEntityMapper::toDomain);
+    }
+
     @Transactional
     @Override
-    public void delete(Long id, Integer numeroMesa) {
+    public void deleteByRestaurantIdAndNumeroMesa(Long id, Integer numeroMesa) {
         mesaRepository.deleteByRestauranteIdAndNumeroDaMesa(id, numeroMesa);
         mesaRepository.flush();
     }
