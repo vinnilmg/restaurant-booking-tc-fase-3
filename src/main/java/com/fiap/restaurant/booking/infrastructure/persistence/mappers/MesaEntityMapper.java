@@ -21,7 +21,7 @@ public interface MesaEntityMapper {
                 mesaEntity.getId(),
                 restauranteEntityMapper.toDomain(mesaEntity.getRestaurante()),
                 mesaEntity.getNumeroDaMesa(),
-                StatusMesaEnum.valueOf(mesaEntity.getStatus())
+                StatusMesaEnum.valueOf(mesaEntity.getStatus().name())
         );
     }
 
