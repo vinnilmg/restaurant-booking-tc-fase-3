@@ -1,7 +1,6 @@
 package com.fiap.restaurant.booking.infrastructure.controllers;
 
 import com.fiap.restaurant.booking.core.usecases.endereco.AtualizaEnderecoUseCase;
-import com.fiap.restaurant.booking.core.usecases.endereco.DeleteEnderecoUseCase;
 import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByBairroUseCase;
 import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCepUseCase;
 import com.fiap.restaurant.booking.core.usecases.endereco.FindEnderecoByCidadeUseCase;
@@ -28,7 +27,6 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 public class EnderecoController {
     private final AtualizaEnderecoUseCase atualizaEnderecoUseCase;
-    private final DeleteEnderecoUseCase deleteEnderecoUseCase;
     private final FindEnderecoByBairroUseCase findEnderecoByBairroUseCase;
     private final FindEnderecoByCepUseCase findEnderecoByCepUseCase;
     private final FindEnderecoByCidadeUseCase findEnderecoByCidadeUseCase;
@@ -39,7 +37,6 @@ public class EnderecoController {
 
     public EnderecoController(
             AtualizaEnderecoUseCase atualizaEnderecoUseCase,
-            DeleteEnderecoUseCase deleteEnderecoUseCase,
             FindEnderecoByBairroUseCase findEnderecoByBairroUseCase,
             FindEnderecoByCepUseCase findEnderecoByCepUseCase,
             FindEnderecoByCidadeUseCase findEnderecoByCidadeUseCase,
@@ -49,7 +46,6 @@ public class EnderecoController {
             EnderecoMapper enderecoMapper
     ) {
         this.atualizaEnderecoUseCase = atualizaEnderecoUseCase;
-        this.deleteEnderecoUseCase = deleteEnderecoUseCase;
         this.findEnderecoByBairroUseCase = findEnderecoByBairroUseCase;
         this.findEnderecoByCepUseCase = findEnderecoByCepUseCase;
         this.findEnderecoByCidadeUseCase = findEnderecoByCidadeUseCase;
@@ -66,35 +62,35 @@ public class EnderecoController {
                 .body(enderecoMapper.toEnderecosResponse(enderecos));
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<EnderecoResponse> getEnderecoById(@PathVariable final Long id) {
         final var endereco = findEnderecoByIdUseCase.execute(id);
         return ResponseEntity.status(OK)
                 .body(enderecoMapper.toEnderecoResponse(endereco));
     }
 
-    @GetMapping("/rua/{rua}")
+    @GetMapping("/street/{rua}")
     public ResponseEntity<List<EnderecoResponse>> getEnderecoByRua(@PathVariable final String rua) {
         final var enderecos = findEnderecoByRuaUseCase.execute(rua);
         return ResponseEntity.status(OK)
                 .body(enderecoMapper.toEnderecosResponse(enderecos));
     }
 
-    @GetMapping("/cidade/{cidade}")
+    @GetMapping("/city/{cidade}")
     public ResponseEntity<List<EnderecoResponse>> getEnderecoByCidade(@PathVariable final String cidade) {
         final var enderecos = findEnderecoByCidadeUseCase.execute(cidade);
         return ResponseEntity.status(OK)
                 .body(enderecoMapper.toEnderecosResponse(enderecos));
     }
 
-    @GetMapping("/cep/{cep}")
+    @GetMapping("/postalCode/{cep}")
     public ResponseEntity<List<EnderecoResponse>> getEnderecoByCep(@PathVariable final String cep) {
         final var enderecos = findEnderecoByCepUseCase.execute(cep);
         return ResponseEntity.status(OK)
                 .body(enderecoMapper.toEnderecosResponse(enderecos));
     }
 
-    @GetMapping("/bairro/{bairro}")
+    @GetMapping("/neighborhood/{bairro}")
     public ResponseEntity<List<EnderecoResponse>> getEnderecoByBairro(@PathVariable final String bairro) {
         final var enderecos = findEnderecoByBairroUseCase.execute(bairro);
         return ResponseEntity.status(OK)

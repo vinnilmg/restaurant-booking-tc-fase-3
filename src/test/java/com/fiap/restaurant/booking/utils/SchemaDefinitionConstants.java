@@ -9,4 +9,7 @@ public class SchemaDefinitionConstants {
 
     public static final String FEEDBACK_SCHEMA = "schema/feedback/feedback.schema.json";
     public static final String FEEDBACK_LIST_SCHEMA = "schema/feedback/feedback.list.schema.json";
+
+    public static final String ENDERECO_SCHEMA = "schema/endereco.schema.json";
+    public static final String ENDERECO_LIST_SCHEMA = "schema/endereco.list.schema.json";
 }

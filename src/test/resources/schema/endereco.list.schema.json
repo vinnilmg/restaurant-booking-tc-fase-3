@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "id",
+      "rua",
+      "numero",
+      "complemento",
+      "bairro",
+      "cidade",
+      "estado",
+      "cep"
+    ],
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "rua": {
+        "type": "string"
+      },
+      "numero": {
+        "type": "string"
+      },
+      "complemento": {
+        "type": ["string", "null"]
+      },
+      "bairro": {
+        "type": "string"
+      },
+      "cidade": {
+        "type": "string"
+      },
+      "estado": {
+        "type": "string"
+      },
+      "cep": {
+        "type": "string"
+      }
+    }
+  }
+}
