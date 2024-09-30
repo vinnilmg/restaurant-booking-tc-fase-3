@@ -28,7 +28,6 @@ Funcionalidade: Feedback
     Entao deve apresentar todos os feedbacks
 
   Cenário: Deletar um feedback existente
-    Dado que existam feedbacks
-    E e desejo deletar um feedback
+    Dado desejo deletar um feedback
     Quando o feedback existir
     Então deve deletar o feedback com sucesso

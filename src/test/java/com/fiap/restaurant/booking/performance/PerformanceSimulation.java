@@ -22,6 +22,7 @@ public class PerformanceSimulation extends Simulation {
     private static final HttpProtocolBuilder httpProtocol =
             http.baseUrl("http://localhost:8090")
                     .header("Content-type", MediaType.APPLICATION_JSON_VALUE);
+
     ActionBuilder buscarReservasRequest = http("Buscar reservas")
             .get("/api/bookings")
             .check(status().is(HttpStatus.OK.value()))
@@ -67,6 +68,22 @@ public class PerformanceSimulation extends Simulation {
 
     ScenarioBuilder cenarioBuscarReservasSolicitadas = scenario("Buscar reservas solicitadas")
             .exec(buscarReservasConfirmadasRequest);
+
+    ActionBuilder buscaFeedBackRequest = http("Buscar FeedBack")
+            .get("/api/feedbacks")
+            .check(status().is(HttpStatus.OK.value()))
+            .check(jsonPath(JSON_PATH_LIST_ID).saveAs("id"));
+
+    ActionBuilder buscarFeedBackPorIdRequest = http("Buscar FeedBack por ID")
+            .get("/api/feedbacks/#{id}")
+            .check(status().is(HttpStatus.OK.value()));
+
+    ScenarioBuilder cenarioBuscarFeedBacks = scenario("Buscar FeedBacks")
+            .exec(buscaFeedBackRequest);
+
+    ScenarioBuilder cenarioBuscarFeedBackPorId = scenario("Buscar FeedBack por ID")
+            .exec(buscaFeedBackRequest)
+            .exec(buscarFeedBackPorIdRequest);
 
     ScenarioBuilder cenarioBuscarRestaurantes = scenario("Buscar restaurantes")
             .exec(buscarRestaurantesRequest);
@@ -123,7 +140,26 @@ public class PerformanceSimulation extends Simulation {
                                 .during(Duration.ofSeconds(20)),
                         rampUsersPerSec(5)
                                 .to(1)
-                                .during(Duration.ofSeconds(10)))
+                                .during(Duration.ofSeconds(10))),
+                cenarioBuscarFeedBacks.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(2)
+                                .during(Duration.ofSeconds(10)),
+                        constantUsersPerSec(2)
+                                .during(Duration.ofSeconds(20)),
+                        rampUsersPerSec(2)
+                                .to(1)
+                                .during(Duration.ofSeconds(10))),
+                cenarioBuscarFeedBackPorId.injectOpen(
+                        rampUsersPerSec(1)
+                                .to(2)
+                                .during(Duration.ofSeconds(10)),
+                        constantUsersPerSec(2)
+                                .during(Duration.ofSeconds(20)),
+                        rampUsersPerSec(2)
+                                .to(1)
+                                .during(Duration.ofSeconds(10))
+                )
         )
                 .protocols(httpProtocol)
                 .assertions(
