@@ -1,9 +1,14 @@
 package com.fiap.restaurant.booking.infrastructure.gateways;
 
 import com.fiap.restaurant.booking.core.domains.Mesa;
+import com.fiap.restaurant.booking.core.domains.MesaDomain;
+import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
+import com.fiap.restaurant.booking.infrastructure.persistence.entities.MesaEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.MesaEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.MesaRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class MesaRepositoryGateway implements MesaGateway {
+public   class MesaRepositoryGateway implements MesaGateway {
     private final MesaRepository mesaRepository;
     private final MesaEntityMapper mesaEntityMapper;
 
@@ -35,18 +40,28 @@ public class MesaRepositoryGateway implements MesaGateway {
         return Optional.empty();
     }
 
-//    @Override
-//    public Optional<Mesa> findByIdRestauranteAndNumeroMesa(Long idRestaurante, Integer numeroMesa) {
-//        return Optional.empty();
-//    }
-
     @Override
-    public List<Mesa> findByStatus(String status) {
-        return List.of();
+    public List<Mesa> findByStatus(StatusMesaEnum status) {
+        List<MesaEntity> mesaEntities = mesaRepository.findByStatus(status);
+        List<Mesa> mesaDomains = mesaEntityMapper.toDomains(mesaEntities);
+        return mesaDomains;
     }
 
     @Override
-    public void delete(Long id) {
-
+    public Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa) {
+        return mesaRepository.findByRestauranteIdAndNumeroDaMesa(idRestaurante,numeroMesa).map(mesaEntityMapper::toDomain);
     }
+
+    @Override
+    public List<Mesa> findByRestauranteId(Long idRestaurante) {
+        return mesaRepository.findByRestauranteId(idRestaurante).stream().map(mesaEntityMapper::toDomain).toList();
+    }
+
+    @Transactional
+    @Override
+    public void deleteByRestaurantIdAndNumeroMesa(Long id, Integer numeroMesa) {
+        mesaRepository.deleteByRestauranteIdAndNumeroDaMesa(id, numeroMesa);
+        mesaRepository.flush();
+    }
+
 }

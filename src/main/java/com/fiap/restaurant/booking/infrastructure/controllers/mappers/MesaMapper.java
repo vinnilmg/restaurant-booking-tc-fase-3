@@ -8,6 +8,8 @@ import com.fiap.restaurant.booking.infrastructure.controllers.response.MesaRespo
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface MesaMapper {
 
@@ -22,8 +24,21 @@ public interface MesaMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "status", source = "status")
     @Mapping(target = "mesa", source = "numeroDaMesa")
-//    @Mapping(target = "restauranteId", expression = "java(mesa.getRestaurante().getId())")
+    @Mapping(target = "restauranteId", expression = "java(mesaDomain.getRestaurante().getId())")
     MesaResponse toMesaResponse(Mesa mesaDomain);
 
     MesaRequest toMesaDomain(Long restauranteId, Integer numeroMesa);
+
+    List<MesaResponse> toMesaResponse(List<Mesa> mesas);
+
+    default Mesa toMesa(final MesaDomain mesaDomain) {
+        return mesaDomain;
+    }
+
+    default MesaDomain toMesaDomain(final Mesa mesa) {
+        if (mesa instanceof MesaDomain) {
+            return (MesaDomain) mesa;
+        }
+        return null;
+    }
 }

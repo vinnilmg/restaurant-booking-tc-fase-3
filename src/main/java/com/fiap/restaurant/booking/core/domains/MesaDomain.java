@@ -1,8 +1,10 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
+import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 
+import static io.micrometer.common.util.StringUtils.isEmpty;
 import static java.util.Objects.isNull;
 
 public class MesaDomain implements Mesa {
@@ -16,12 +18,12 @@ public class MesaDomain implements Mesa {
         this.id = id;
         this.numeroDaMesa = numeroDaMesa;
         this.restaurante = restaurante;
-        this.status = status;
+        this.status = statusValidation(String.valueOf(status));
     }
 
     public MesaDomain(Integer numeroDaMesa, StatusMesaEnum status) {
         this.numeroDaMesa = numeroDaMesa;
-        this.status = status;
+        this.status = statusValidation(String.valueOf(status));
     }
 
     public Long getId() {
@@ -74,5 +76,12 @@ public class MesaDomain implements Mesa {
             throw ValidationException.of("Id do restaurante ausente", "Deve-se informar o Id do restaurante");
         if (idRestaurante < 1)
             throw ValidationException.of("Id do restaurante inválido", "id restaurante deve ser maior que zero");
+    }
+
+    private static StatusMesaEnum statusValidation(final String status) {
+        if (isEmpty(status)) throw ValidationException.of("Status", "cannot be null or empty");
+        final var statusEnum = StatusMesaEnum.toEnum(status);
+        if (statusEnum.isEmpty()) throw ValidationException.of("Status", "is invalid");
+        return statusEnum.get();
     }
 }

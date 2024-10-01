@@ -34,7 +34,6 @@ public class MesaEntity {
     @Enumerated(EnumType.STRING)
     @NotNull(message = "O status não pode ser nulo")
     private StatusMesaEnum status;
-
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private RestauranteEntity restaurante;
