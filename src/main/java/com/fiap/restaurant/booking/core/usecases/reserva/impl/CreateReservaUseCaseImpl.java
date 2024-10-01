@@ -4,6 +4,7 @@ import com.fiap.restaurant.booking.core.domains.Reserva;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
+import com.fiap.restaurant.booking.core.usecases.mesa.BookMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.CreateReservaUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.FindReservaByCpfUseCase;
@@ -16,17 +17,20 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
     private final FindRestauranteByIdUseCase findRestauranteByIdUseCase;
     private final FindMesaByIdUseCase findMesaByIdUseCase;
     private final FindReservaByCpfUseCase findReservaByCpfUseCase;
+    private final BookMesaUseCase bookMesaUseCase;
 
     public CreateReservaUseCaseImpl(
             ReservaGateway reservaGateway,
             FindRestauranteByIdUseCase findRestauranteByIdUseCase,
             FindMesaByIdUseCase findMesaByIdUseCase,
-            FindReservaByCpfUseCase findReservaByCpfUseCase
+            FindReservaByCpfUseCase findReservaByCpfUseCase,
+            BookMesaUseCase bookMesaUseCase
     ) {
         this.reservaGateway = reservaGateway;
         this.findRestauranteByIdUseCase = findRestauranteByIdUseCase;
         this.findMesaByIdUseCase = findMesaByIdUseCase;
         this.findReservaByCpfUseCase = findReservaByCpfUseCase;
+        this.bookMesaUseCase = bookMesaUseCase;
     }
 
     @Override
@@ -61,6 +65,10 @@ public class CreateReservaUseCaseImpl implements CreateReservaUseCase {
 
         reserva.fillMesa(mesa);
 
-        return reservaGateway.create(reserva);
+        final var createdReserva = reservaGateway.create(reserva);
+
+        bookMesaUseCase.execute(mesaId);
+
+        return createdReserva;
     }
 }

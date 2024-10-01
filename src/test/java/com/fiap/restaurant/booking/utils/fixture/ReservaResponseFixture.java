@@ -11,6 +11,8 @@ public class ReservaResponseFixture {
         return new ReservaResponse(
                 reserva.getId(),
                 reserva.getCpf(),
+                reserva.getMesa().getRestaurante().getNome(),
+                reserva.getMesa().getNumeroDaMesa(),
                 reserva.getStatus(),
                 toDefaultFormat(reserva.getDataHoraReserva()),
                 toDefaultFormat(reserva.getDataHoraCriacao())

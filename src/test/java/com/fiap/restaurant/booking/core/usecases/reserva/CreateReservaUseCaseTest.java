@@ -2,6 +2,7 @@ package com.fiap.restaurant.booking.core.usecases.reserva;
 
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 import com.fiap.restaurant.booking.core.gateways.ReservaGateway;
+import com.fiap.restaurant.booking.core.usecases.mesa.BookMesaUseCase;
 import com.fiap.restaurant.booking.core.usecases.mesa.FindMesaByIdUseCase;
 import com.fiap.restaurant.booking.core.usecases.reserva.impl.CreateReservaUseCaseImpl;
 import com.fiap.restaurant.booking.core.usecases.restaurante.FindRestauranteByIdUseCase;
@@ -26,6 +27,7 @@ class CreateReservaUseCaseTest {
     private FindRestauranteByIdUseCase findRestauranteByIdUseCase;
     private FindMesaByIdUseCase findMesaByIdUseCase;
     private FindReservaByCpfUseCase findReservaByCpfUseCase;
+    private BookMesaUseCase bookMesaUseCase;
 
     @BeforeEach
     void init() {
@@ -33,11 +35,13 @@ class CreateReservaUseCaseTest {
         findReservaByCpfUseCase = mock(FindReservaByCpfUseCase.class);
         findRestauranteByIdUseCase = mock(FindRestauranteByIdUseCase.class);
         findMesaByIdUseCase = mock(FindMesaByIdUseCase.class);
+        bookMesaUseCase = mock(BookMesaUseCase.class);
         createReservaUseCase = new CreateReservaUseCaseImpl(
                 reservaGateway,
                 findRestauranteByIdUseCase,
                 findMesaByIdUseCase,
-                findReservaByCpfUseCase
+                findReservaByCpfUseCase,
+                bookMesaUseCase
         );
     }
 

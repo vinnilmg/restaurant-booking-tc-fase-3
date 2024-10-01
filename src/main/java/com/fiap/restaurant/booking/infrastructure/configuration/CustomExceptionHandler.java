@@ -15,8 +15,8 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    @ExceptionHandler(ValidationException.class)
-    public ResponseEntity<ApiErrorResponse> handleValidationError(ValidationException e, WebRequest request) {
+    @ExceptionHandler({ValidationException.class, IllegalArgumentException.class})
+    public ResponseEntity<ApiErrorResponse> handleValidationError(Exception e, WebRequest request) {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(new ApiErrorResponse(e.getMessage()));

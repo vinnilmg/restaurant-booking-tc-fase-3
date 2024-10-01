@@ -15,5 +15,4 @@ public interface Mesa {
     StatusMesaEnum getStatus();
 
     void updateStatus(StatusMesaEnum status);
-
 }

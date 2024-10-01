@@ -32,5 +32,7 @@ public interface ReservaMapper {
     @Mapping(target = "status", source = "status")
     @Mapping(target = "dataHoraReserva", source = "dataHoraReservaFormatted")
     @Mapping(target = "dataHoraCriacao", source = "dataHoraCriacaoFormatted")
+    @Mapping(target = "restaurante", source = "mesa.restaurante.nome")
+    @Mapping(target = "numeroMesa", source = "mesa.numeroDaMesa")
     ReservaResponse toReservaResponse(Reserva reserva);
 }

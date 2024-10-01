@@ -81,8 +81,11 @@ public class MesaController {
         return ResponseEntity.status(201).body(response);
     }
 
-    @DeleteMapping
-    public ResponseEntity<MesaResponse> deleteMesa(@RequestParam Long restauranteId, @RequestParam Integer numeroMesa) {
+    @DeleteMapping("/restaurants/{restauranteId}/number/{numeroMesa}")
+    public ResponseEntity<MesaResponse> deleteMesa(
+            @PathVariable Long restauranteId,
+            @PathVariable Integer numeroMesa
+    ) {
         final var mesa = deleteMesaUseCase.execute(restauranteId, numeroMesa);
         return ResponseEntity.noContent().build();
     }

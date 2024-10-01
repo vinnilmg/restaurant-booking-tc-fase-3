@@ -21,4 +21,6 @@ public interface MesaGateway {
     Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa);
 
     List<Mesa> findByRestauranteId(Long idRestaurante);
+
+    void update(Mesa mesa);
 }
