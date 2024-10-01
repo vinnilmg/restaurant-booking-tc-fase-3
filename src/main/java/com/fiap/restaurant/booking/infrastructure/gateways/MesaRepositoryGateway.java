@@ -1,13 +1,11 @@
 package com.fiap.restaurant.booking.infrastructure.gateways;
 
 import com.fiap.restaurant.booking.core.domains.Mesa;
-import com.fiap.restaurant.booking.core.domains.MesaDomain;
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
 import com.fiap.restaurant.booking.core.gateways.MesaGateway;
 import com.fiap.restaurant.booking.infrastructure.persistence.entities.MesaEntity;
 import com.fiap.restaurant.booking.infrastructure.persistence.mappers.MesaEntityMapper;
 import com.fiap.restaurant.booking.infrastructure.persistence.repositories.MesaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,7 +15,7 @@ import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public   class MesaRepositoryGateway implements MesaGateway {
+public class MesaRepositoryGateway implements MesaGateway {
     private final MesaRepository mesaRepository;
     private final MesaEntityMapper mesaEntityMapper;
 
@@ -49,7 +47,7 @@ public   class MesaRepositoryGateway implements MesaGateway {
 
     @Override
     public Optional<Mesa> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa) {
-        return mesaRepository.findByRestauranteIdAndNumeroDaMesa(idRestaurante,numeroMesa).map(mesaEntityMapper::toDomain);
+        return mesaRepository.findByRestauranteIdAndNumeroDaMesa(idRestaurante, numeroMesa).map(mesaEntityMapper::toDomain);
     }
 
     @Override

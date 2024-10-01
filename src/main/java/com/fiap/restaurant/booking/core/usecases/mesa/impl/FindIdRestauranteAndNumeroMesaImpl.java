@@ -19,7 +19,7 @@ public class FindIdRestauranteAndNumeroMesaImpl implements FindIdRestauranteAndN
     @Override
     public Mesa execute(Long idRestaurante, Integer numeroMesa) {
         if (isNull(numeroMesa) || numeroMesa < 0) throw ValidationException.of("Numero da Mesa", "cannot be null or negative");
-        return mesaGateway.findByRestauranteIdAndNumeroDaMesa(idRestaurante,numeroMesa)
+        return mesaGateway.findByRestauranteIdAndNumeroDaMesa(idRestaurante, numeroMesa)
                 .orElseThrow(() -> NotFoundException.of("Mesa"));
     }
 }

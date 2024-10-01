@@ -16,7 +16,6 @@ public class FindMesaByIdUseCaseImpl implements FindMesaByIdUseCase {
     }
 
 
-
     @Override
     public Mesa execute(final Long id) {
         if (isNull(id) || id < 0) throw ValidationException.of("Mesa Id", "cannot be null or negative");

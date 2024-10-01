@@ -1,7 +1,6 @@
 package com.fiap.restaurant.booking.core.domains;
 
 import com.fiap.restaurant.booking.core.domains.enums.StatusMesaEnum;
-import com.fiap.restaurant.booking.core.domains.enums.StatusReservaEnum;
 import com.fiap.restaurant.booking.core.exceptions.ValidationException;
 
 import static io.micrometer.common.util.StringUtils.isEmpty;

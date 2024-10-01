@@ -7,9 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface MesaRepository extends JpaRepository<MesaEntity, Long>
-{
-    Optional<MesaEntity> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa );
+public interface MesaRepository extends JpaRepository<MesaEntity, Long> {
+    Optional<MesaEntity> findByRestauranteIdAndNumeroDaMesa(Long idRestaurante, Integer numeroMesa);
 
     List<MesaEntity> findByStatus(StatusMesaEnum status);
 
