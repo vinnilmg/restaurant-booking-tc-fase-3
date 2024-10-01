@@ -3,10 +3,12 @@
 Documentação do projeto:
 - https://docs.google.com/document/d/1lUFmM9Qkay3HMyTQha3oZiq69MQRNsmjWClve4ZIGuM/edit?usp=sharing
 
-Na pasta resources, localizada na raiz do projeto, contém a collection para realizar os testes em todos os endpoints via postman.
+Na pasta resources, localizada na raiz do projeto, contém a collection para realizar os testes em todos os endpoints via postman (LOCAL).
+Foi realizado o deploy em cloud, segue: https://restaurant-booking-fiap.onrender.com
+<p style="color:red">Obs: O deploy foi feito em nuvem grátis, portanto, a aplicação ficará inativa e quando o primeiro request for realizado, a mesma será ativada. Aguardar alguns minutos para que a aplicação fique ativa.</p>
 
 ### Passo a passo a partir do Makefile
-<b>Obs: Precisa do make na máquina.</b>
+<p style="color:red">Obs: Precisa do make na máquina.</p>
 
 #### Geração de imagem
 Compila, gera o executável (JAR) e gera a imagem:
@@ -40,7 +42,7 @@ Para gerar o relatório do allure: <br/>
 ```sh
 allure serve target/allure-results
 ```
-<b>Obs: Precisa do allure na máquina</b>
+<p style="color:red">Obs: Precisa do allure na máquina</p>
 
 <p>Após a execução dos testes de performance, será exibido um log com o relatório gerado. 
 O mesmo também fica localizado na pasta target/gatling.</p>
