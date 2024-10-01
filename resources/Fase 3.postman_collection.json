@@ -1,0 +1,973 @@
+{
+	"info": {
+		"_postman_id": "a5caec26-41ab-438e-a470-6b78cf0ec62d",
+		"name": "Fase 3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7403997",
+		"_collection_link": "https://gold-station-588936.postman.co/workspace/FIAP--Grupo-5~ae9d38dd-1094-43ca-9e2d-a749c7a7997e/collection/37214743-a5caec26-41ab-438e-a470-6b78cf0ec62d?action=share&source=collection_link&creator=7403997"
+	},
+	"item": [
+		{
+			"name": "Endereco",
+			"item": [
+				{
+					"name": "Get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"conde de sarzedas\",\r\n    \"numero\": \"135\",\r\n    \"complemento\": \"ap 2207\",\r\n    \"bairro\": \"se\",\r\n    \"cidade\": \"são paulo\",\r\n    \"estado\": \"sp\",\r\n    \"cep\": \"01512000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/addresses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Rua",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/street/Rua numero 1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"street",
+								"Rua numero 1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/city/Brusque",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"city",
+								"Brusque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Cep",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/postalCode/02998050",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"postalCode",
+								"02998050"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/neighborhood/Vila Bela",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"neighborhood",
+								"Vila Bela"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update address",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rua\": \"conde de sarzedas\",\r\n    \"numero\": \"135\",\r\n    \"complemento\": \"ap 2207\",\r\n    \"bairro\": \"se\",\r\n    \"cidade\": \"são paulo\",\r\n    \"estado\": \"sp\",\r\n    \"cep\": \"01512000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/addresses/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"addresses",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Restaurante",
+			"item": [
+				{
+					"name": "GET all restaurantes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE restaurante",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Cornelius\",\r\n  \"cnpj\": \"41521747000173\",\r\n  \"endereco\": {\r\n    \"rua\": \"Avenida do Café\",\r\n    \"numero\": \"604\",\r\n    \"complemento\": \"Sala 2\",\r\n    \"bairro\": \"Vila Guarani\",\r\n    \"cidade\": \"São Paulo\",\r\n    \"estado\": \"SP\",\r\n    \"cep\": \"04311-001\"\r\n  },\r\n  \"tipoCulinaria\": \"Paulista\",\r\n  \"inicioFuncionamento\": \"08:00\",\r\n  \"fimFuncionamento\": \"22:00\",\r\n  \"capacidade\": 20,\r\n  \"mediaFeedback\": 4.5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/name/Cornelius",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"name",
+								"Cornelius"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by rua",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/street/Praça da República",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"street",
+								"Praça da República"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/district/Bela",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"district",
+								"Bela"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/city/Brusque",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"city",
+								"Brusque"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by tipo culinaria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/cuisine/ITALIANA",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"cuisine",
+								"ITALIANA"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET restaurante by media feedback",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/restaurants/feedback/5.0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"restaurants",
+								"feedback",
+								"5.0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mesa",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroDaMesa\": \"1\",\r\n    \"restauranteId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/tables",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"tables"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete mesa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/tables/restaurants/1/number/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"tables",
+								"restaurants",
+								"1",
+								"number",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/tables/status/:status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"tables",
+								"status",
+								":status"
+							],
+							"variable": [
+								{
+									"key": "status",
+									"value": "DISPONIVEL"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id Restaurante",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numeroDaMesa\": \"1\",\r\n    \"status\": \"DISPONIVEL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/tables/restaurant/:idRestaurante",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"tables",
+								"restaurant",
+								":idRestaurante"
+							],
+							"variable": [
+								{
+									"key": "idRestaurante",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Restaurante and Mesa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/tables/disponibilidade?restauranteId=1&numeroMesa=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"tables",
+								"disponibilidade"
+							],
+							"query": [
+								{
+									"key": "restauranteId",
+									"value": "1"
+								},
+								{
+									"key": "numeroMesa",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reserva",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restauranteId\": 1,\r\n    \"mesaId\": 1,\r\n    \"cpfCliente\": \"47611018511\",\r\n    \"dataHoraReserva\": \"2024-12-31 16:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by cpf",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/customers/:CPF",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"customers",
+								":CPF"
+							],
+							"variable": [
+								{
+									"key": "CPF",
+									"value": "21859806023"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/:ID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								":ID"
+							],
+							"variable": [
+								{
+									"key": "ID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find requested",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/requested",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"requested"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find canceled",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/canceled",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"canceled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find confirmed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/confirmed",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"confirmed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cancel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/cancel/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"cancel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "confirm",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/bookings/cancel/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"bookings",
+								"cancel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "Create Feedback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": 1,\n    \"nomeCliente\": \"Datena\",\n    \"avaliacao\": 4,\n    \"comentario\": \"Ótimo atendimento!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll Feedback",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByNomeCliente FeedBack",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks/nome-cliente/Datena",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks",
+								"nome-cliente",
+								"Datena"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": 4,\n    \"nomeCliente\": \"te\",\n    \"avaliacao\": 1,\n    \"comentario\": \"Ótimo atendimento!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindByIdRestaurante",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restauranteId\": 4,\n    \"nomeCliente\": \"te\",\n    \"avaliacao\": 1,\n    \"comentario\": \"Ótimo atendimento!\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks/restaurante/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks",
+								"restaurante",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete FeedBack",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/api/feedbacks/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"api",
+								"feedbacks",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

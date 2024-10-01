@@ -4,7 +4,7 @@ build:
 
 package:
 	@echo "Gerando JAR..."
-	mvn package -Dmaven.test.skip
+	mvn clean package -Dmaven.test.skip
 
 docker-build:
 	@echo "Gerando imagem..."
